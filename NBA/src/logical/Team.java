@@ -1,16 +1,14 @@
 package logical;
 
-public class team{
+public class Team{
 	
 	private String nombreEquipo;
 	private String ciudad;
 	private String entrenador;
-	private int año;
 	private int victorias;
 	private int derrotas;
-	//hola
 
-	public team() {
+	public Team() {
 		// TODO Auto-generated constructor stub
 	}
 	public String getNombreEquipo() {
@@ -35,14 +33,6 @@ public class team{
 
 	public void setEntrenador(String entrenador) {
 		this.entrenador = entrenador;
-	}
-
-	public int getAño() {
-		return año;
-	}
-
-	public void setAño(int año) {
-		this.año = año;
 	}
 
 	public int getVictorias() {

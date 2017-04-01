@@ -1,6 +1,6 @@
 package logical;
 
-public class game {
+public class Game {
 	private String equipoLocal;
 	private String equipoVisitante;
 	private String localizacion;
@@ -11,13 +11,11 @@ public class game {
 	private String hora;
 	private int marcadorLocal;
 	private int marcadorVisitante;
-	//hola
 
-	public game() {
-		// TODO Auto-generated constructor stub
+	public Game() {
 	}
 
-	public game(String equipoLocal, String equipoVisitante, String localizacion, String estadio, int dia, String mes,
+	public Game(String equipoLocal, String equipoVisitante, String localizacion, String estadio, int dia, String mes,
 			String año, String hora, int marcadorLocal, int marcadorVisitante) {
 		super();
 		this.equipoLocal = equipoLocal;

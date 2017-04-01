@@ -1,18 +1,17 @@
 package logical;
 
-public class injury {
+public class Injury {
 	private String nombreJugador;
 	private String equipo;
 	private String tipo;
 	private String fecha;
 	private String infoAdicional;
 	private String recuperacion;
-	//lol
 
-	public injury() {
+	public Injury() {
 		// TODO Auto-generated constructor stub
 	}
-	public injury(String nombreJugador, String equipo, String tipo, String fecha, String infoAdicional, String recuperacion) {
+	public Injury(String nombreJugador, String equipo, String tipo, String fecha, String infoAdicional, String recuperacion) {
 		super();
 		this.nombreJugador = nombreJugador;
 		this.equipo = equipo;

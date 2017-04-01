@@ -1,6 +1,6 @@
 package logical;
 
-public class performance{
+public class Performance{
 	private int asistencias;
 	private int tirosLibres;
 	private int tirosTres;
@@ -8,13 +8,12 @@ public class performance{
 	private int robos;
 	private int tirosCampo;
 	private int balonesPerdidos;
-	//hola
 
-	public performance() {
+	public Performance() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public performance(int asistencias, int tirosLibres, int tirosTres, int rebotes, int robos, int tirosCampo,
+	public Performance(int asistencias, int tirosLibres, int tirosTres, int rebotes, int robos, int tirosCampo,
 			int balonesPerdidos) {
 		super();
 		this.asistencias = asistencias;

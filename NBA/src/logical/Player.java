@@ -1,6 +1,6 @@
 package logical;
 
-public class player {
+public class Player {
 	
 	private String nombre;
 	private String pais;
@@ -11,13 +11,11 @@ public class player {
 	private String posicion;
 	private String equipo;
 	private boolean lesion;
-	//hola
 	
-
-	public player() {
+	public Player() {
 		// TODO Auto-generated constructor stub
 	}
-	public player(String nombre, String pais, int edad, float altura, float peso, int numero, String posicion,
+	public Player(String nombre, String pais, int edad, float altura, float peso, int numero, String posicion,
 			String equipo, boolean lesion) {
 		super();
 		this.nombre = nombre;
