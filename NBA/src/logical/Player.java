@@ -11,6 +11,7 @@ public class Player {
 	private String posicion;
 	private String equipo;
 	private boolean lesion;
+	//lol
 	
 	public Player() {
 		// TODO Auto-generated constructor stub
