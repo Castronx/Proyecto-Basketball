@@ -7,6 +7,7 @@ public class Team{
 	private String entrenador;
 	private int victorias;
 	private int derrotas;
+	//lol
 
 	public Team() {
 		// TODO Auto-generated constructor stub
