@@ -1,19 +1,16 @@
 package logical;
 
 public class Injury {
-	private String nombreJugador;
-	private String equipo;
+	private Player jugador;
+	private Team equipo;
 	private String tipo;
 	private String fecha;
 	private String infoAdicional;
 	private String recuperacion;
 
-	public Injury() {
-		// TODO Auto-generated constructor stub
-	}
-	public Injury(String nombreJugador, String equipo, String tipo, String fecha, String infoAdicional, String recuperacion) {
+	public Injury(Player jugador, Team equipo, String tipo, String fecha, String infoAdicional, String recuperacion) {
 		super();
-		this.nombreJugador = nombreJugador;
+		this.jugador = jugador;
 		this.equipo = equipo;
 		this.tipo = tipo;
 		this.fecha = fecha;
@@ -21,19 +18,19 @@ public class Injury {
 		this.recuperacion = recuperacion;
 	}
 
-	public String getNombreJugador() {
-		return nombreJugador;
+	public Player getJugador() {
+		return jugador;
 	}
 
-	public void setNombreJugador(String nombreJugador) {
-		this.nombreJugador = nombreJugador;
+	public void setJugador(Player jugador) {
+		this.jugador = jugador;
 	}
 
-	public String getEquipo() {
+	public Team getEquipo() {
 		return equipo;
 	}
 
-	public void setEquipo(String equipo) {
+	public void setEquipo(Team equipo) {
 		this.equipo = equipo;
 	}
 

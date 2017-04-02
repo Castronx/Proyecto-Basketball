@@ -1,6 +1,8 @@
 package logical;
 
 public class Performance{
+	private Player jugador;
+	private Team equipo;
 	private int asistencias;
 	private int tirosLibres;
 	private int tirosTres;
@@ -9,13 +11,12 @@ public class Performance{
 	private int tirosCampo;
 	private int balonesPerdidos;
 
-	public Performance() {
-		// TODO Auto-generated constructor stub
-	}
 
-	public Performance(int asistencias, int tirosLibres, int tirosTres, int rebotes, int robos, int tirosCampo,
+	public Performance(Player jugador, Team equipo, int asistencias, int tirosLibres, int tirosTres, int rebotes, int robos, int tirosCampo,
 			int balonesPerdidos) {
 		super();
+		this.jugador = jugador;
+		this.equipo = equipo;
 		this.asistencias = asistencias;
 		this.tirosLibres = tirosLibres;
 		this.tirosTres = tirosTres;
@@ -23,6 +24,22 @@ public class Performance{
 		this.robos = robos;
 		this.tirosCampo = tirosCampo;
 		this.balonesPerdidos = balonesPerdidos;
+	}
+	
+	public Player getJugador() {
+		return jugador;
+	}
+
+	public void setJugador(Player jugador) {
+		this.jugador = jugador;
+	}
+
+	public Team getEquipo() {
+		return equipo;
+	}
+
+	public void setEquipo(Team equipo) {
+		this.equipo = equipo;
 	}
 
 	public int getAsistencias() {
