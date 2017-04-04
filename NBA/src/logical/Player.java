@@ -1,9 +1,11 @@
 package logical;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements Serializable{
 	
+	private static final long serialVersionUID = 3950417824981446715L;
 	private String nombre;
 	private String apellido;
 	private String pais;
@@ -130,12 +132,27 @@ public class Player {
 	public void setEstadisticasJugador(ArrayList <Performance> estadisticasJugador) {
 		this.estadisticasJugador = estadisticasJugador;
 	}
+	//metodo insertar lesionado
 	public void InsertarLesion(Injury lesiones){
-		
 		lesion.add(lesiones);
 	}
+	//metodo borrar lesionado
+	public void removerLesion(Injury lesiones){
+		lesion.remove(lesiones);
+	}
+	//metodo insertar estadisiticas jugador
 	public void InsertarEstadisticasJugador(Performance estadisticasJug) {
 		estadisticasJugador.add(estadisticasJug);
+	}
+	//metodo puntos totales
+	public int gettotalPuntos() {
+		int total = 0;
+		for (Team aux : Nba.getInstances().getMisEquipos()) {
+			for (Player aux2 : aux.getMisJugadores()) {
+				total += aux.getMisJugadores().get(0).getEstadisticasJugador().get(0).getPuntoTotales();
+			}
+		}
+		return total;
 	}
 }
 

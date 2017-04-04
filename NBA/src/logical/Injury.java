@@ -1,6 +1,12 @@
 package logical;
 
-public class Injury {
+import java.io.Serializable;
+
+public class Injury implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2202017412633310866L;
 	private Player jugador;
 	private Team equipo;
 	private String tipo;

@@ -1,17 +1,19 @@
 package logical;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Team{
+public class Team implements Serializable {
 	
+	private static final long serialVersionUID = -543838711625534963L;
 	private String nombreEquipo;
 	private String ciudad;
 	private String entrenador;
 	private int victorias;
 	private int derrotas;
 	private String estadio;
-	private ArrayList <Performance> estadisticas;
-	private ArrayList <Player> jugador;
+	private ArrayList <Performance> misEstadisticas;
+	private ArrayList <Player> misJugadores;
 	public static Team equipo;
 
 	public static Team getInstance(){
@@ -28,8 +30,8 @@ public class Team{
 		this.victorias = victorias;
 		this.derrotas = derrotas;
 		this.estadio = estadio;
-		estadisticas = new ArrayList <>();
-		jugador = new ArrayList<>();
+		misEstadisticas = new ArrayList <>();
+		misJugadores = new ArrayList<>();
 	}
 	
 	public Team(String nombreEquipo,String ciudad, String entrenador, String estadio) {
@@ -39,49 +41,35 @@ public class Team{
 		this.entrenador = entrenador;
 		this.estadio = estadio;
 	}
-	
-	
 	public Team() {
-		
 	}
-	
-	
 	public String getNombreEquipo() {
 		return nombreEquipo;
 	}
-
 	public void setNombreEquipo(String nombreEquipo) {
 		this.nombreEquipo = nombreEquipo;
 	}
-
 	public String getCiudad() {
 		return ciudad;
 	}
-
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
-
 	public String getEntrenador() {
 		return entrenador;
 	}
-
 	public void setEntrenador(String entrenador) {
 		this.entrenador = entrenador;
 	}
-
 	public int getVictorias() {
 		return victorias;
 	}
-
 	public void setVictorias(int victorias) {
 		this.victorias = victorias;
 	}
-
 	public int getDerrotas() {
 		return derrotas;
 	}
-
 	public void setDerrotas(int derrotas) {
 		this.derrotas = derrotas;
 	}
@@ -91,26 +79,40 @@ public class Team{
 	public void setEstadio(String estadio) {
 		this.estadio = estadio;
 	}
-	public ArrayList <Performance> getEstadisticas() {
-		return estadisticas;
+	public ArrayList<Performance> getMisEstadisticas() {
+		return misEstadisticas;
 	}
-	public void setEstadisticas(ArrayList <Performance> estadisticas) {
-		this.estadisticas = estadisticas;
+	public void setMisEstadisticas(ArrayList<Performance> misEstadisticas) {
+		this.misEstadisticas = misEstadisticas;
 	}
-	public ArrayList <Player> getJugador() {
-		return jugador;
+	public ArrayList<Player> getMisJugadores() {
+		return misJugadores;
 	}
-	public void setJugador(ArrayList <Player> jugador) {
-		this.jugador = jugador;
+	public void setMisJugadores(ArrayList<Player> misJugadores) {
+		this.misJugadores = misJugadores;
 	}
-	
+	//metodo insertar jugador.
 	public void InsertarJugador(Player jugadores)
 	{
-		jugador.add(jugadores);
+		misJugadores.add(jugadores);
 	}
-	
+	//metodo eliminar jugador.
+	public void elminiarJugador(Player jugadores){
+		misJugadores.remove(jugadores);
+	}
+	//metodo insertar estadisticas.
 	public void InsertarEstadisticasEquipo(Performance estadisticasEq) {
-		estadisticas.add(estadisticasEq);
+		misEstadisticas.add(estadisticasEq);
+	}
+	//roster inicial
+	public ArrayList<Player> getRoster() {
+		ArrayList<Player> Roster = null;
+		for (Team aux : Nba.getInstances().getMisEquipos()) {
+			for (Player aux2 : aux.getMisJugadores()) {
+				Roster = aux.getMisJugadores();
+			}
+		}
+		return Roster;
 	}
 }
 

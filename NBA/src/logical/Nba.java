@@ -1,10 +1,17 @@
 package logical;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Nba {
-
+public class Nba implements Serializable {
+	
+	private static final long serialVersionUID = 7492466070158751832L;
 	private ArrayList<Team> misEquipos;
 	private ArrayList<Game> misJuegos;
 	private ArrayList<Player> misJugadores;
@@ -12,7 +19,6 @@ public class Nba {
 	private static Nba enebea;
 
 	public Nba() {
-		// TODO Auto-generated constructor stub
 	}
 	public Nba(ArrayList<Team> misEquipos, ArrayList<Game> misJuegos, ArrayList<Player> misJugadores, ArrayList<Injury> misLesiones) {
 		super();
@@ -27,6 +33,9 @@ public class Nba {
 			enebea = new Nba();
 		}
 		return enebea;	
+	}
+	public static void setLiga(Nba enbiei){
+		Nba.enebea = enbiei;
 	}
 	public ArrayList<Team> getMisEquipos() {
 		return misEquipos;
@@ -62,14 +71,14 @@ public class Nba {
 	public void eliminarPartido(Game jogo){
 		misJuegos.remove(jogo);
 	}
-	//metodo insertar lesion
+	/*//metodo insertar lesion
 	public void insertarLesion(Injury inju){
 		misLesiones.add(inju);
 	}
 	//metodo borrar lesion
 	public void eliminarLesion(Injury inju){
 		misLesiones.remove(inju);
-	}
+	}*/
 	//metodo buscar jugador.
 	public Player buscarJugador(String jugador){
 		Player juga = null;
@@ -90,5 +99,44 @@ public class Nba {
 		}
 		return equipo;
 	}
+	//fichero de cargar.
+	public void cargarNba(Nba nba) {
+		 try {
+			    FileInputStream f = new FileInputStream("Datoscargados.dat");
+				ObjectInputStream ob = new ObjectInputStream(f);
+				Nba nba1 = (Nba)ob.readObject();
+				Nba.setLiga(nba1);
+				ob.close();
+			 
+			} catch (Exception e) {	
+				e.printStackTrace();
+			}
+		
+	}
+	//fichero de guardar.
+	public void guardarNba(Nba nba){
+	 	 File f = new File("Datoscargados.dat");
+		 FileOutputStream fo = null;
+		 ObjectOutputStream ob = null;
+		try {
+			 fo = new FileOutputStream(f);
+			 ob = new  ObjectOutputStream (fo);
+			 ob.writeObject(nba);
+			 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				if(ob!= null){
+					ob.close();
+				}
+					
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+		}
+	}
+
 }
 
