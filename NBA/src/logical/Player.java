@@ -155,4 +155,3 @@ public class Player implements Serializable{
 		return total;
 	}
 }
-

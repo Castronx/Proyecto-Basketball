@@ -74,4 +74,3 @@ public class Performance implements Serializable{
 		this.puntoTotales = puntoTotales;
 	}
 }
-

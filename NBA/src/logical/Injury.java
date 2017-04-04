@@ -3,9 +3,7 @@ package logical;
 import java.io.Serializable;
 
 public class Injury implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 2202017412633310866L;
 	private Player jugador;
 	private Team equipo;
@@ -23,43 +21,33 @@ public class Injury implements Serializable {
 		this.infoAdicional = infoAdicional;
 		this.recuperacion = recuperacion;
 	}
-
 	public Player getJugador() {
 		return jugador;
 	}
-
 	public void setJugador(Player jugador) {
 		this.jugador = jugador;
 	}
-
 	public Team getEquipo() {
 		return equipo;
 	}
-
 	public void setEquipo(Team equipo) {
 		this.equipo = equipo;
 	}
-
 	public String getTipo() {
 		return tipo;
 	}
-
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-
 	public String getFecha() {
 		return fecha;
 	}
-
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-
 	public String getInfoAdicional() {
 		return infoAdicional;
 	}
-
 	public void setInfoAdicional(String infoAdicional) {
 		this.infoAdicional = infoAdicional;
 	}
@@ -69,5 +57,4 @@ public class Injury implements Serializable {
 	public void setRecuperacion(String recuperacion) {
 		this.recuperacion = recuperacion;
 	}
-
 }

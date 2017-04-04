@@ -18,7 +18,6 @@ public class Game implements Serializable{
 
 	public Game() {
 	}
-
 	public Game(String equipoLocal, String equipoVisitante, String localizacion, String estadio, int dia, String mes,
 			String año, String hora, int marcadorLocal, int marcadorVisitante) {
 		super();
@@ -33,83 +32,63 @@ public class Game implements Serializable{
 		this.marcadorLocal = marcadorLocal;
 		this.marcadorVisitante = marcadorVisitante;
 	}
-
 	public String getEquipoLocal() {
 		return equipoLocal;
 	}
-
 	public void setEquipoLocal(String equipoLocal) {
 		this.equipoLocal = equipoLocal;
 	}
-
 	public String getEquipoVisitante() {
 		return equipoVisitante;
 	}
-
 	public void setEquipoVisitante(String equipoVisitante) {
 		this.equipoVisitante = equipoVisitante;
 	}
-
 	public String getLocalizacion() {
 		return localizacion;
 	}
-
 	public void setLocalizacion(String localizacion) {
 		this.localizacion = localizacion;
 	}
-
 	public String getEstadio() {
 		return estadio;
 	}
-
 	public void setEstadio(String estadio) {
 		this.estadio = estadio;
 	}
-
 	public int getDia() {
 		return dia;
 	}
-
 	public void setDia(int dia) {
 		this.dia = dia;
 	}
-
 	public String getMes() {
 		return mes;
 	}
-
 	public void setMes(String mes) {
 		this.mes = mes;
 	}
-
 	public String getAño() {
 		return año;
 	}
-
 	public void setAño(String año) {
 		this.año = año;
 	}
-
 	public String getHora() {
 		return hora;
 	}
-
 	public void setHora(String hora) {
 		this.hora = hora;
 	}
-
 	public int getMarcadorLocal() {
 		return marcadorLocal;
 	}
-
 	public void setMarcadorLocal(int marcadorLocal) {
 		this.marcadorLocal = marcadorLocal;
 	}
-
 	public int getMarcadorVisitante() {
 		return marcadorVisitante;
 	}
-
 	public void setMarcadorVisitante(int marcadorVisitante) {
 		this.marcadorVisitante = marcadorVisitante;
 	}

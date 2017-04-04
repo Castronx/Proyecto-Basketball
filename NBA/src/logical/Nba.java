@@ -8,7 +8,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
 public class Nba implements Serializable {
 	
 	private static final long serialVersionUID = 7492466070158751832L;
@@ -137,6 +136,5 @@ public class Nba implements Serializable {
 			}
 		}
 	}
-
 }
 
