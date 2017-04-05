@@ -11,6 +11,7 @@ public class Injury implements Serializable {
 	private String fecha;
 	private String infoAdicional;
 	private String recuperacion;
+	//terminar
 
 	public Injury(Player jugador, Team equipo, String tipo, String fecha, String infoAdicional, String recuperacion) {
 		super();

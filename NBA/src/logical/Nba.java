@@ -16,6 +16,7 @@ public class Nba implements Serializable {
 	private ArrayList<Player> misJugadores;
 	private ArrayList<Injury> misLesiones;
 	private static Nba enebea;
+	//terminar
 
 	public Nba() {
 	}

@@ -13,6 +13,7 @@ public class Performance implements Serializable{
 	private int tirosCampo;
 	private int balonesPerdidos;
 	private int puntoTotales;
+	//terminar
 
 	public Performance(int asistencias, int tirosLibres, int tirosTres, int rebotes, int robos, int tirosCampo,
 			int balonesPerdidos) {

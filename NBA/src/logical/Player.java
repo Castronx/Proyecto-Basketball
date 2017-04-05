@@ -21,6 +21,7 @@ public class Player implements Serializable{
 	private ArrayList <Injury> lesion;
 	private ArrayList <Performance> estadisticasJugador;
 	private static Player jugador;
+	//terminar
 
 	public Player() {
 		lesion = new ArrayList<>();

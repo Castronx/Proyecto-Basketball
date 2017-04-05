@@ -15,6 +15,7 @@ public class Team implements Serializable {
 	private ArrayList <Performance> misEstadisticas;
 	private ArrayList <Player> misJugadores;
 	public static Team equipo;
+	//terminar
 	public static Team getInstance(){
 		if(equipo ==null){
 			equipo = new Team();
