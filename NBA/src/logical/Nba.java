@@ -16,7 +16,6 @@ public class Nba implements Serializable {
 	private ArrayList<Player> misJugadores;
 	private ArrayList<Injury> misLesiones;
 	private static Nba enebea;
-	//terminar
 
 	public Nba() {
 	}
@@ -71,14 +70,6 @@ public class Nba implements Serializable {
 	public void eliminarPartido(Game jogo){
 		misJuegos.remove(jogo);
 	}
-	/*//metodo insertar lesion
-	public void insertarLesion(Injury inju){
-		misLesiones.add(inju);
-	}
-	//metodo borrar lesion
-	public void eliminarLesion(Injury inju){
-		misLesiones.remove(inju);
-	}*/
 	//metodo buscar jugador.
 	public Player buscarJugador(String jugador){
 		Player juga = null;

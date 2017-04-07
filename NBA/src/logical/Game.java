@@ -9,13 +9,9 @@ public class Game implements Serializable{
 	private String equipoVisitante;
 	private String localizacion;
 	private String estadio;
-	private int dia;
-	private String mes;
-	private String año;
 	private String hora;
 	private int marcadorLocal;
 	private int marcadorVisitante;
-	//terminar
 
 	public Game() {
 	}
@@ -26,9 +22,6 @@ public class Game implements Serializable{
 		this.equipoVisitante = equipoVisitante;
 		this.localizacion = localizacion;
 		this.estadio = estadio;
-		this.dia = dia;
-		this.mes = mes;
-		this.año = año;
 		this.hora = hora;
 		this.marcadorLocal = marcadorLocal;
 		this.marcadorVisitante = marcadorVisitante;
@@ -56,24 +49,6 @@ public class Game implements Serializable{
 	}
 	public void setEstadio(String estadio) {
 		this.estadio = estadio;
-	}
-	public int getDia() {
-		return dia;
-	}
-	public void setDia(int dia) {
-		this.dia = dia;
-	}
-	public String getMes() {
-		return mes;
-	}
-	public void setMes(String mes) {
-		this.mes = mes;
-	}
-	public String getAño() {
-		return año;
-	}
-	public void setAño(String año) {
-		this.año = año;
 	}
 	public String getHora() {
 		return hora;

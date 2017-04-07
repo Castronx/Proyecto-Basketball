@@ -15,13 +15,7 @@ public class Team implements Serializable {
 	private ArrayList <Performance> misEstadisticas;
 	private ArrayList <Player> misJugadores;
 	public static Team equipo;
-	//terminar
-	public static Team getInstance(){
-		if(equipo ==null){
-			equipo = new Team();
-		}
-		return equipo;
-	}
+	
 	public Team(String nombreEquipo, String ciudad, String entrenador, int victorias, int derrotas, String estadio) {
 		super();
 		this.nombreEquipo = nombreEquipo;
@@ -33,15 +27,14 @@ public class Team implements Serializable {
 		misEstadisticas = new ArrayList <>();
 		misJugadores = new ArrayList<>();
 	}
-	
-	public Team(String nombreEquipo,String ciudad, String entrenador, String estadio) {
-		super();
-		this.nombreEquipo = nombreEquipo;
-		this.ciudad = ciudad;
-		this.entrenador = entrenador;
-		this.estadio = estadio;
-	}
 	public Team() {
+	}
+	//singleton
+	public static Team getInstance(){
+		if(equipo ==null){
+			equipo = new Team();
+		}
+		return equipo;
 	}
 	public String getNombreEquipo() {
 		return nombreEquipo;
