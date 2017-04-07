@@ -5,14 +5,14 @@ import java.io.Serializable;
 public class Injury implements Serializable {
 
 	private static final long serialVersionUID = 2202017412633310866L;
-	private Player jugador;
-	private Team equipo;
+	private String jugador;
+	private String equipo;
 	private String tipo;
 	private String fecha;
 	private String infoAdicional;
 	private String recuperacion;
 	
-	public Injury(Player jugador, Team equipo, String tipo, String fecha, String infoAdicional, String recuperacion) {
+	public Injury(String jugador, String equipo, String tipo, String fecha, String infoAdicional, String recuperacion) {
 		super();
 		this.jugador = jugador;
 		this.equipo = equipo;
@@ -21,16 +21,16 @@ public class Injury implements Serializable {
 		this.infoAdicional = infoAdicional;
 		this.recuperacion = recuperacion;
 	}
-	public Player getJugador() {
+	public String getJugador() {
 		return jugador;
 	}
-	public void setJugador(Player jugador) {
+	public void setJugador(String jugador) {
 		this.jugador = jugador;
 	}
-	public Team getEquipo() {
+	public String getEquipo() {
 		return equipo;
 	}
-	public void setEquipo(Team equipo) {
+	public void setEquipo(String equipo) {
 		this.equipo = equipo;
 	}
 	public String getTipo() {
