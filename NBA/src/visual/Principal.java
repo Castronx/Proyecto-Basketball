@@ -78,8 +78,8 @@ public class Principal extends JFrame {
 		mntmListado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(iniciodesesionad==true){
-					ListadoUsuarios lista = new ListadoUsuarios(resort);
-					lista.setVisible(true);
+					//ListadoUsuarios lista = new ListadoUsuarios(resort);
+					//lista.setVisible(true);
 				}else{
 					JOptionPane.showMessageDialog(null, "Debe registrar un equipo antes de registrar un jugador.", null,JOptionPane.INFORMATION_MESSAGE, null);
 				}
@@ -94,8 +94,8 @@ public class Principal extends JFrame {
 		mntmRealizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(iniciodesesionad==true){
-				hacerReservacion reservacion = new hacerReservacion(resort, hues);
-				reservacion.setVisible(true);
+				//hacerReservacion reservacion = new hacerReservacion(resort, hues);
+			//	reservacion.setVisible(true);
 				setLocationRelativeTo(null);
 			}else{
 				JOptionPane.showMessageDialog(null, "Inicio de sesión (admin) requerido.", null,JOptionPane.INFORMATION_MESSAGE, null);
@@ -114,74 +114,44 @@ public class Principal extends JFrame {
 		JButton button = new JButton("Iniciar sesi\u00F3n");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				inicioSesion user = new inicioSesion(resort,"",false);
-				user.setVisible(true);
-				hues = user.getUsuario();
+				//inicioSesion user = new inicioSesion(resort,"",false);
+				//user.setVisible(true);
+				//hues = user.getUsuario();
 			}
 		});
 		button.setBounds(995, 11, 131, 23);
 		contentPane.add(button);
 		
 		JButton button_1 = new JButton("Inicio sesi\u00F3n (Admin)");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				inicioSesion sesion = new inicioSesion(resort, "", true);
-				sesion.setVisible(true);
-				if(sesion.admin()==true){
-				iniciodesesionad=true;
-				}
-			}
-		});
+
 		button_1.setBounds(1136, 11, 155, 23);
 		contentPane.add(button_1);
 		
 		JButton button_2 = new JButton("Registrarse");
-		button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RegistrarUsuario registro = new RegistrarUsuario(resort);
-				registro.setVisible(true);
-			}
-		});
+	
+		
 		button_2.setBounds(995, 82, 105, 23);
 		contentPane.add(button_2);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar sesi\u00F3n");
-		btnCerrarSesin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				hues = null;
-				if(iniciodesesionad==true){
-					JOptionPane.showMessageDialog(null, "Se ha cerrado sesión.", null,JOptionPane.INFORMATION_MESSAGE, null);
-				}else if(iniciodesesionad==false){
-					JOptionPane.showMessageDialog(null, "No hay sesión activa.", null, JOptionPane.INFORMATION_MESSAGE);
-				}
-			}
-		});
+
 		btnCerrarSesin.setBounds(995, 45, 131, 23);
 		contentPane.add(btnCerrarSesin);
 		
 		JButton btnCerrarSesinadmin = new JButton("Cerrar sesi\u00F3n (Admin)");
-		btnCerrarSesinadmin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(iniciodesesionad==true){
-					JOptionPane.showMessageDialog(null, "Usted ha Cerrado Sesión.", null,JOptionPane.INFORMATION_MESSAGE, null);
-				}else if(iniciodesesionad==false){
-					JOptionPane.showMessageDialog(null, "No hay sesión activa.", null,JOptionPane.INFORMATION_MESSAGE, null);
-				}
-				iniciodesesionad=false;
-			}
-		});
+	
 		btnCerrarSesinadmin.setBounds(1136, 45, 167, 23);
 		contentPane.add(btnCerrarSesinadmin);
 		
 		JButton btnCambiarContraseaadmin = new JButton("Cambiar contrase\u00F1a (Admin)");
 		btnCambiarContraseaadmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cambiarContraseña cambia = new cambiarContraseña(resort, usur, change);
+				//cambiarContraseña cambia = new cambiarContraseña(resort, usur, change);
 				if(iniciodesesionad==true){
-				cambia.setVisible(true);
+				//cambia.setVisible(true);
 				setLocationRelativeTo(null);}
 				else{
-					cambia.setVisible(false);
+					//cambia.setVisible(false);
 				}
 			}
 		});
