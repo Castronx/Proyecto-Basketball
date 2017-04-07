@@ -73,4 +73,7 @@ public class Performance implements Serializable{
 	public void setPuntoTotales(int puntoTotales) {
 		this.puntoTotales = puntoTotales;
 	}
+
+	
+
 }

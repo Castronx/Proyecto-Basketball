@@ -12,6 +12,8 @@ public class Game implements Serializable{
 	private String hora;
 	private int marcadorLocal;
 	private int marcadorVisitante;
+	
+	//aqui estoy
 
 	public Game() {
 	}
