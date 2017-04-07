@@ -53,6 +53,7 @@ public class RegistrarEquipo extends JDialog implements Serializable {
         private  JButton imprimir;
         private ArrayList<Team> equipos = new ArrayList<>();
         private Object[] fila;
+        
        
         private class CELL_RENDERER extends JCheckBox implements TableCellRenderer{
                 
