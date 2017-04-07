@@ -12,8 +12,8 @@ public class Team implements Serializable {
 	private int victorias;
 	private int derrotas;
 	private String estadio;
-	private ArrayList <Performance> misEstadisticas;
-	private ArrayList <Player> misJugadores;
+	private ArrayList <Performance> misEstadisticas = new ArrayList<>();
+	private ArrayList <Player> misJugadores = new ArrayList<>();
 	public static Team equipo;
 	
 	public Team(String nombreEquipo, String ciudad, String entrenador, int victorias, int derrotas, String estadio) {
@@ -30,7 +30,7 @@ public class Team implements Serializable {
 	public Team() {
 	}
 	//singleton
-	public static Team getInstance(){
+	public static Team getInstances(){
 		if(equipo ==null){
 			equipo = new Team();
 		}

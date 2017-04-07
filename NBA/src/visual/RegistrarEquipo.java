@@ -51,6 +51,7 @@ public class RegistrarEquipo extends JDialog implements Serializable {
         private JTextField Coach;
         private JButton borrar;
         private JButton Insertar;
+        private  JButton imprimir;
         private ArrayList<Team> equipos = new ArrayList<>();
         private Object[] fila;
        
@@ -191,7 +192,7 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                         borrar = new JButton("Eliminar");
                         borrar.addActionListener(new ActionListener() {
                                 public void actionPerformed(ActionEvent arg0) {
-                                        int answer = JOptionPane.showConfirmDialog(null, "Desea borrar este equipo?",null,JOptionPane.YES_NO_OPTION);
+                                        int answer = JOptionPane.showConfirmDialog(null, "¿desea eliminar este equipo?",null,JOptionPane.YES_NO_OPTION);
                                 if (answer == JOptionPane.YES_OPTION) {
                                         borrarEquipo();
                                         CargarEquipo();                                      
@@ -203,7 +204,7 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                         });
                         buttonPane.setLayout(new GridLayout(0, 4, 0, 0));
                         
-                        JButton imprimir = new JButton("Imprimir");
+                        imprimir = new JButton("Imprimir");
                         imprimir.addActionListener(new ActionListener() {
                         	public void actionPerformed(ActionEvent e) {
                         		 try{
@@ -228,7 +229,7 @@ public class RegistrarEquipo extends JDialog implements Serializable {
           			             bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
           			               bw.close();
           			               fw.close();
-          			               JOptionPane.showMessageDialog(null, "Lista de equipos esta impresa!");
+          			               JOptionPane.showMessageDialog(null, "Lista de equipos impresa!");
           			               }catch(Exception ex){
           			                   ex.printStackTrace();
           			               }
@@ -263,7 +264,7 @@ public class RegistrarEquipo extends JDialog implements Serializable {
         tablaEquipos.getColumn("Select").setMaxWidth(60);
         tablaEquipos.getColumn("Select").setCellEditor(new CELL_EDITOR(new JCheckBox()));
         tablaEquipos.setRowSelectionAllowed(true);
-        for (Team aux : Nba.getInstances().getMisEquipos()) {
+        for(Team aux : Nba.getInstances().getMisEquipos()){
 			 fila[1] = aux.getNombreEquipo();
 			 fila[2] = aux.getEntrenador();
 			 fila[3] = aux.getCiudad();
