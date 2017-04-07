@@ -11,6 +11,8 @@ public class Game {
 	private String hora;
 	private int marcadorLocal;
 	private int marcadorVisitante;
+	
+	//aqui estoy
 
 	public Game() {
 	}
