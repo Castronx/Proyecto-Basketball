@@ -3,7 +3,6 @@ package visual;
 import java.awt.BorderLayout;
 import java.awt.Component;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -32,7 +31,7 @@ import javax.swing.JTable;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.ImageIcon;
+//import javax.swing.ImageIcon;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -153,7 +152,7 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                 scrollPane.setViewportView(tablaEquipos);
                 
                 JLabel lblNewLabel = new JLabel("");
-                java.awt.Image image = new ImageIcon(this.getClass().getResource("/descarga.png")).getImage();
+             //   java.awt.Image image = new ImageIcon(this.getClass().getResource("/descarga.png")).getImage();
                 lblNewLabel.setBounds(482, 11, 233, 148);
                 contentPanel.add(lblNewLabel);
                 {                      	
