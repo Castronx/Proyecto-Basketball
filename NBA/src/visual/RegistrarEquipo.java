@@ -71,7 +71,6 @@ public class RegistrarEquipo extends JDialog implements Serializable {
          	private class CELL_EDITOR extends DefaultCellEditor{
                
 				private static final long serialVersionUID = 3727661195130308862L;
-
 				public CELL_EDITOR(JCheckBox checkBox) {
                     super(checkBox);
                     checkBox.setHorizontalAlignment(JLabel.CENTER);    
