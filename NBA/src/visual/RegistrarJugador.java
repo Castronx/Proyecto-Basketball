@@ -12,13 +12,16 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.JSeparator;
+import javax.swing.border.TitledBorder;
+import javax.swing.DefaultComboBoxModel;
+
 
 public class RegistrarJugador extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField textNombre;
+	private JTextField textEdad;
+	private JTextField textApellido;
 
 	/**
 	 * Launch the application.
@@ -44,109 +47,131 @@ public class RegistrarJugador extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JPanel panel = new JPanel();
-			panel.setBounds(0, 0, 684, 178);
+			panel.setBorder(new TitledBorder(null, "Datos del Jugador", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setBounds(0, 11, 684, 178);
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
-				JLabel lblNewLabel = new JLabel("Equipo:");
-				lblNewLabel.setBounds(10, 11, 59, 14);
-				panel.add(lblNewLabel);
+				JLabel lblEquipo = new JLabel("Equipo:");
+				lblEquipo.setBounds(10, 30, 59, 14);
+				panel.add(lblEquipo);
 			}
 			{
-				JLabel lblNewLabel_1 = new JLabel("Nombre:");
-				lblNewLabel_1.setBounds(10, 59, 59, 14);
-				panel.add(lblNewLabel_1);
+				JLabel lblNombre = new JLabel("Nombre:");
+				lblNombre.setEnabled(false);
+				lblNombre.setBounds(10, 71, 59, 14);
+				panel.add(lblNombre);
 			}
 			{
-				JLabel lblNewLabel_2 = new JLabel("Fecha de Nacimiento:");
-				lblNewLabel_2.setBounds(10, 103, 115, 14);
-				panel.add(lblNewLabel_2);
+				JLabel lblFechaN = new JLabel("Fecha de Nacimiento:");
+				lblFechaN.setEnabled(false);
+				lblFechaN.setBounds(10, 111, 115, 14);
+				panel.add(lblFechaN);
 			}
 			{
-				JLabel lblNewLabel_3 = new JLabel("Edad:");
-				lblNewLabel_3.setBounds(10, 151, 36, 14);
-				panel.add(lblNewLabel_3);
+				JLabel lblEdad = new JLabel("Edad:");
+				lblEdad.setEnabled(false);
+				lblEdad.setBounds(10, 151, 49, 14);
+				panel.add(lblEdad);
 			}
 			{
 				JLabel lblNo = new JLabel("No:");
-				lblNo.setBounds(100, 151, 36, 14);
+				lblNo.setEnabled(false);
+				lblNo.setBounds(165, 151, 36, 14);
 				panel.add(lblNo);
 			}
 			
-			JComboBox comboBox = new JComboBox();
-			comboBox.setBounds(97, 8, 142, 20);
-			panel.add(comboBox);
+			JComboBox comboBoxEquipo = new JComboBox();
+			comboBoxEquipo.setModel(new DefaultComboBoxModel(new String[] {"<Selecionne el Equipo>"}));
+			comboBoxEquipo.setBounds(97, 24, 160, 20);
+			panel.add(comboBoxEquipo);
 			
-			textField = new JTextField();
-			textField.setBounds(100, 56, 139, 20);
-			panel.add(textField);
-			textField.setColumns(10);
+			textNombre = new JTextField();
+			textNombre.setBounds(100, 65, 157, 20);
+			panel.add(textNombre);
+			textNombre.setColumns(10);
 			
-			textField_1 = new JTextField();
-			textField_1.setBounds(54, 148, 31, 20);
-			panel.add(textField_1);
-			textField_1.setColumns(10);
+			textEdad = new JTextField();
+			textEdad.setBounds(69, 145, 42, 20);
+			panel.add(textEdad);
+			textEdad.setColumns(10);
 			
-			JSpinner spinner = new JSpinner();
-			spinner.setBounds(132, 148, 42, 20);
-			panel.add(spinner);
+			JSpinner spinnerNo = new JSpinner();
+			spinnerNo.setEnabled(false);
+			spinnerNo.setBounds(197, 145, 42, 20);
+			panel.add(spinnerNo);
 			
 			JLabel lblPosicion = new JLabel("Posicion:");
-			lblPosicion.setBounds(317, 11, 68, 14);
+			lblPosicion.setEnabled(false);
+			lblPosicion.setBounds(315, 30, 68, 14);
 			panel.add(lblPosicion);
 			
-			JComboBox comboBox_1 = new JComboBox();
-			comboBox_1.setBounds(396, 8, 153, 20);
-			panel.add(comboBox_1);
+			JComboBox comboBoxPosicion = new JComboBox();
+			comboBoxPosicion.setEnabled(false);
+			comboBoxPosicion.setBounds(396, 24, 153, 20);
+			panel.add(comboBoxPosicion);
 			
 			JLabel lblApellido = new JLabel("Apellido:");
-			lblApellido.setBounds(317, 59, 68, 14);
+			lblApellido.setEnabled(false);
+			lblApellido.setBounds(315, 71, 68, 14);
 			panel.add(lblApellido);
 			
-			textField_2 = new JTextField();
-			textField_2.setBounds(396, 56, 153, 20);
-			panel.add(textField_2);
-			textField_2.setColumns(10);
+			textApellido = new JTextField();
+			
+			textApellido.setBounds(396, 65, 153, 20);
+			panel.add(textApellido);
+			textApellido.setColumns(10);
 			
 			JLabel lblAltura = new JLabel("Altura:");
-			lblAltura.setBounds(317, 103, 46, 14);
+			lblAltura.setEnabled(false);
+			lblAltura.setBounds(315, 111, 46, 14);
 			panel.add(lblAltura);
 			
-			JSpinner spinner_1 = new JSpinner();
-			spinner_1.setBounds(396, 100, 36, 20);
-			panel.add(spinner_1);
+			JSpinner spinnerPies = new JSpinner();
+			spinnerPies.setEnabled(false);
+			spinnerPies.setBounds(400, 105, 36, 20);
+			panel.add(spinnerPies);
 			
 			JLabel lblPies = new JLabel("Pies");
-			lblPies.setBounds(442, 103, 31, 14);
+			lblPies.setEnabled(false);
+			lblPies.setBounds(442, 111, 31, 14);
 			panel.add(lblPies);
 			
-			JSpinner spinner_2 = new JSpinner();
-			spinner_2.setBounds(469, 100, 36, 20);
-			panel.add(spinner_2);
+			JSpinner spinnerPulgadas = new JSpinner();
+			spinnerPulgadas.setEnabled(false);
+			spinnerPulgadas.setBounds(469, 105, 36, 20);
+			panel.add(spinnerPulgadas);
 			
 			JLabel lblPulgadas = new JLabel("Pulgadas");
-			lblPulgadas.setBounds(515, 103, 46, 14);
+			lblPulgadas.setEnabled(false);
+			lblPulgadas.setBounds(515, 111, 46, 14);
 			panel.add(lblPulgadas);
 			
 			JLabel lblPeso = new JLabel("Peso:");
-			lblPeso.setBounds(317, 151, 46, 14);
+			lblPeso.setEnabled(false);
+			lblPeso.setBounds(315, 151, 46, 14);
 			panel.add(lblPeso);
 			
-			JSpinner spinner_3 = new JSpinner();
-			spinner_3.setBounds(396, 148, 36, 20);
-			panel.add(spinner_3);
+			JSpinner spinnerPeso = new JSpinner();
+			spinnerPeso.setEnabled(false);
+			spinnerPeso.setBounds(400, 145, 36, 20);
+			panel.add(spinnerPeso);
 			
 			JLabel lblKgs = new JLabel("Kgs");
+			spinnerPeso.setEnabled(false);
 			lblKgs.setBounds(442, 151, 36, 14);
 			panel.add(lblKgs);
 			
 			JLabel lblLesionado = new JLabel("Lesionado:");
+			lblLesionado.setEnabled(false);
 			lblLesionado.setBounds(515, 151, 68, 14);
 			panel.add(lblLesionado);
 			
-			JComboBox comboBox_2 = new JComboBox();
-			comboBox_2.setBounds(593, 148, 59, 20);
-			panel.add(comboBox_2);
+			JComboBox comboBoxLesionado = new JComboBox();
+			comboBoxLesionado.setEnabled(false);
+			comboBoxLesionado.setModel(new DefaultComboBoxModel(new String[] {"NO", "SI"}));
+			comboBoxLesionado.setBounds(593, 145, 59, 20);
+			panel.add(comboBoxLesionado);
 		}
 		
 		JSeparator separator = new JSeparator();
