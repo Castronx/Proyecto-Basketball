@@ -54,6 +54,15 @@ public class Nba implements Serializable {
 	public void setMisJugadores(ArrayList<Player> misJugadores) {
 		this.misJugadores = misJugadores;
 	}
+	
+	public ArrayList<Injury> getMisLesiones() {
+		return misLesiones;
+	}
+	public void setMisLesiones(ArrayList<Injury> misLesiones) {
+		this.misLesiones = misLesiones;
+	}
+	
+	
 	//metodo insertar equipo.
 	public void insertarEquipo(Team equi){
 		misEquipos.add(equi);
