@@ -2,6 +2,7 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.io.Serializable;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,8 +17,9 @@ import javax.swing.border.TitledBorder;
 import javax.swing.DefaultComboBoxModel;
 
 
-public class RegistrarJugador extends JDialog {
-
+public class RegistrarJugador extends JDialog implements Serializable{
+    
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textNombre;
 	private JTextField textEdad;
