@@ -12,11 +12,12 @@ public class Game implements Serializable{
 	private String hora;
 	private int marcadorLocal;
 	private int marcadorVisitante;
+	private String fecha;
+	private boolean jugado;
 	
 	public Game() {
 	}
-	public Game(String equipoLocal, String equipoVisitante, String localizacion, String estadio, int dia, String mes,
-			String año, String hora, int marcadorLocal, int marcadorVisitante) {
+	public Game(String equipoLocal, String equipoVisitante, String localizacion, String estadio, String hora, int marcadorLocal, int marcadorVisitante, String fecha, boolean jugado) {
 		super();
 		this.equipoLocal = equipoLocal;
 		this.equipoVisitante = equipoVisitante;
@@ -25,6 +26,8 @@ public class Game implements Serializable{
 		this.hora = hora;
 		this.marcadorLocal = marcadorLocal;
 		this.marcadorVisitante = marcadorVisitante;
+		this.fecha = fecha;
+		this.jugado = jugado;
 	}
 	public String getEquipoLocal() {
 		return equipoLocal;
@@ -67,5 +70,17 @@ public class Game implements Serializable{
 	}
 	public void setMarcadorVisitante(int marcadorVisitante) {
 		this.marcadorVisitante = marcadorVisitante;
+	}
+	public String getFecha() {
+		return fecha;
+	}
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+	public boolean isJugado() {
+		return jugado;
+	}
+	public void setJugado(boolean jugado) {
+		this.jugado = jugado;
 	}
 }

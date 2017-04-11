@@ -30,7 +30,7 @@ public class Principal extends JFrame {
 	private Dimension dim;
 	public Nba lig;
 	private Player play;
-	private boolean iniciodesesionad=false;
+	private boolean hayequipo=false;
 	private String usur;
 	private boolean change;
 	
@@ -65,8 +65,8 @@ public class Principal extends JFrame {
 		JMenuItem mntmRegistrar = new JMenuItem("Registrar");
 		mntmRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					RegistrarEquipo reghotel = new RegistrarEquipo();
-					reghotel.setVisible(true);
+					RegistrarEquipo regequi = new RegistrarEquipo();
+					regequi.setVisible(true);
 			}
 		});
 		mnHoteles.add(mntmRegistrar);
@@ -77,9 +77,9 @@ public class Principal extends JFrame {
 		JMenuItem mntmListado = new JMenuItem("Registrar");
 		mntmListado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(iniciodesesionad==true){
-					//ListadoUsuarios lista = new ListadoUsuarios(resort);
-					//lista.setVisible(true);
+				if(hayequipo==true){
+				RegistrarJugador registro = new RegistrarJugador();
+				registro.setVisible(true);
 				}else{
 					JOptionPane.showMessageDialog(null, "Debe registrar un equipo antes de registrar un jugador.", null,JOptionPane.INFORMATION_MESSAGE, null);
 				}
@@ -87,21 +87,34 @@ public class Principal extends JFrame {
 		});
 		mnUsuarios.add(mntmListado);
 		
-		JMenu mnReservaciones = new JMenu("Reservaciones");
+		JMenu mnReservaciones = new JMenu("Lesiones");
 		mnNewMenu.add(mnReservaciones);
 		
-		JMenuItem mntmRealizar = new JMenuItem("Realizar");
+		JMenuItem mntmRealizar = new JMenuItem("Registrar");
 		mntmRealizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(iniciodesesionad==true){
-				//hacerReservacion reservacion = new hacerReservacion(resort, hues);
-			//	reservacion.setVisible(true);
+				if(hayequipo==true){
+					RegistrarLesion registro = new RegistrarLesion();
+					registro.setVisible(true);
 				setLocationRelativeTo(null);
 			}else{
-				JOptionPane.showMessageDialog(null, "Inicio de sesión (admin) requerido.", null,JOptionPane.INFORMATION_MESSAGE, null);
+				JOptionPane.showMessageDialog(null, "Debe registrar un jugador antes de registrar una lesión.", null,JOptionPane.INFORMATION_MESSAGE, null);
 			}
 		}});
 		mnReservaciones.add(mntmRealizar);
+		
+		JMenu mnNewMenu_1 = new JMenu("Partidos");
+		mnNewMenu.add(mnNewMenu_1);
+		
+		JMenuItem mntmRegistrar_1 = new JMenuItem("Registrar");
+		mntmRegistrar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistrarPartido regipart = new RegistrarPartido();
+				regipart.setVisible(true);
+				setLocationRelativeTo(null);
+			}
+		});
+		mnNewMenu_1.add(mntmRegistrar_1);
 		dim = super.getToolkit().getScreenSize();
 		super.setSize(dim.width, (dim.height-80));
 		this.setResizable(false);
@@ -147,13 +160,13 @@ public class Principal extends JFrame {
 		btnCambiarContraseaadmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//cambiarContraseña cambia = new cambiarContraseña(resort, usur, change);
-				if(iniciodesesionad==true){
+				//if(iniciodesesionad==true){
 				//cambia.setVisible(true);
 				setLocationRelativeTo(null);}
-				else{
+				//else{
 					//cambia.setVisible(false);
-				}
-			}
+				//}
+			//}
 		});
 		btnCambiarContraseaadmin.setBounds(1136, 82, 214, 23);
 		contentPane.add(btnCambiarContraseaadmin);
