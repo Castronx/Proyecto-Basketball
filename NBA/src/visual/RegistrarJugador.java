@@ -25,9 +25,6 @@ public class RegistrarJugador extends JDialog implements Serializable{
 	private JTextField textEdad;
 	private JTextField textApellido;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		try {
 			RegistrarJugador dialog = new RegistrarJugador();
@@ -38,9 +35,6 @@ public class RegistrarJugador extends JDialog implements Serializable{
 		}
 	}
 
-	/**
-	 * Create the dialog.
-	 */
 	public RegistrarJugador() {
 		setBounds(100, 100, 700, 573);
 		getContentPane().setLayout(new BorderLayout());

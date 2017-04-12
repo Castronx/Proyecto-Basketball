@@ -22,9 +22,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
+import java.util.Calendar;
 
 public class RegistrarPartido extends JDialog {
 
+	private static final long serialVersionUID = -9168198932418671005L;
 	private final JPanel contentPanel = new JPanel();
 	private JSpinner spnTiempo;
 	private JComboBox equipolocal;
@@ -33,18 +36,14 @@ public class RegistrarPartido extends JDialog {
 	private JTextField ciudad;
 	private JDateChooser fechapartido;
 	private Date fecha;
-
-	public static void main(String[] args) {
-		try {
-			RegistrarPartido dialog = new RegistrarPartido();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private JSpinner hora;
+	private SpinnerDateModel spinnerDateModel;
 
 	public RegistrarPartido() {
+		fechapartido = new JDateChooser();
+		fecha = new Date();
+		spinnerDateModel = new SpinnerDateModel(fecha, null, null, Calendar.MINUTE);
+		
 		setTitle("Registrar Partido");
 		setBounds(100, 100, 553, 236);
 		getContentPane().setLayout(new BorderLayout());
@@ -88,8 +87,12 @@ public class RegistrarPartido extends JDialog {
 		fechapartido.setBounds(85, 122, 134, 20);
 		contentPanel.add(fechapartido);
 		
-		JSpinner hora = new JSpinner();
-		hora.setBounds(378, 122, 77, 20);
+		hora = new JSpinner();
+		hora.setModel(new SpinnerDateModel(new Date(1492038000000L), null, null, Calendar.MINUTE));
+		JSpinner.DateEditor de_spnTiempo = new JSpinner.DateEditor(hora, "hh:mm a");
+		de_spnTiempo.getTextField().setEditable(true);
+		hora.setEditor(de_spnTiempo);
+		hora.setBounds(392, 122, 98, 20);
 		contentPanel.add(hora);
 		
 		JLabel lblCiudad = new JLabel("Ciudad:");
@@ -105,10 +108,6 @@ public class RegistrarPartido extends JDialog {
 		lblEjPuertoPlata.setBounds(423, 54, 104, 14);
 		contentPanel.add(lblEjPuertoPlata);
 		
-		JLabel lblPm = new JLabel("pm");
-		lblPm.setBounds(462, 125, 46, 14);
-		contentPanel.add(lblPm);
-		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -122,11 +121,10 @@ public class RegistrarPartido extends JDialog {
 						String local = equipolocal.getSelectedItem().toString();
 						String visitante = equipovisitante.getSelectedItem().toString();
 						String campo = estadio.getSelectedItem().toString();
-						String fechaJuego = fe.getTextField().getText().toString();
+						String time = fe.getTextField().getText().toString();
 						String city = ciudad.getText().toString();
-						String time = hora.getValue().toString();
 						boolean jugados = false;
-						Game partido = new Game(local, visitante, city, campo, time, 0, 0, fechaJuego, jugados);
+						Game partido = new Game(local, visitante, city, campo, time, 0, 0, dat, jugados);
 						if (equipovisitante.getSelectedIndex() == 0 || equipolocal.getSelectedIndex() == 0 || estadio.getSelectedIndex() == 0 || fechapartido.getDate().toString().isEmpty()||ciudad.getText().toString()=="") {
 							JOptionPane.showMessageDialog(null, "Completar todos los campos.", "Warning!", JOptionPane.WARNING_MESSAGE);
 						}

@@ -29,9 +29,6 @@ import java.awt.event.ActionEvent;
 
 public class RegistrarLesion extends JDialog implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 9067065319805762038L;
 	private final JPanel contentPanel = new JPanel();
 	private Team equipo;
@@ -46,22 +43,6 @@ public class RegistrarLesion extends JDialog implements Serializable {
 	private JComboBox comboTipo;
 	
 
-	/**
-	 * Launch the application.
-	 */
-/*	public static void main(String[] args) {
-		try {
-			RegistrarLesion dialog = new RegistrarLesion();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public RegistrarLesion() {
 		setTitle("Insertar Lesi\u00F3n");
 		setBounds(100, 100, 659, 290);
@@ -83,13 +64,10 @@ public class RegistrarLesion extends JDialog implements Serializable {
 		comboEquipo = new JComboBox();
 		comboEquipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				comboJugador.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione Jugador>"}));
 				comboJugador.setEnabled(true);
-				
 				for (Team aux : Nba.getInstances().getMisEquipos()){
 					for (Player aux2 : aux.getMisJugadores()){
-						
 						comboJugador.setEnabled(true);
 						if (comboEquipo.getSelectedItem().toString().equalsIgnoreCase(aux.getNombreEquipo())){
 							comboJugador.addItem(aux2.getNombre()+" "+aux2.getApellido());
@@ -98,14 +76,11 @@ public class RegistrarLesion extends JDialog implements Serializable {
 				}
 				if (comboEquipo.getSelectedIndex()==0)
 					comboJugador.setEnabled(false);
-			}
-				 		 
+			} 		 
 			});
-		
 		comboEquipo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione Equipo>"}));
 		comboEquipo.setBounds(98, 31, 227, 20);
-		
-	  for (Team aux : Nba.getInstances().getMisEquipos())
+		for (Team aux : Nba.getInstances().getMisEquipos())
 		comboEquipo.addItem(aux.getNombreEquipo());
 		panel.add(comboEquipo);
 		
@@ -116,17 +91,12 @@ public class RegistrarLesion extends JDialog implements Serializable {
 		comboJugador = new JComboBox();
 		comboJugador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 
-				 	if(comboEquipo.getSelectedIndex()!=0)
-					comboJugador.setEnabled(true);
-					
+				 if(comboEquipo.getSelectedIndex()!=0)
+				comboJugador.setEnabled(true);
 				if(comboJugador.getSelectedIndex()!=0)
 					comboTipo.setEnabled(true);
-				
 				if(comboJugador.getSelectedIndex()==0)
 					comboTipo.setEnabled(false);
-				 
-				 
 			}
 		});
 		comboJugador.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione Jugador>"}));
@@ -191,16 +161,12 @@ public class RegistrarLesion extends JDialog implements Serializable {
 							String fecha = txtFecha.getText();
 							String recuperacion = txtRecuperacion.getText();
 							String infoAdicional = txtInfo.getText();
-							
 							listo = true;
 							Injury aux = new Injury(equipo, jugador, tipo, fecha, recuperacion, infoAdicional); 
 			
 		 JOptionPane.showMessageDialog(null, "Lesión Registrada " + comboJugador.getSelectedItem().toString(), null, JOptionPane.INFORMATION_MESSAGE);
 							Nba.getInstances().getMisEquipos().get(comboEquipo.getSelectedIndex()).getMisJugadores().get(comboJugador.getSelectedIndex()).InsertarLesion(aux);
 							clean();
-		  
-		  				
-		 
 						}
 						
 						else{
@@ -225,9 +191,6 @@ public class RegistrarLesion extends JDialog implements Serializable {
 			}
 		}
 	}
-	
-	
-	
 	 public JComboBox<String> getComboBox_Team() {
 		return comboEquipo;
 	}
@@ -235,11 +198,6 @@ public class RegistrarLesion extends JDialog implements Serializable {
 	public JComboBox<String> getComboBox_Player() {
 		return comboJugador;
 	}
-	  
-	  
-	 
-
-
 	private void clean() {
 		comboEquipo.setSelectedIndex(0);
 		comboJugador.setSelectedIndex(0);
@@ -247,6 +205,5 @@ public class RegistrarLesion extends JDialog implements Serializable {
 		txtFecha.setText("");
 		txtRecuperacion.setText("");
 		txtInfo.setText("");
-		
 	}
 }
