@@ -52,11 +52,6 @@ public class Principal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Jesus\\Pictures\\0BE.jpg"));
-		lblNewLabel.setBounds(10, 11, 1340, 606);
-		contentPane.add(lblNewLabel);
-		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		

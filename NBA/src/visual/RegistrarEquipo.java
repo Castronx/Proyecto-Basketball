@@ -151,11 +151,6 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                 scrollPane.setBounds(88, 236, 627, 214);
                 contentPanel.add(scrollPane);
                 scrollPane.setViewportView(tablaEquipos);
-                
-                JLabel lblNewLabel = new JLabel("");
-                lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Jesus\\Pictures\\Nueva carpeta\\descarga.png"));
-                lblNewLabel.setBounds(482, 11, 233, 190);
-                contentPanel.add(lblNewLabel);
                 {                      	
                 	tablaEquipos.addMouseListener(new MouseAdapter() {
                         public void mouseClicked(MouseEvent e) {

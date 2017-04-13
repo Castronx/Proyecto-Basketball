@@ -11,10 +11,10 @@ import java.util.ArrayList;
 public class Nba implements Serializable {
 	
 	private static final long serialVersionUID = 7492466070158751832L;
-	private ArrayList<Team> misEquipos;
-	private ArrayList<Game> misJuegos;
-	private ArrayList<Player> misJugadores;
-	private ArrayList<Injury> misLesiones;
+	private ArrayList<Team> misEquipos = new ArrayList<>();
+	private ArrayList<Game> misJuegos = new ArrayList<>();
+	private ArrayList<Player> misJugadores = new ArrayList<>();
+	private ArrayList<Injury> misLesiones = new ArrayList<>();
 	private static Nba enebea;
 
 	public Nba() {
