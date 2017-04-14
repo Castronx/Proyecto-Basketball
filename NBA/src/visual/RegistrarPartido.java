@@ -10,8 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
-import com.toedter.calendar.JDateChooser;
-import com.toedter.components.JSpinField;
+
 
 import logical.Game;
 import logical.Nba;
@@ -34,13 +33,13 @@ public class RegistrarPartido extends JDialog {
 	private JComboBox equipovisitante;
 	private JComboBox estadio;
 	private JTextField ciudad;
-	private JDateChooser fechapartido;
+	//private JDateChooser fechapartido;
 	private Date fecha;
 	private JSpinner hora;
 	private SpinnerDateModel spinnerDateModel;
 
 	public RegistrarPartido() {
-		fechapartido = new JDateChooser();
+//		fechapartido = new JDateChooser();
 		fecha = new Date();
 		spinnerDateModel = new SpinnerDateModel(fecha, null, null, Calendar.MINUTE);
 		
@@ -83,9 +82,9 @@ public class RegistrarPartido extends JDialog {
 		lblHora.setBounds(333, 125, 35, 14);
 		contentPanel.add(lblHora);
 		
-		fechapartido = new JDateChooser();
-		fechapartido.setBounds(85, 122, 134, 20);
-		contentPanel.add(fechapartido);
+//		fechapartido = new JDateChooser();
+	//	fechapartido.setBounds(85, 122, 134, 20);
+  //    contentPanel.add(fechapartido);
 		
 		hora = new JSpinner();
 		hora.setModel(new SpinnerDateModel(new Date(1492038000000L), null, null, Calendar.MINUTE));

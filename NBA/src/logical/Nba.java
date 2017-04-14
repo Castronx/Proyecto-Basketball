@@ -15,6 +15,7 @@ public class Nba implements Serializable {
 	private ArrayList<Game> misJuegos = new ArrayList<>();
 	private ArrayList<Player> misJugadores = new ArrayList<>();
 	private ArrayList<Injury> misLesiones = new ArrayList<>();
+	private ArrayList<Game> partido;
 	private static Nba enebea;
 
 	public Nba() {
@@ -25,6 +26,7 @@ public class Nba implements Serializable {
 		this.misJuegos = new ArrayList<Game>();
 		this.misJugadores = new ArrayList<>();
 		this.misLesiones = new ArrayList<>();
+		this.partido = new ArrayList<>();
 	}
 	//metodo singleton.
 	public static Nba getInstances(){
@@ -60,6 +62,12 @@ public class Nba implements Serializable {
 	}
 	public void setMisLesiones(ArrayList<Injury> misLesiones) {
 		this.misLesiones = misLesiones;
+	}
+	public ArrayList<Game> getPartido() {
+		return partido;
+	}
+	public void setPartido(ArrayList<Game> partido) {
+		this.partido = partido;
 	}
 	//metodo insertar equipo.
 	public void insertarEquipo(Team equi){
