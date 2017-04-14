@@ -56,9 +56,9 @@ public class RegistrarEquipo extends JDialog implements Serializable {
         private Object[] fila;
         private JTextField localizacion;
         private JTextField estadio;
+        private String nombreEquipo;
         
         private class CELL_RENDERER extends JCheckBox implements TableCellRenderer{
-                
 			private static final long serialVersionUID = -82726668020420698L;
 				public CELL_RENDERER(){
                     setHorizontalAlignment(JLabel.CENTER);
@@ -71,7 +71,6 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                 }
             }
          	private class CELL_EDITOR extends DefaultCellEditor{
-               
 				private static final long serialVersionUID = 3727661195130308862L;
 				public CELL_EDITOR(JCheckBox checkBox) {
                     super(checkBox);
@@ -79,20 +78,19 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                 }
             }
         public class TABLE_MODEL extends DefaultTableModel{  
-             
 			private static final long serialVersionUID = -6335799403628701645L;
 				public TABLE_MODEL(){
                     addColumn("Select");
                     addColumn("Nombre");
+                    addColumn("Ciudad");
+                    addColumn("Estadio");
                     addColumn("Coach");
-                    addColumn("Localizacion");
                     Object object[]={new Boolean(false)};
                     addRow(object);
             }
-   
         }
-         static JTable table = null;   
-         private static JTable tablaEquipos;
+         static JTable table = new JTable();   
+         private static JTable tablaEquipos = new JTable();
          JButton button = new JButton();
          TABLE_MODEL tablem = new TABLE_MODEL();
        
@@ -154,10 +152,17 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                 {                      	
                 	tablaEquipos.addMouseListener(new MouseAdapter() {
                         public void mouseClicked(MouseEvent e) {
-                        	Boolean checked=(Boolean)tablem.getValueAt(table.getSelectedRow(),0);
-                            if (checked!=null && checked) {
-                         	   equipos.add(Nba.getInstances().getMisEquipos().get(table.getSelectedRow()));  
-                          }
+                        	if(table.getSelectedRow()>=0){
+                        	//borrar.setEnabled(true);
+        						//imprimir.setEnabled(true);
+        						int index = table.getSelectedRow();
+        						nombreEquipo = (String)table.getModel().getValueAt(index, 0);	
+        						System.out.println(""+index);
+        					}
+                        	//Boolean checked=(Boolean)tablem.getValueAt(table.getSelectedRow(),0);
+                            //if (checked!=null && checked) {
+                         	  // equipos.add(Nba.getInstances().getMisEquipos().get(table.getSelectedRow()));  
+                          //}
                         }
                 	}
                 	);}
@@ -171,13 +176,13 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                                 	String entrenador = Coach.getText().toString();
                                 	String lugar = localizacion.getText().toString();
                                 	String estadioE = estadio.getText().toString();
-                                        if (NombreEquipo.getText()=="" || Coach.getText()=="" || localizacion.getText()==""||estadio.getText()=="") {
+                                        if (NombreEquipo.getText().isEmpty() || Coach.getText().isEmpty() || localizacion.getText().isEmpty()||estadio.getText().isEmpty()) {
                                                 JOptionPane.showMessageDialog(null, "Datos Incompletos", "Warning", JOptionPane.WARNING_MESSAGE);
                                         }
                                         else {
                                                 Team equi = new Team(nombreEq, lugar, entrenador, 0, 0, estadioE);
                                                 Nba.getInstances().insertarEquipo(equi);
-                                                JOptionPane.showMessageDialog(null, "El equipo ha sido creado", null, JOptionPane.INFORMATION_MESSAGE, null);
+                                                JOptionPane.showMessageDialog(null, "El equipo ha sido creado exitosamente.", null, JOptionPane.INFORMATION_MESSAGE, null);
                                                 Clean();
                                                 CargarEquipo();
                                         }
@@ -186,7 +191,7 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                         borrar = new JButton("Eliminar");
                         borrar.addActionListener(new ActionListener() {
                                 public void actionPerformed(ActionEvent arg0) {
-                                        int answer = JOptionPane.showConfirmDialog(null, "¿desea eliminar este equipo?",null,JOptionPane.YES_NO_OPTION);
+                                        int answer = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este equipo?",null,JOptionPane.YES_NO_OPTION);
                                 if (answer == JOptionPane.YES_OPTION) {
                                         borrarEquipo();
                                         CargarEquipo();                                      
@@ -206,11 +211,10 @@ public class RegistrarEquipo extends JDialog implements Serializable {
           			               if(!file.exists()){
           			                   file.createNewFile();
           			               }
-          			               
           			               FileWriter fw = new FileWriter(file.getAbsoluteFile());
           			               BufferedWriter bw = new BufferedWriter(fw);
           			               
-          			               bw.write("\n														EQUIPOS														\n");
+          			               bw.write("\n														Listado de equipos													\n");
           			               bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
           			               bw.write("\t\t\t\tNombre \t\t\tCoach \t\t\tLocacion\n");
           			             bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
@@ -233,7 +237,7 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                         buttonPane.add(borrar);
                         buttonPane.add(Insertar);
                         {
-                                JButton cancelar = new JButton("Cancelar");
+                                JButton cancelar = new JButton("Cerrar");
                                 cancelar.addActionListener(new ActionListener() {
                                         public void actionPerformed(ActionEvent e) {
                                                 dispose();
@@ -250,7 +254,6 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                 tablaEquipos.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                         borrar.setEnabled(true);
-                        table.setEnabled(true);
                 }
         });
         tablaEquipos.getColumn("Select").setCellRenderer(new CELL_RENDERER());
@@ -259,8 +262,9 @@ public class RegistrarEquipo extends JDialog implements Serializable {
         tablaEquipos.setRowSelectionAllowed(true);
         for(Team aux : Nba.getInstances().getMisEquipos()){
 			 fila[1] = aux.getNombreEquipo();
-			 fila[2] = aux.getEntrenador();
-			 fila[3] = aux.getCiudad();
+			 fila[2] = aux.getCiudad();
+			 fila[3] = aux.getEstadio();
+			 fila[4] = aux.getEntrenador();
 			 tablem.addRow(fila);
 		}
 		tablaEquipos.setModel(tablem);

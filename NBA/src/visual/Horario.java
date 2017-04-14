@@ -31,45 +31,26 @@ public class Horario extends JDialog {
 	Object[] fila;
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
-	private JButton buttonJugar;
-	private JButton buttonImprimir;
-	private JButton buttonCerrar;
+	private JButton jugar;
+	private JButton imprimir;
+	private JButton cerrar;
 	public DefaultTableModel tableModel;
 	
-	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		try {
-			Horario dialog = new Horario();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	*/
-
-	/**
-	 * Create the dialog.
-	 */
 	public Horario() {
 		setTitle("Horario");
-		setBounds(100, 100, 542, 359);
+		setBounds(100, 100, 599, 395);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(10, 282, 506, 33);
+			buttonPane.setBounds(10, 312, 563, 33);
 			contentPanel.add(buttonPane);
 			buttonPane.setLayout(null);
 			{
-				JButton imprimirButton = new JButton("Imprimir");
-				imprimirButton.addActionListener(new ActionListener() {
+				JButton imprimir = new JButton("Imprimir");
+				imprimir.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						try{
 							File file = new File("./Horario.txt");
@@ -91,76 +72,65 @@ public class Horario extends JDialog {
 				                     
 				                   }
 				                   bw.write("\n");
-				                  
-				                  
 				               }
 				               bw.write("-----------------------------------------------------------------------------------------");;
-				              
-				             
 				               bw.close();
-				              
 				               fw.close();
 				               JOptionPane.showMessageDialog(null, "Horario Imprimido!");
 						}
 						       catch(Exception except){
 						    	   except.printStackTrace();
-						    	   
 						       }
 					}
 				});
-				imprimirButton.setBounds(325, 5, 79, 23);
-				buttonPane.add(imprimirButton);
+				imprimir.setBounds(366, 5, 98, 23);
+				buttonPane.add(imprimir);
 			}
 			{
-				JButton cerrarButton = new JButton("Cerrar");
-				cerrarButton.addActionListener(new ActionListener() {
+				cerrar = new JButton("Cerrar");
+				cerrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
 					}
 				});
-				cerrarButton.setBounds(415, 5, 79, 23);
-				cerrarButton.setActionCommand("Cancel");
-				buttonPane.add(cerrarButton);
+				cerrar.setBounds(474, 5, 79, 23);
+				cerrar.setActionCommand("Cancel");
+				buttonPane.add(cerrar);
 			}
-			
-			JButton jugarButton = new JButton("Jugar");
-			buttonJugar.setEnabled(false);
-			jugarButton.addActionListener(new ActionListener() {
+			jugar = new JButton("Jugar");
+			jugar.setEnabled(false);
+			jugar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					JugarPartido juga = new JugarPartido();
+					juga.setVisible(true);
+					setLocationRelativeTo(null);
 				}
 			});
-			jugarButton.setBounds(226, 5, 89, 23);
-			buttonPane.add(jugarButton);
+			jugar.setBounds(267, 5, 89, 23);
+			buttonPane.add(jugar);
 		}
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 505, 260);
+		scrollPane.setBounds(10, 11, 563, 290);
 		contentPanel.add(scrollPane);
 		
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				buttonJugar.setEnabled(true);
+				jugar.setEnabled(true);
 			}
 		});
-		
 		scrollPane.setViewportView(table);
 		{
-			tableModel = new DefaultTableModel(new Object[][] {}, new String[] {"Fecha", "Tiempo", "Equipo Local"
-,"Equipo visitante" }				
+			tableModel = new DefaultTableModel(new Object[][] {}, new String[] {"Fecha", "Tiempo", "Equipo Local","Equipo visitante"}				
 			);
-		
 		table.setModel(tableModel);
 		table.getColumnModel().getColumn(0).setPreferredWidth(125);
 		table.getColumnModel().getColumn(1).setPreferredWidth(110);
 		table.getColumnModel().getColumn(2).setPreferredWidth(135);
 		table.getColumnModel().getColumn(3).setPreferredWidth(135);
 		try {
-			
 			cargarJuego();
-			
 		}
 		catch (ClassNotFoundException e){
 			e.printStackTrace();
@@ -170,20 +140,16 @@ public class Horario extends JDialog {
 		}
 		}
 	}
-	
 	public void cargarJuego() throws IOException, ClassNotFoundException {
 		tableModel.setRowCount(0);
 		fila = new Object[tableModel.getColumnCount()];
-		
 		for (Game aux : Nba.getInstances().getPartido()) {
 			fila[0] = aux.getFecha();
 			fila[1] = aux.getHora();
 			fila[2] = aux.getEquipoLocal();
 			fila[3] = aux.getEquipoVisitante();
-			
 			tableModel.addRow(fila);
 		}
-		
 		table.setModel(tableModel);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getTableHeader().setReorderingAllowed(false);

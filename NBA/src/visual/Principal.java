@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.omg.PortableServer.ServantLocatorOperations;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -14,6 +17,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
@@ -98,6 +102,19 @@ public class Principal extends JFrame {
 		mnPartidos.add(mntmRegistrar_2);
 		
 		JMenuItem mntmJugar = new JMenuItem("Jugar");
+		mntmJugar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Horario hora = new Horario();
+				try {
+					hora.cargarJuego();
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				hora.setVisible(true);
+			}
+		});
 		mnPartidos.add(mntmJugar);
 		
 		JMenu mnLesiones = new JMenu("Lesiones");

@@ -15,7 +15,7 @@ public class Nba implements Serializable {
 	private ArrayList<Game> misJuegos = new ArrayList<>();
 	private ArrayList<Player> misJugadores = new ArrayList<>();
 	private ArrayList<Injury> misLesiones = new ArrayList<>();
-	private ArrayList<Game> partido;
+	private ArrayList<Game> partido = new ArrayList<>();
 	private static Nba enebea;
 
 	public Nba() {

@@ -2,13 +2,29 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
@@ -16,178 +32,603 @@ import javax.swing.JSeparator;
 import javax.swing.border.TitledBorder;
 import javax.swing.DefaultComboBoxModel;
 
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 
-public class RegistrarJugador extends JDialog implements Serializable{
+import logical.Nba;
+import logical.Player;
+import logical.Team;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
+
+public class RegistrarJugador extends JDialog implements Serializable
+    {
     
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textNombre;
-	private JTextField textEdad;
-	private JTextField textApellido;
-
-	public static void main(String[] args) {
-		try {
-			RegistrarJugador dialog = new RegistrarJugador();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public RegistrarJugador() {
-		setBounds(100, 100, 700, 573);
+	private JTextField nombre;
+	private JTextField edad;
+	private JTextField apellido;
+	private JTable tabladeJugadores;
+	private DefaultTableModel tableModel;
+	private JSpinner nocamiseta,pies, pulgadas, peso;
+	@SuppressWarnings("rawtypes")
+	private JComboBox equipo, posicion, lesionado;
+	private Object[] row;
+	private JLabel lblEquipo, lblNombre, lblFechaN, lblEdad, lblNo, lblPosicion, lblApellido, lblAltura, lblPies, lblPulgadas, lblPeso, lblKgs, lblLesionado, lblAos ;
+    private JDateChooser fechaNaci;
+    private JButton btnModify,btnDelete, btnInsert, btnBorrar, btnImprimir, btnClose;
+    
+    int year;
+	String aux;
+	RegistrarLesion injury;
+	File filePlayers;
+	ArrayList<Player> listPlayers;
+	private JLabel lblPas;
+	private JTextField pais;
+	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public RegistrarJugador() 
+	    {
+        setResizable(false);
+		setModal(true);
+		injury = new RegistrarLesion();
+		listPlayers = new ArrayList<>();
+		new JCalendar();
+		setBounds(100, 100, 818, 634);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		btnDelete = new JButton("Delete");
+		btnDelete.setBounds(304, 507, 75, 23);
+		
+		btnBorrar = new JButton("Borrar");
+		btnBorrar.setEnabled(false);
+		btnBorrar.addActionListener(new ActionListener() 
 		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				int answer = JOptionPane.showConfirmDialog(null, "Desea eliminar este jugador?",null,JOptionPane.YES_NO_OPTION);
+				if (answer == JOptionPane.YES_OPTION)
+				{
+					borrarJugadores();
+					cargarJugadores();
+					
+				}
+			}
+		});
+		btnBorrar.setBounds(420, 571, 75, 23);
+		contentPanel.add(btnBorrar);
+		
+		btnModify = new JButton("Modificar");
+		btnModify.setEnabled(false);
+		btnModify.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) {
+				modificarJugadores();
+				btnModify.setEnabled(false);
+				tabladeJugadores.setEnabled(false);
+				btnDelete.setEnabled(false); 
+			}
+		});
+		btnModify.setBounds(517, 571, 82, 23);
+		contentPanel.add(btnModify);
+		
+		btnInsert = new JButton("Insertar");
+		btnInsert.setEnabled(false);
+		btnInsert.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				String Born = new SimpleDateFormat("MMM/dd/yyyy").format(fechaNaci.getDate());
+				aux = ""+Born.charAt(7)+Born.charAt(8)+Born.charAt(9)+Born.charAt(10);
+				year = Integer.parseInt(aux);
+				boolean inj = false;
+				if (lesionado.getSelectedIndex() == 0)
+				{
+					inj = false;
+				}
+				else
+				{
+					inj = true;
+				}
+				String name = nombre.getText().toString();
+				String lastname = apellido.getText().toString();
+				int weight = (int) peso.getValue();
+				int pi = (int) pies.getValue();
+				int pulg = (int) pulgadas.getValue();
+				int numCam = (int) nocamiseta.getValue();
+				String pos = posicion.getSelectedItem().toString();
+				String equi = equipo.getSelectedItem().toString();
+				String country = pais.getText().toString();
+				Player pla = new Player(name, lastname, country, Born, 2016-year, pi, pulg, weight, numCam, pos, equi, inj);
+				if (nombre.getText().isEmpty() || apellido.getText().isEmpty() || posicion.getSelectedIndex() == 0 || equipo.getSelectedIndex() == 0) 
+				{
+					JOptionPane.showMessageDialog(null, "Campos vacios!", "Warning!", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				for (Team aux : Nba.getInstances().getMisEquipos()) {
+					for (Player aux2 : aux.getMisJugadores()) {
+						if ((nombre.getText().equalsIgnoreCase(aux2.getNombre()) && (apellido.getText().equalsIgnoreCase(aux2.getApellido())))) {
+							JOptionPane.showMessageDialog(null, "El jugador ya existe!", "Warning!", JOptionPane.WARNING_MESSAGE);
+							clean();
+							return;
+						}
+					}
+				}
+				for (Team aux : Nba.getInstances().getMisEquipos()) {
+					if (equipo.getSelectedItem().toString().equalsIgnoreCase(aux.getNombreEquipo())) {
+						aux.InsertarJugador(pla);
+						JOptionPane.showMessageDialog(null, "Jugador insertado!", null, JOptionPane.INFORMATION_MESSAGE);
+						btnModify.setEnabled(false);
+						tabladeJugadores.setEnabled(true);
+						btnDelete.setEnabled(false);
+						equipo.setEnabled(true);
+						if (inj) {
+							injury.getComboBox_Team().setSelectedItem(equipo.getSelectedItem().toString());
+							injury.getComboBox_Team().setEnabled(false);
+							injury.getComboBox_Player().setSelectedItem(nombre.getText()+" "+apellido.getText());
+							injury.getComboBox_Player().setEnabled(false);
+							injury.setVisible(true);
+						}
+						clean();
+						cargarJugadores();
+					}
+				}
+			}
+		});
+		contentPanel.add(btnInsert);
+		btnInsert.setBounds(609, 571, 89, 23);
+		{
+		btnClose = new JButton("Salir\r\n");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		btnClose.setBounds(713, 571, 89, 23);
+		contentPanel.add(btnClose);
+	    }
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(null, "Datos del Jugador", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel.setBounds(0, 11, 684, 178);
+			panel.setBounds(0, 11, 802, 213);
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
-				JLabel lblEquipo = new JLabel("Equipo:");
+				lblEquipo = new JLabel("Equipo:");
 				lblEquipo.setBounds(10, 30, 59, 14);
 				panel.add(lblEquipo);
 			}
 			{
-				JLabel lblNombre = new JLabel("Nombre:");
+				lblNombre = new JLabel("Nombre:");
 				lblNombre.setEnabled(false);
 				lblNombre.setBounds(10, 71, 59, 14);
 				panel.add(lblNombre);
 			}
 			{
-				JLabel lblFechaN = new JLabel("Fecha de Nacimiento:");
+				lblFechaN = new JLabel("Fecha de Nacimiento:");
 				lblFechaN.setEnabled(false);
-				lblFechaN.setBounds(10, 111, 115, 14);
+				lblFechaN.setBounds(10, 145, 127, 14);
 				panel.add(lblFechaN);
 			}
 			{
-				JLabel lblEdad = new JLabel("Edad:");
+				lblEdad = new JLabel("Edad:");
 				lblEdad.setEnabled(false);
-				lblEdad.setBounds(10, 151, 49, 14);
+				lblEdad.setBounds(10, 185, 49, 14);
 				panel.add(lblEdad);
 			}
 			{
-				JLabel lblNo = new JLabel("No:");
+				lblNo = new JLabel("No:");
 				lblNo.setEnabled(false);
-				lblNo.setBounds(165, 151, 36, 14);
+				lblNo.setBounds(165, 185, 36, 14);
 				panel.add(lblNo);
 			}
+			equipo = new JComboBox();
+			equipo.setModel(new DefaultComboBoxModel(new String[] {"<Selecionne el Equipo>"}));
+			for (Team aux : Nba.getInstances().getMisEquipos())
+				equipo.addItem(""+aux.getNombreEquipo());
+			equipo.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e){
+					int opt = equipo.getSelectedIndex();	
+					cargarJugadores();
+					switch (opt){
+					case 0:
+						lblNombre.setEnabled(false);
+						nombre.setEnabled(false);
+						lblApellido.setEnabled(false);
+						apellido.setEnabled(false);
+						lblEdad.setEnabled(false);
+						lblPosicion.setEnabled(false);
+						posicion.setEnabled(false);
+						lblPeso.setEnabled(false);
+						peso.setEnabled(false);
+						lblAltura.setEnabled(false);
+						pies.setEnabled(false);
+						pulgadas.setEnabled(false);
+						lblFechaN.setEnabled(false);
+						btnInsert.setEnabled(false);
+						lblNo.setEnabled(false);
+						nocamiseta.setEnabled(false);
+						fechaNaci.setEnabled(false);
+						edad.setEnabled(false);
+						lblLesionado.setEnabled(false);
+						lesionado.setEnabled(false);
+						lblAos.setEnabled(false);
+						lblPas.setEnabled(false);
+						pais.setEnabled(false);
+						break;
+						default:
+						lblNombre.setEnabled(true);
+						nombre.setEnabled(true);
+						lblApellido.setEnabled(true);
+						apellido.setEnabled(true);
+						lblEdad.setEnabled(true);
+						lblPosicion.setEnabled(true);
+						posicion.setEnabled(true);
+						lblPeso.setEnabled(true);
+						peso.setEnabled(true);
+						lblAltura.setEnabled(true);
+						pies.setEnabled(true);
+						pulgadas.setEnabled(true);
+						lblFechaN.setEnabled(true);
+						btnInsert.setEnabled(true);
+						lblNo.setEnabled(true);
+						nocamiseta.setEnabled(true);
+						fechaNaci.setEnabled(true);
+						edad.setEnabled(true);
+						lblLesionado.setEnabled(true);
+						lesionado.setEnabled(true);
+						lblAos.setEnabled(true);
+						lblPas.setEnabled(true);
+						pais.setEnabled(true);
+					}
+				}
+			});
+			equipo.setBounds(97, 27, 160, 20);
+			panel.add(equipo);
 			
-			JComboBox comboBoxEquipo = new JComboBox();
-			comboBoxEquipo.setModel(new DefaultComboBoxModel(new String[] {"<Selecionne el Equipo>"}));
-			comboBoxEquipo.setBounds(97, 24, 160, 20);
-			panel.add(comboBoxEquipo);
+			nombre = new JTextField();
+			nombre.setBounds(97, 68, 160, 20);
+			panel.add(nombre);
+			nombre.setColumns(10);
 			
-			textNombre = new JTextField();
-			textNombre.setBounds(100, 65, 157, 20);
-			panel.add(textNombre);
-			textNombre.setColumns(10);
+			edad = new JTextField();
+			edad.setBounds(52, 182, 42, 20);
+			panel.add(edad);
+			edad.setColumns(10);
 			
-			textEdad = new JTextField();
-			textEdad.setBounds(69, 145, 42, 20);
-			panel.add(textEdad);
-			textEdad.setColumns(10);
+			nocamiseta = new JSpinner();
+			nocamiseta.setEnabled(false);
+			nocamiseta.setBounds(197, 182, 42, 20);
+			panel.add(nocamiseta);
 			
-			JSpinner spinnerNo = new JSpinner();
-			spinnerNo.setEnabled(false);
-			spinnerNo.setBounds(197, 145, 42, 20);
-			panel.add(spinnerNo);
-			
-			JLabel lblPosicion = new JLabel("Posicion:");
+			lblPosicion = new JLabel("Posici\u00F3n:");
 			lblPosicion.setEnabled(false);
 			lblPosicion.setBounds(315, 30, 68, 14);
 			panel.add(lblPosicion);
 			
-			JComboBox comboBoxPosicion = new JComboBox();
-			comboBoxPosicion.setEnabled(false);
-			comboBoxPosicion.setBounds(396, 24, 153, 20);
-			panel.add(comboBoxPosicion);
+			posicion = new JComboBox();
+			posicion.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "PG", "SG", "C", "PF", "SF"}));
+			posicion.setEnabled(false);
+			posicion.setBounds(396, 27, 153, 20);
+			panel.add(posicion);
 			
-			JLabel lblApellido = new JLabel("Apellido:");
+			lblApellido = new JLabel("Apellido:");
 			lblApellido.setEnabled(false);
 			lblApellido.setBounds(315, 71, 68, 14);
 			panel.add(lblApellido);
 			
-			textApellido = new JTextField();
+			apellido = new JTextField();
+			apellido.setBounds(396, 68, 153, 20);
+			panel.add(apellido);
+			apellido.setColumns(10);
 			
-			textApellido.setBounds(396, 65, 153, 20);
-			panel.add(textApellido);
-			textApellido.setColumns(10);
-			
-			JLabel lblAltura = new JLabel("Altura:");
+			lblAltura = new JLabel("Altura:");
 			lblAltura.setEnabled(false);
-			lblAltura.setBounds(315, 111, 46, 14);
+			lblAltura.setBounds(315, 145, 46, 14);
 			panel.add(lblAltura);
 			
-			JSpinner spinnerPies = new JSpinner();
-			spinnerPies.setEnabled(false);
-			spinnerPies.setBounds(400, 105, 36, 20);
-			panel.add(spinnerPies);
+			pies = new JSpinner();
+			pies.setEnabled(false);
+			pies.setBounds(400, 142, 36, 20);
+			panel.add(pies);
 			
-			JLabel lblPies = new JLabel("Pies");
+			lblPies = new JLabel("Pies");
 			lblPies.setEnabled(false);
-			lblPies.setBounds(442, 111, 31, 14);
+			lblPies.setBounds(442, 145, 31, 14);
 			panel.add(lblPies);
 			
-			JSpinner spinnerPulgadas = new JSpinner();
-			spinnerPulgadas.setEnabled(false);
-			spinnerPulgadas.setBounds(469, 105, 36, 20);
-			panel.add(spinnerPulgadas);
+			pulgadas = new JSpinner();
+			pulgadas.setEnabled(false);
+			pulgadas.setBounds(473, 142, 36, 20);
+			panel.add(pulgadas);
 			
-			JLabel lblPulgadas = new JLabel("Pulgadas");
+			lblPulgadas = new JLabel("Pulgadas");
 			lblPulgadas.setEnabled(false);
-			lblPulgadas.setBounds(515, 111, 46, 14);
+			lblPulgadas.setBounds(519, 145, 68, 14);
 			panel.add(lblPulgadas);
 			
-			JLabel lblPeso = new JLabel("Peso:");
+			lblPeso = new JLabel("Peso:");
 			lblPeso.setEnabled(false);
-			lblPeso.setBounds(315, 151, 46, 14);
+			lblPeso.setBounds(315, 185, 46, 14);
 			panel.add(lblPeso);
 			
-			JSpinner spinnerPeso = new JSpinner();
-			spinnerPeso.setEnabled(false);
-			spinnerPeso.setBounds(400, 145, 36, 20);
-			panel.add(spinnerPeso);
+			peso = new JSpinner();
+			peso.setEnabled(false);
+			peso.setBounds(400, 182, 36, 20);
+			panel.add(peso);
 			
-			JLabel lblKgs = new JLabel("Kgs");
-			spinnerPeso.setEnabled(false);
-			lblKgs.setBounds(442, 151, 36, 14);
+			lblKgs = new JLabel("Kgs");
+			lblKgs.setEnabled(false);
+			lblKgs.setBounds(442, 185, 36, 14);
 			panel.add(lblKgs);
 			
-			JLabel lblLesionado = new JLabel("Lesionado:");
+			lblLesionado = new JLabel("Lesionado:");
 			lblLesionado.setEnabled(false);
-			lblLesionado.setBounds(515, 151, 68, 14);
+			lblLesionado.setBounds(515, 185, 68, 14);
 			panel.add(lblLesionado);
 			
-			JComboBox comboBoxLesionado = new JComboBox();
-			comboBoxLesionado.setEnabled(false);
-			comboBoxLesionado.setModel(new DefaultComboBoxModel(new String[] {"NO", "SI"}));
-			comboBoxLesionado.setBounds(593, 145, 59, 20);
-			panel.add(comboBoxLesionado);
-		}
-		
+			lesionado = new JComboBox();
+			lesionado.setEnabled(false);
+			lesionado.setModel(new DefaultComboBoxModel(new String[] {"NO", "SI"}));
+			lesionado.setBounds(593, 182, 42, 20);
+			panel.add(lesionado);
+				
 		JSeparator separator = new JSeparator();
-		separator.setBounds(0, 200, 684, 2);
+		separator.setBounds(10, 235, 802, 2);
 		contentPanel.add(separator);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.addMouseListener(new MouseAdapter() 
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			public void mouseClicked(MouseEvent arg0)
 			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				btnModify.setEnabled(true);
 			}
+		});
+		scrollPane.setBounds(13, 209, 558, 253);
+		scrollPane.setBounds(14, 277, 618, 253);
+		
+		JScrollPane scrollPane1 = new JScrollPane();
+		scrollPane1.setBounds(14, 277, 788, 283);
+		contentPanel.add(scrollPane1);
+		SimpleDateFormat format = new SimpleDateFormat("MMM/dd/yyyy");
+		Date minDate = null, maxDate = null, selectDate = null;
+		try
+		{
+			minDate = format.parse("Jan/01/1977");
+			maxDate = format.parse("Dec/31/1997");
+			selectDate = format.parse("Jan/01/1997");
+		}
+		catch (ParseException e) 
+		{
+			e.printStackTrace();
+		}
+		fechaNaci = new JDateChooser();
+		fechaNaci.setEnabled(false);
+		fechaNaci.setBounds(147, 142, 117, 20);
+		panel.add(fechaNaci);
+		fechaNaci.setSelectableDateRange(minDate, maxDate);
+		fechaNaci.setDate(selectDate);
+		
+		lblAos = new JLabel("a\u00F1os");
+		lblAos.setBounds(109, 185, 46, 14);
+		panel.add(lblAos);
+		
+		lblPas = new JLabel("Pa\u00EDs:");
+		lblPas.setBounds(10, 107, 46, 14);
+		panel.add(lblPas);
+		
+		pais = new JTextField();
+		pais.setBounds(97, 104, 160, 20);
+		panel.add(pais);
+		pais.setColumns(10);
+		String Born = new SimpleDateFormat("MMM/dd/yyyy").format(fechaNaci.getDate());
+		aux = ""+Born.charAt(7)+Born.charAt(8)+Born.charAt(9)+Born.charAt(10);
+		year = Integer.parseInt(aux);
+		
+		fechaNaci.getDateEditor().addPropertyChangeListener( new PropertyChangeListener() 
+		{
+		    @Override
+		    public void propertyChange(PropertyChangeEvent e) 
+		    {
+		    	String Born = new SimpleDateFormat("MMM/dd/yyyy").format(fechaNaci.getDate());
+				aux = ""+Born.charAt(7)+Born.charAt(8)+Born.charAt(9)+Born.charAt(10);
+				year = Integer.parseInt(aux);	
+		        edad.setText(""+(2016-year));
+		        edad.validate();
+		    }
+		});
+		tabladeJugadores = new JTable();
+		tabladeJugadores.addMouseListener(new MouseAdapter() 
+		{
+			@Override
+			public void mouseClicked(MouseEvent e) 
 			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				if (btnModify.isEnabled() == false && tabladeJugadores.isEnabled() == true) 
+				{
+					btnModify.setEnabled(true);
+					btnDelete.setEnabled(true);
+				}
+				else //que diablo hace este else?
+				{
+					;
+				}
 			}
+		});
+		scrollPane1.setViewportView(tabladeJugadores);
+{
+			tableModel = new DefaultTableModel
+				(
+					new Object[][] {},
+					new String[] 
+						{
+						"Nombre", "Apellido", "País", "Fecha Nac.", "Edad", "Pies", "Pulgadas", "Peso", "No.", "Posición","Equipo","¿Lesión?"
+						}
+				);
+			tabladeJugadores.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+						"Nombre", "Apellido", "País", "Fecha Nac.", "Edad", "Pies", "Pulgadas", "Peso", "No.", "Posición","Equipo","¿Lesión?"
+				}
+			));
+			tabladeJugadores.getColumnModel().getColumn(0).setPreferredWidth(90);
+			tabladeJugadores.getColumnModel().getColumn(1).setPreferredWidth(100);
+			tabladeJugadores.getColumnModel().getColumn(2).setPreferredWidth(140);
+			tabladeJugadores.getColumnModel().getColumn(3).setPreferredWidth(140);
+			tabladeJugadores.getColumnModel().getColumn(4).setPreferredWidth(100);
+			tabladeJugadores.getColumnModel().getColumn(5).setPreferredWidth(110);
+			tabladeJugadores.getColumnModel().getColumn(6).setPreferredWidth(50);
+			tabladeJugadores.getColumnModel().getColumn(7).setPreferredWidth(60);
+			tabladeJugadores.getColumnModel().getColumn(8).setPreferredWidth(80);
+			tabladeJugadores.getColumnModel().getColumn(9).setPreferredWidth(110);
+		
+			JButton btnImprimir = new JButton("Imprimir");
+			btnImprimir.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					   try{
+			               File file = new File("./Jugadores.txt");
+			               if(!file.exists()){
+			                   file.createNewFile();
+			               }
+			               FileWriter fw = new FileWriter(file.getAbsoluteFile());
+			               BufferedWriter bw = new BufferedWriter(fw);
+			               bw.write("\n														Listado de jugadores															\n");
+			               bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
+			               bw.write("Nombre \tApellido \tPaís \t\tFecha Nac. \t\tEdad \t\tPies \t\tPulgadas \t\tPeso \t\tNo. \t\tPosición \t\tEquipo \t\t\t¿Lesión?\n");
+			               bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
+			               for(int i = 0; i < tabladeJugadores.getRowCount(); i++){
+			                   for(int j = 0; j < tabladeJugadores.getColumnCount(); j++){
+			                       bw.write(tabladeJugadores.getModel().getValueAt(i, j)+"			 ");
+			                   }
+			                   bw.write("\n");
+			               }
+			               bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
+			               bw.close();
+			               fw.close();
+			               JOptionPane.showMessageDialog(null, "El listado de jugadores ha sido impreso.");
+			               }catch(Exception ex){
+			                   ex.printStackTrace();
+			               }
+				}
+			});
+			btnImprimir.setBounds(10, 571, 89, 23);
+			contentPanel.add(btnImprimir);
+           }   
+               }
+	private void clean() {	
+		nombre.setText("");
+		apellido.setText("");
+		peso.setValue(100);
+		posicion.setSelectedIndex(0);
+		equipo.setSelectedIndex(0);
+		pulgadas.setValue(new Integer(0));
+		pies.setValue(new Integer(5));
+		nocamiseta.setValue(new Integer(0));
+		lesionado.setSelectedIndex(0);
+	}
+	public void modificarJugadores(){
+		SimpleDateFormat formatter = new SimpleDateFormat("MMM/dd/yyyy");
+		Date date = null;
+		char Feets, Inches;
+		int feets, inches;
+		String Position = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 0);
+		int Number = (int) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 1);
+		String Name = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 2);
+		String LastName = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 3);
+		int Age = (int) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 4);
+		int Weight = (int) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 5);
+		String Height = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 6);
+		Feets = Height.charAt(0);
+		Inches = Height.charAt(2);
+		feets = Character.getNumericValue(Feets);
+		inches = Character.getNumericValue(Inches);
+		String Injuried = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 7);
+		try
+		{
+			date = formatter.parse((String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 8));
+		}
+		catch (ParseException e) 
+		{
+			e.printStackTrace();
+		}
+		String Team = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 9);
+		borrarJugadores();
+		posicion.setSelectedItem(Position);
+		nombre.setText(Name);
+		apellido.setText(LastName);
+		peso.setValue(Weight);
+		pies.setValue(feets);
+		pulgadas.setValue(inches);
+		equipo.setSelectedItem(Team);
+		nocamiseta.setValue(Number);
+		fechaNaci.setDate(date);
+		edad.setText(""+Age);
+		if (Injuried == "No") 
+		{
+			lesionado.setSelectedIndex(0);
+		}
+		else
+		{
+			lesionado.setSelectedIndex(1);
 		}
 	}
+	public void borrarJugadores() {
+		String Name = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 2);
+		for(Team aux : Nba.getInstances().getMisEquipos())
+		{
+			for(Player aux2 : aux.getMisJugadores())
+			{
+				if (Name.equalsIgnoreCase(aux.getMisJugadores().get(0).getNombre())) 
+				{
+					aux.getMisJugadores().remove(aux2);
+				}
+			}
+		}
+	}	
+	public void cargarJugadores() {
+		tableModel.setRowCount(0); 
+		row = new Object[tableModel.getColumnCount()];
+			      for(Team aux : Nba.getInstances().getMisEquipos()){
+						for (Player aux2 : aux.getMisJugadores()) {
+							row[0] = aux2.getPosicion();
+							row[1] = aux2.getNumero();
+							row[2] = aux2.getNombre();
+							row[3] = aux2.getApellido();
+							row[4] = aux2.getEdad();
+							row[5] = aux2.getPeso();
+							row[6] = aux2.getPies() + "'" + aux2.getPulgadas();
+							if (aux2.isLesionado() == false) {
+								row[7] = "No";
+							}
+							else {
+								row[7] = "Si";
+							}
+							row[8] = aux2.getFechaNacimiento();
+							row[9] = aux2.getEquipo();
+							tableModel.addRow(row);
+						}
+					}
+		tabladeJugadores.setModel(tableModel);
+		tabladeJugadores.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tabladeJugadores.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel modeloColumna = tabladeJugadores.getColumnModel();
+		modeloColumna.getColumn(0).setPreferredWidth(50);
+		modeloColumna.getColumn(1).setPreferredWidth(25);
+		modeloColumna.getColumn(2).setPreferredWidth(80);
+		modeloColumna.getColumn(3).setPreferredWidth(80);
+		modeloColumna.getColumn(4).setPreferredWidth(30);
+		modeloColumna.getColumn(5).setPreferredWidth(50);
+		modeloColumna.getColumn(6).setPreferredWidth(50);
+		modeloColumna.getColumn(7).setPreferredWidth(50);
+		modeloColumna.getColumn(8).setPreferredWidth(87);
+		modeloColumna.getColumn(9).setPreferredWidth(155);
+		}
 }

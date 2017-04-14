@@ -3,10 +3,14 @@ package visual;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.toedter.calendar.JDateChooser;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
@@ -33,13 +37,13 @@ public class RegistrarPartido extends JDialog {
 	private JComboBox equipovisitante;
 	private JComboBox estadio;
 	private JTextField ciudad;
-	//private JDateChooser fechapartido;
+	private JDateChooser fechapartido;
 	private Date fecha;
 	private JSpinner hora;
 	private SpinnerDateModel spinnerDateModel;
 
 	public RegistrarPartido() {
-//		fechapartido = new JDateChooser();
+		fechapartido = new JDateChooser();
 		fecha = new Date();
 		spinnerDateModel = new SpinnerDateModel(fecha, null, null, Calendar.MINUTE);
 		
@@ -54,16 +58,22 @@ public class RegistrarPartido extends JDialog {
 		lblHomeTeam.setBounds(10, 11, 70, 14);
 		contentPanel.add(lblHomeTeam);
 		
-		equipolocal = new JComboBox();
-		equipolocal.setBounds(85, 8, 157, 20);
+		equipolocal = new JComboBox<String>();
+		equipolocal.setModel(new DefaultComboBoxModel(new String[] {"<Seleccionar>"}));
+		equipolocal.setBounds(85, 8, 135, 20);
+		for (int i = 0; i < Nba.getInstances().getMisEquipos().size(); i++)
+		equipolocal.addItem(""+Nba.getInstances().getMisEquipos().get(i).getNombreEquipo());
 		contentPanel.add(equipolocal);
 		
 		JLabel lblAwayTeam = new JLabel("Equipo visitante");
 		lblAwayTeam.setBounds(284, 11, 98, 14);
 		contentPanel.add(lblAwayTeam);
-		
-		equipovisitante = new JComboBox();
+				
+		equipovisitante = new JComboBox<String>();
+		equipovisitante.setModel(new DefaultComboBoxModel(new String[] {"<Seleccionar>"}));
 		equipovisitante.setBounds(392, 8, 135, 20);
+		for (int i = 0; i < Nba.getInstances().getMisEquipos().size(); i++)
+		equipovisitante.addItem(""+Nba.getInstances().getMisEquipos().get(i).getNombreEquipo());
 		contentPanel.add(equipovisitante);
 		
 		JLabel lblEstadio = new JLabel("Estadio:");
@@ -82,9 +92,9 @@ public class RegistrarPartido extends JDialog {
 		lblHora.setBounds(333, 125, 35, 14);
 		contentPanel.add(lblHora);
 		
-//		fechapartido = new JDateChooser();
-	//	fechapartido.setBounds(85, 122, 134, 20);
-  //    contentPanel.add(fechapartido);
+		fechapartido = new JDateChooser();
+		fechapartido.setBounds(85, 122, 134, 20);
+		contentPanel.add(fechapartido);
 		
 		hora = new JSpinner();
 		hora.setModel(new SpinnerDateModel(new Date(1492038000000L), null, null, Calendar.MINUTE));
@@ -149,7 +159,6 @@ public class RegistrarPartido extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
-			
 		}
 	}
 	public void clean() {
