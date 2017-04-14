@@ -41,7 +41,6 @@ public class Principal extends JFrame {
 			}
 		});
 	}
-
 	public Principal() {
 		setResizable(false);
 		setTitle("National Basketball Asociation");
@@ -132,6 +131,5 @@ public class Principal extends JFrame {
 		
 		JMenuItem mntmHistorial = new JMenuItem("Historial");
 		mnLesiones.add(mntmHistorial);
-		
 	}
 }

@@ -49,14 +49,13 @@ public class RegistrarEquipo extends JDialog implements Serializable {
 		private final JPanel contentPanel = new JPanel();
         private JTextField NombreEquipo;
         private JTextField Coach;
-        private JButton borrar;
-        private JButton Insertar;
-        private  JButton imprimir;
         private ArrayList<Team> equipos = new ArrayList<>();
         private Object[] fila;
         private JTextField localizacion;
         private JTextField estadio;
         private String nombreEquipo;
+        private JButton eliminar;
+        private JButton modificar;
         
         private class CELL_RENDERER extends JCheckBox implements TableCellRenderer{
 			private static final long serialVersionUID = -82726668020420698L;
@@ -149,103 +148,104 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                 scrollPane.setBounds(88, 236, 627, 214);
                 contentPanel.add(scrollPane);
                 scrollPane.setViewportView(tablaEquipos);
+                
+                JButton Cancelar = new JButton("Cancelar");
+                Cancelar.addActionListener(new ActionListener() {
+                	public void actionPerformed(ActionEvent e) {
+                		dispose();
+                	}
+                });
+                Cancelar.setBounds(626, 498, 89, 23);
+                contentPanel.add(Cancelar);
+                
+                JButton registrar = new JButton("Registrar");
+                registrar.addActionListener(new ActionListener() {
+                	public void actionPerformed(ActionEvent e) {
+                		String nombreEq = NombreEquipo.getText().toString();
+                    	String entrenador = Coach.getText().toString();
+                    	String lugar = localizacion.getText().toString();
+                    	String estadioE = estadio.getText().toString();
+                            if (NombreEquipo.getText().isEmpty() || Coach.getText().isEmpty() || localizacion.getText().isEmpty()||estadio.getText().isEmpty()) {
+                                    JOptionPane.showMessageDialog(null, "Datos Incompletos", "Warning", JOptionPane.WARNING_MESSAGE);
+                            }
+                            else {
+                                    Team equi = new Team(nombreEq, lugar, entrenador, 0, 0, estadioE);
+                                    Nba.getInstances().insertarEquipo(equi);
+                                    JOptionPane.showMessageDialog(null, "El equipo ha sido creado exitosamente.", null, JOptionPane.INFORMATION_MESSAGE, null);
+                                    Clean();
+                                    CargarEquipo();
+                            }
+                    }
+                });
+                registrar.setBounds(527, 498, 89, 23);
+                contentPanel.add(registrar);
+                
+                eliminar = new JButton("Eliminar");
+                eliminar.addActionListener(new ActionListener() {
+                	public void actionPerformed(ActionEvent e) {
+                		int answer = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este equipo?",null,JOptionPane.YES_NO_OPTION);
+                        if (answer == JOptionPane.YES_OPTION) {
+                                borrarEquipo();
+                                CargarEquipo();                                      
+                        }
+                        else {
+                                return;
+                        }
+                	}
+                });
+                eliminar.setBounds(428, 498, 89, 23);
+                contentPanel.add(eliminar);
+                
+                modificar = new JButton("Modificar");
+                modificar.setBounds(329, 498, 89, 23);
+                contentPanel.add(modificar);
+                
+                JButton Imprimir = new JButton("Imprimir");
+                Imprimir.addActionListener(new ActionListener() {
+                	public void actionPerformed(ActionEvent e) {
+                		try{
+   			               File file = new File("./Equipos.txt");  
+   			               if(!file.exists()){
+   			                   file.createNewFile();
+   			               }
+   			               FileWriter fw = new FileWriter(file.getAbsoluteFile());
+   			               BufferedWriter bw = new BufferedWriter(fw);
+   			               
+   			               bw.write("\n														Listado de equipos													\n");
+   			               bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
+   			               bw.write("\t\t\t\tNombre \t\t\tCoach \t\t\tLocacion\n");
+   			             bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
+   			               for(int i = 0; i < tablaEquipos.getRowCount(); i++){
+   			                   for(int j = 0; j < tablaEquipos.getColumnCount(); j++){
+   			                       bw.write(tablaEquipos.getModel().getValueAt(i, j)+"			 ");
+   			                   }
+   			                   bw.write("\n");
+   			               }
+   			             bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
+   			               bw.close();
+   			               fw.close();
+   			               JOptionPane.showMessageDialog(null, "Lista de equipos impresa!");
+   			               }catch(Exception ex){
+   			                   ex.printStackTrace();
+   			               }
+                 	}
+                });
+                Imprimir.setBounds(230, 498, 89, 23);
+                contentPanel.add(Imprimir);
                 {                      	
                 	tablaEquipos.addMouseListener(new MouseAdapter() {
                         public void mouseClicked(MouseEvent e) {
                         	if(table.getSelectedRow()>=0){
-                        	//borrar.setEnabled(true);
-        						//imprimir.setEnabled(true);
         						int index = table.getSelectedRow();
         						nombreEquipo = (String)table.getModel().getValueAt(index, 0);	
         						System.out.println(""+index);
         					}
-                        	//Boolean checked=(Boolean)tablem.getValueAt(table.getSelectedRow(),0);
-                            //if (checked!=null && checked) {
-                         	  // equipos.add(Nba.getInstances().getMisEquipos().get(table.getSelectedRow()));  
-                          //}
                         }
                 	}
                 	);}
                         JPanel buttonPane = new JPanel();
                         getContentPane().add(buttonPane, BorderLayout.SOUTH);
-                       
-                        Insertar = new JButton("Registrar");
-                        Insertar.addActionListener(new ActionListener() {
-                                public void actionPerformed(ActionEvent e) {
-                                	String nombreEq = NombreEquipo.getText().toString();
-                                	String entrenador = Coach.getText().toString();
-                                	String lugar = localizacion.getText().toString();
-                                	String estadioE = estadio.getText().toString();
-                                        if (NombreEquipo.getText().isEmpty() || Coach.getText().isEmpty() || localizacion.getText().isEmpty()||estadio.getText().isEmpty()) {
-                                                JOptionPane.showMessageDialog(null, "Datos Incompletos", "Warning", JOptionPane.WARNING_MESSAGE);
-                                        }
-                                        else {
-                                                Team equi = new Team(nombreEq, lugar, entrenador, 0, 0, estadioE);
-                                                Nba.getInstances().insertarEquipo(equi);
-                                                JOptionPane.showMessageDialog(null, "El equipo ha sido creado exitosamente.", null, JOptionPane.INFORMATION_MESSAGE, null);
-                                                Clean();
-                                                CargarEquipo();
-                                        }
-                                }
-                        });
-                        borrar = new JButton("Eliminar");
-                        borrar.addActionListener(new ActionListener() {
-                                public void actionPerformed(ActionEvent arg0) {
-                                        int answer = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este equipo?",null,JOptionPane.YES_NO_OPTION);
-                                if (answer == JOptionPane.YES_OPTION) {
-                                        borrarEquipo();
-                                        CargarEquipo();                                      
-                                }
-                                else {
-                                        return;
-                                }
-                                }
-                        });
                         buttonPane.setLayout(new GridLayout(0, 4, 0, 0));
-                        
-                        imprimir = new JButton("Imprimir");
-                        imprimir.addActionListener(new ActionListener() {
-                        	public void actionPerformed(ActionEvent e) {
-                        		 try{
-          			               File file = new File("./Equipos.txt");  
-          			               if(!file.exists()){
-          			                   file.createNewFile();
-          			               }
-          			               FileWriter fw = new FileWriter(file.getAbsoluteFile());
-          			               BufferedWriter bw = new BufferedWriter(fw);
-          			               
-          			               bw.write("\n														Listado de equipos													\n");
-          			               bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
-          			               bw.write("\t\t\t\tNombre \t\t\tCoach \t\t\tLocacion\n");
-          			             bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
-          			               for(int i = 0; i < tablaEquipos.getRowCount(); i++){
-          			                   for(int j = 0; j < tablaEquipos.getColumnCount(); j++){
-          			                       bw.write(tablaEquipos.getModel().getValueAt(i, j)+"			 ");
-          			                   }
-          			                   bw.write("\n");
-          			               }
-          			             bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
-          			               bw.close();
-          			               fw.close();
-          			               JOptionPane.showMessageDialog(null, "Lista de equipos impresa!");
-          			               }catch(Exception ex){
-          			                   ex.printStackTrace();
-          			               }
-                        	}
-                        });
-                        buttonPane.add(imprimir);
-                        buttonPane.add(borrar);
-                        buttonPane.add(Insertar);
-                        {
-                                JButton cancelar = new JButton("Cerrar");
-                                cancelar.addActionListener(new ActionListener() {
-                                        public void actionPerformed(ActionEvent e) {
-                                                dispose();
-                                        }
-                                });
-                                cancelar.setActionCommand("Cancel");
-                                buttonPane.add(cancelar);
-                        }  
                 }
         public void CargarEquipo(){
                 tablem.setRowCount(0);
@@ -253,7 +253,8 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                 tablaEquipos= new JTable(tablem);
                 tablaEquipos.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
-                        borrar.setEnabled(true);
+                        eliminar.setEnabled(true);
+                        modificar.setEnabled(true);
                 }
         });
         tablaEquipos.getColumn("Select").setCellRenderer(new CELL_RENDERER());
