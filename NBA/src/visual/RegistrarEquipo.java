@@ -42,6 +42,7 @@ import java.awt.Color;
 
 import java.awt.GridLayout;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
  
 public class RegistrarEquipo extends JDialog implements Serializable {
 	
@@ -94,18 +95,19 @@ public class RegistrarEquipo extends JDialog implements Serializable {
          TABLE_MODEL tablem = new TABLE_MODEL();
        
          public RegistrarEquipo() {
+         	setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarEquipo.class.getResource("/images/images.png")));
         	 	setResizable(false);
                 CargarEquipo();
                 setModal(true);
                 setTitle("Registrar Equipo");
-                setBounds(100, 100, 755, 561);
+                setBounds(100, 100, 731, 561);
                 getContentPane().setLayout(new BorderLayout());
                 contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
                 getContentPane().add(contentPanel, BorderLayout.CENTER);
                 contentPanel.setLayout(null);
                 JPanel panel = new JPanel();
                 panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informacion", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-                panel.setBounds(10, 11, 452, 190);
+                panel.setBounds(10, 11, 468, 190);
                 contentPanel.add(panel);
                 panel.setLayout(null);
                
@@ -114,7 +116,7 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                 panel.add(lblNombre);
                
                 NombreEquipo = new JTextField();
-                NombreEquipo.setBounds(82, 23, 327, 20);
+                NombreEquipo.setBounds(82, 23, 376, 20);
                 panel.add(NombreEquipo);
                 NombreEquipo.setColumns(10);
                
@@ -123,7 +125,7 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                 panel.add(label_1);
                
                 Coach = new JTextField();
-                Coach.setBounds(82, 124, 327, 20);
+                Coach.setBounds(82, 124, 376, 20);
                 panel.add(Coach);
                 Coach.setColumns(10);
                
@@ -132,7 +134,7 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                 panel.add(lblLocalizacion);
                 
                 localizacion = new JTextField();
-                localizacion.setBounds(82, 58, 327, 20);
+                localizacion.setBounds(82, 58, 376, 20);
                 panel.add(localizacion);
                 localizacion.setColumns(10);
                 
@@ -141,11 +143,11 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                 panel.add(lblEstadio);
                 
                 estadio = new JTextField();
-                estadio.setBounds(82, 91, 327, 20);
+                estadio.setBounds(82, 91, 376, 20);
                 panel.add(estadio);
                 estadio.setColumns(10);
                 JScrollPane scrollPane = new JScrollPane();
-                scrollPane.setBounds(88, 236, 627, 214);
+                scrollPane.setBounds(10, 229, 705, 258);
                 contentPanel.add(scrollPane);
                 scrollPane.setViewportView(tablaEquipos);
                 
@@ -197,6 +199,14 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                 contentPanel.add(eliminar);
                 
                 modificar = new JButton("Modificar");
+                modificar.addActionListener(new ActionListener() {
+                	public void actionPerformed(ActionEvent e) {
+                		modificarEquipo();
+                		eliminar.setEnabled(false);
+                		tablaEquipos.setEnabled(false);
+                		modificar.setEnabled(false);
+                	}
+                });
                 modificar.setBounds(329, 498, 89, 23);
                 contentPanel.add(modificar);
                 
@@ -232,6 +242,11 @@ public class RegistrarEquipo extends JDialog implements Serializable {
                 });
                 Imprimir.setBounds(230, 498, 89, 23);
                 contentPanel.add(Imprimir);
+                
+                JLabel lblNewLabel = new JLabel("");
+                lblNewLabel.setIcon(new ImageIcon(RegistrarEquipo.class.getResource("/images/descarga.png")));
+                lblNewLabel.setBounds(488, 11, 227, 190);
+                contentPanel.add(lblNewLabel);
                 {                      	
                 	tablaEquipos.addMouseListener(new MouseAdapter() {
                         public void mouseClicked(MouseEvent e) {

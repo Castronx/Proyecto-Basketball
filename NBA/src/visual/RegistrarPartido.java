@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import java.util.Calendar;
+import java.awt.Toolkit;
 
 public class RegistrarPartido extends JDialog {
 
@@ -43,6 +44,7 @@ public class RegistrarPartido extends JDialog {
 	private SpinnerDateModel spinnerDateModel;
 
 	public RegistrarPartido() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarPartido.class.getResource("/images/5215-200.png")));
 		fechapartido = new JDateChooser();
 		fecha = new Date();
 		spinnerDateModel = new SpinnerDateModel(fecha, null, null, Calendar.MINUTE);

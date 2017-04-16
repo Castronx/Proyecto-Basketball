@@ -30,7 +30,7 @@ public class Horario extends JDialog {
 	private Nba liga;
 	Object[] fila;
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
+	public JTable tableHorario;
 	private JButton jugar;
 	private JButton imprimir;
 	private JButton cerrar;
@@ -65,10 +65,10 @@ public class Horario extends JDialog {
 				               bw.write("-----------------------------------------------------------------------------------------\n");
 				               bw.write("Fecha \t\t\t\tTiempo \t\t\t\tAway team \t\t\t\tHome team\n");
 				               bw.write("-----------------------------------------------------------------------------------------\n");
-				               for(int i = 0; i < table.getRowCount(); i++){
+				               for(int i = 0; i < tableHorario.getRowCount(); i++){
 				                  
-				                   for(int j = 0; j < table.getColumnCount(); j++){
-				                       bw.write(table.getModel().getValueAt(i, j)+"			 ");
+				                   for(int j = 0; j < tableHorario.getColumnCount(); j++){
+				                       bw.write(tableHorario.getModel().getValueAt(i, j)+"			 ");
 				                     
 				                   }
 				                   bw.write("\n");
@@ -113,22 +113,22 @@ public class Horario extends JDialog {
 		scrollPane.setBounds(10, 11, 563, 290);
 		contentPanel.add(scrollPane);
 		
-		table = new JTable();
-		table.addMouseListener(new MouseAdapter() {
+		tableHorario = new JTable();
+		tableHorario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				jugar.setEnabled(true);
 			}
 		});
-		scrollPane.setViewportView(table);
+		scrollPane.setViewportView(tableHorario);
 		{
 			tableModel = new DefaultTableModel(new Object[][] {}, new String[] {"Fecha", "Tiempo", "Equipo Local","Equipo visitante"}				
 			);
-		table.setModel(tableModel);
-		table.getColumnModel().getColumn(0).setPreferredWidth(125);
-		table.getColumnModel().getColumn(1).setPreferredWidth(110);
-		table.getColumnModel().getColumn(2).setPreferredWidth(135);
-		table.getColumnModel().getColumn(3).setPreferredWidth(135);
+		tableHorario.setModel(tableModel);
+		tableHorario.getColumnModel().getColumn(0).setPreferredWidth(125);
+		tableHorario.getColumnModel().getColumn(1).setPreferredWidth(110);
+		tableHorario.getColumnModel().getColumn(2).setPreferredWidth(135);
+		tableHorario.getColumnModel().getColumn(3).setPreferredWidth(135);
 		try {
 			cargarJuego();
 		}
@@ -143,17 +143,17 @@ public class Horario extends JDialog {
 	public void cargarJuego() throws IOException, ClassNotFoundException {
 		tableModel.setRowCount(0);
 		fila = new Object[tableModel.getColumnCount()];
-		for (Game aux : Nba.getInstances().getPartido()) {
+		for (Game aux : Nba.getInstances().getMisJuegos()) {
 			fila[0] = aux.getFecha();
 			fila[1] = aux.getHora();
 			fila[2] = aux.getEquipoLocal();
 			fila[3] = aux.getEquipoVisitante();
 			tableModel.addRow(fila);
 		}
-		table.setModel(tableModel);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getTableHeader().setReorderingAllowed(false);
-		TableColumnModel columnModel = table.getColumnModel();
+		tableHorario.setModel(tableModel);
+		tableHorario.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tableHorario.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = tableHorario.getColumnModel();
 		columnModel.getColumn(0).setPreferredWidth(125);
 		columnModel.getColumn(1).setPreferredWidth(110);
 		columnModel.getColumn(2).setPreferredWidth(135);

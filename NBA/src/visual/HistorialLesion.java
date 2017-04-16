@@ -28,43 +28,27 @@ import javax.swing.JTable;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class HistorialLesion extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private Object[] row;
 	public static JTable table;
-	private static JTable tableLesiones;
+	private static JTable tableLesiones = new JTable();
 	public static DefaultTableModel tableModel;
 	public JComboBox<String> comboEquipo;
 	public JComboBox<String> comboJugador;
-	private JTable tableLesion;
+	private JTable tableLesion = new JTable();
 
 	private JLabel lblJugador;
 	private JLabel lblEquipo;
 
-	/**
-	 * Launch the application.
-	 */
-	
-	/*
-	public static void main(String[] args) {
-		try {
-			HistorialLesion dialog = new HistorialLesion();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public HistorialLesion() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(HistorialLesion.class.getResource("/images/descarga (1).png")));
 		setModal(true);
 		setTitle("Historial Lesi\u00F3n");
-		setBounds(100, 100, 800, 570);
+		setBounds(100, 100, 861, 570);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -72,12 +56,12 @@ public class HistorialLesion extends JDialog {
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Filtros", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel.setBounds(10, 53, 764, 50);
+			panel.setBounds(10, 53, 825, 50);
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
 				lblEquipo = new JLabel("Buscar por Equipo");
-				lblEquipo.setBounds(12, 21, 95, 14);
+				lblEquipo.setBounds(12, 22, 109, 14);
 				panel.add(lblEquipo);
 			}
 			{
@@ -115,7 +99,7 @@ public class HistorialLesion extends JDialog {
 					}
 				});
 				comboEquipo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione Equipo>"}));
-				comboEquipo.setBounds(109, 18, 235, 20);
+				comboEquipo.setBounds(118, 19, 235, 20);
 				panel.add(comboEquipo);
 				
 				for (Team aux : Nba.getInstances().getMisEquipos())
@@ -123,7 +107,7 @@ public class HistorialLesion extends JDialog {
 			}
 			{
 				lblJugador = new JLabel("Buscar por Jugador");
-				lblJugador.setBounds(415, 21, 104, 14);
+				lblJugador.setBounds(466, 22, 116, 14);
 				panel.add(lblJugador);
 			}
 			{
@@ -161,7 +145,7 @@ public class HistorialLesion extends JDialog {
 					}
 				});
 				comboJugador.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione Jugador>"}));
-				comboJugador.setBounds(517, 18, 234, 20);
+				comboJugador.setBounds(581, 19, 234, 20);
 				panel.add(comboJugador);
 			}
 		}
@@ -173,12 +157,12 @@ public class HistorialLesion extends JDialog {
 		}
 		{
 			JPanel panel = new JPanel();
-			panel.setBounds(10, 107, 764, 380);
+			panel.setBounds(10, 107, 825, 380);
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
 				JScrollPane scrollPane = new JScrollPane();
-				scrollPane.setBounds(10, 11, 744, 358);
+				scrollPane.setBounds(10, 11, 805, 358);
 				panel.add(scrollPane);
 				
 				tableLesion = new JTable();
@@ -191,9 +175,6 @@ public class HistorialLesion extends JDialog {
 							"Equipo", "Nombre", "Apellido", "Tipo", "Informacion Adicional", "Fecha", "Retorno"
 						});
 				tableLesiones.setModel(tableModel);
-				
-				
-				
 			}
 		}
 		{
@@ -201,7 +182,7 @@ public class HistorialLesion extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Aceptar");
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -213,8 +194,6 @@ public class HistorialLesion extends JDialog {
 			}
 		}
 	}
-	
-	
 	//metodo para cargar jugador a partir de equipo
 	public void loadPlayerFromTeam()
 	{

@@ -55,6 +55,10 @@ public class Principal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(10, 11, 1340, 616);
+		contentPane.add(lblNewLabel);
+		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -130,6 +134,13 @@ public class Principal extends JFrame {
 		mnLesiones.add(mntmRegistrar_3);
 		
 		JMenuItem mntmHistorial = new JMenuItem("Historial");
+		mntmHistorial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HistorialLesion histole = new HistorialLesion();
+				histole.setVisible(true);
+				histole.setLocationRelativeTo(null);
+			}
+		});
 		mnLesiones.add(mntmHistorial);
 	}
 }

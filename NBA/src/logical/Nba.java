@@ -15,7 +15,6 @@ public class Nba implements Serializable {
 	private ArrayList<Game> misJuegos = new ArrayList<>();
 	private ArrayList<Player> misJugadores = new ArrayList<>();
 	private ArrayList<Injury> misLesiones = new ArrayList<>();
-	private ArrayList<Game> partido = new ArrayList<>();
 	private static Nba enebea;
 
 	public Nba() {
@@ -24,9 +23,8 @@ public class Nba implements Serializable {
 		super();
 		this.misEquipos = new ArrayList<Team>();
 		this.misJuegos = new ArrayList<Game>();
-		this.misJugadores = new ArrayList<>();
-		this.misLesiones = new ArrayList<>();
-		this.partido = new ArrayList<>();
+		this.misJugadores = new ArrayList<Player>();
+		this.misLesiones = new ArrayList<Injury>();
 	}
 	//metodo singleton.
 	public static Nba getInstances(){
@@ -63,12 +61,6 @@ public class Nba implements Serializable {
 	public void setMisLesiones(ArrayList<Injury> misLesiones) {
 		this.misLesiones = misLesiones;
 	}
-	public ArrayList<Game> getPartido() {
-		return partido;
-	}
-	public void setPartido(ArrayList<Game> partido) {
-		this.partido = partido;
-	}
 	//metodo insertar equipo.
 	public void insertarEquipo(Team equi){
 		misEquipos.add(equi);
@@ -104,6 +96,10 @@ public class Nba implements Serializable {
 			}
 		}
 		return equipo;
+	}
+	//metodo de set partido.
+	public void setPartido(int index, String equipoLocal, String equipoVisitante, String localizacion, String estadio, String hora, int marcadorLocal, int marcadorVisitante, String fecha, boolean jugado){
+		misJuegos.set(index, new Game(equipoLocal, equipoVisitante, localizacion, estadio, hora, marcadorLocal, marcadorVisitante, fecha, jugado));
 	}
 	//fichero de cargar.
 	public void cargarNba(Nba nba) {
