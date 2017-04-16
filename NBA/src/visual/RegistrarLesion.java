@@ -196,6 +196,8 @@ public class RegistrarLesion extends JDialog implements Serializable {
 	public JComboBox<String> getComboBox_Player() {
 		return comboJugador;
 	}
+	
+	//metodo limpiar
 	private void clean() {
 		comboEquipo.setSelectedIndex(0);
 		comboJugador.setSelectedIndex(0);
