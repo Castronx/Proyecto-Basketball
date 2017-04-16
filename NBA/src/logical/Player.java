@@ -11,9 +11,9 @@ public class Player implements Serializable{
 	private String pais;
 	private String fechaNacimiento;
 	private int edad;
-	private float pies;
-	private float pulgadas;
-	private float peso;
+	private int pies;
+	private int pulgadas;
+	private int peso;
 	private int numero;
 	private String posicion;
 	private String equipo;
@@ -26,8 +26,8 @@ public class Player implements Serializable{
 		lesion = new ArrayList<>();
 		estadisticasJugador = new ArrayList<>();
 	}
-	public Player(String nombre, String apellido, String pais, String fechaNacimiento, int edad, float pies,
-			float pulgadas, float peso, int numero, String posicion, String equipo, boolean lesionado) {
+	public Player(String nombre, String apellido, String pais, String fechaNacimiento, int edad, int pies,
+			int pulgadas, int peso, int numero, String posicion, String equipo, boolean lesionado) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -66,10 +66,10 @@ public class Player implements Serializable{
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
-	public float getPeso() {
+	public int getPeso() {
 		return peso;
 	}
-	public void setPeso(float peso) {
+	public void setPeso(int peso) {
 		this.peso = peso;
 	}
 	public int getNumero() {
@@ -108,16 +108,16 @@ public class Player implements Serializable{
 	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	public float getPies() {
+	public int getPies() {
 		return pies;
 	}
-	public void setPies(float pies) {
+	public void setPies(int pies) {
 		this.pies = pies;
 	}
-	public float getPulgadas() {
+	public int getPulgadas() {
 		return pulgadas;
 	}
-	public void setPulgadas(float pulgadas) {
+	public void setPulgadas(int pulgadas) {
 		this.pulgadas = pulgadas;
 	}
 	public ArrayList <Injury> getLesion() {

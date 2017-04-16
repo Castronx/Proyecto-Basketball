@@ -147,7 +147,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 				String pos = posicion.getSelectedItem().toString();
 				String equi = equipo.getSelectedItem().toString();
 				String country = pais.getText().toString();
-				Player pla = new Player(name, lastname, country, Born, 2016-year, pi, pulg, weight, numCam, pos, equi, inj);
+				Player pla = new Player(name, lastname, country, Born, 2017-year, pi, pulg, weight, numCam, pos, equi, inj);
 				if (nombre.getText().isEmpty() || apellido.getText().isEmpty() || posicion.getSelectedIndex() == 0 || equipo.getSelectedIndex() == 0) 
 				{
 					JOptionPane.showMessageDialog(null, "Campos vacios!", "Warning!", JOptionPane.WARNING_MESSAGE);
@@ -212,9 +212,9 @@ public class RegistrarJugador extends JDialog implements Serializable
 				panel.add(lblNombre);
 			}
 			{
-				lblFechaN = new JLabel("Fecha de Nacimiento:");
+				lblFechaN = new JLabel("Nacimiento:");
 				lblFechaN.setEnabled(false);
-				lblFechaN.setBounds(10, 145, 127, 14);
+				lblFechaN.setBounds(10, 145, 68, 14);
 				panel.add(lblFechaN);
 			}
 			{
@@ -226,7 +226,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 			{
 				lblNo = new JLabel("No:");
 				lblNo.setEnabled(false);
-				lblNo.setBounds(165, 185, 36, 14);
+				lblNo.setBounds(181, 185, 24, 14);
 				panel.add(lblNo);
 			}
 			equipo = new JComboBox();
@@ -281,12 +281,15 @@ public class RegistrarJugador extends JDialog implements Serializable
 						lblNo.setEnabled(true);
 						nocamiseta.setEnabled(true);
 						fechaNaci.setEnabled(true);
-						edad.setEnabled(true);
+						edad.setEnabled(false);
 						lblLesionado.setEnabled(true);
 						lesionado.setEnabled(true);
 						lblAos.setEnabled(true);
 						lblPas.setEnabled(true);
 						pais.setEnabled(true);
+						lblKgs.setEnabled(true);
+						lblPulgadas.setEnabled(true);
+						lblPies.setEnabled(true);
 					}
 				}
 			});
@@ -294,18 +297,20 @@ public class RegistrarJugador extends JDialog implements Serializable
 			panel.add(equipo);
 			
 			nombre = new JTextField();
+			nombre.setEnabled(false);
 			nombre.setBounds(97, 68, 160, 20);
 			panel.add(nombre);
 			nombre.setColumns(10);
 			
 			edad = new JTextField();
-			edad.setBounds(52, 182, 42, 20);
+			edad.setEnabled(false);
+			edad.setBounds(97, 182, 31, 20);
 			panel.add(edad);
 			edad.setColumns(10);
 			
 			nocamiseta = new JSpinner();
 			nocamiseta.setEnabled(false);
-			nocamiseta.setBounds(197, 182, 42, 20);
+			nocamiseta.setBounds(215, 182, 42, 20);
 			panel.add(nocamiseta);
 			
 			lblPosicion = new JLabel("Posici\u00F3n:");
@@ -325,6 +330,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 			panel.add(lblApellido);
 			
 			apellido = new JTextField();
+			apellido.setEnabled(false);
 			apellido.setBounds(396, 68, 153, 20);
 			panel.add(apellido);
 			apellido.setColumns(10);
@@ -336,7 +342,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 			
 			pies = new JSpinner();
 			pies.setEnabled(false);
-			pies.setBounds(400, 142, 36, 20);
+			pies.setBounds(396, 142, 36, 20);
 			panel.add(pies);
 			
 			lblPies = new JLabel("Pies");
@@ -356,28 +362,28 @@ public class RegistrarJugador extends JDialog implements Serializable
 			
 			lblPeso = new JLabel("Peso:");
 			lblPeso.setEnabled(false);
-			lblPeso.setBounds(315, 185, 46, 14);
+			lblPeso.setBounds(315, 110, 46, 14);
 			panel.add(lblPeso);
 			
 			peso = new JSpinner();
 			peso.setEnabled(false);
-			peso.setBounds(400, 182, 36, 20);
+			peso.setBounds(396, 104, 47, 20);
 			panel.add(peso);
 			
 			lblKgs = new JLabel("Kgs");
 			lblKgs.setEnabled(false);
-			lblKgs.setBounds(442, 185, 36, 14);
+			lblKgs.setBounds(453, 110, 36, 14);
 			panel.add(lblKgs);
 			
 			lblLesionado = new JLabel("Lesionado:");
 			lblLesionado.setEnabled(false);
-			lblLesionado.setBounds(515, 185, 68, 14);
+			lblLesionado.setBounds(315, 185, 68, 14);
 			panel.add(lblLesionado);
 			
 			lesionado = new JComboBox();
 			lesionado.setEnabled(false);
 			lesionado.setModel(new DefaultComboBoxModel(new String[] {"NO", "SI"}));
-			lesionado.setBounds(593, 182, 42, 20);
+			lesionado.setBounds(396, 182, 42, 20);
 			panel.add(lesionado);
 				
 		JSeparator separator = new JSeparator();
@@ -412,13 +418,14 @@ public class RegistrarJugador extends JDialog implements Serializable
 		}
 		fechaNaci = new JDateChooser();
 		fechaNaci.setEnabled(false);
-		fechaNaci.setBounds(147, 142, 117, 20);
+		fechaNaci.setBounds(97, 145, 160, 20);
 		panel.add(fechaNaci);
 		fechaNaci.setSelectableDateRange(minDate, maxDate);
 		fechaNaci.setDate(selectDate);
 		
 		lblAos = new JLabel("a\u00F1os");
-		lblAos.setBounds(109, 185, 46, 14);
+		lblAos.setEnabled(false);
+		lblAos.setBounds(138, 185, 36, 14);
 		panel.add(lblAos);
 		
 		lblPas = new JLabel("Pa\u00EDs:");
@@ -426,6 +433,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 		panel.add(lblPas);
 		
 		pais = new JTextField();
+		pais.setEnabled(false);
 		pais.setBounds(97, 104, 160, 20);
 		panel.add(pais);
 		pais.setColumns(10);
@@ -441,7 +449,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 		    	String Born = new SimpleDateFormat("MMM/dd/yyyy").format(fechaNaci.getDate());
 				aux = ""+Born.charAt(7)+Born.charAt(8)+Born.charAt(9)+Born.charAt(10);
 				year = Integer.parseInt(aux);	
-		        edad.setText(""+(2016-year));
+		        edad.setText(""+(2017-year));
 		        edad.validate();
 		    }
 		});
@@ -454,11 +462,12 @@ public class RegistrarJugador extends JDialog implements Serializable
 				if (btnModify.isEnabled() == false && tabladeJugadores.isEnabled() == true) 
 				{
 					btnModify.setEnabled(true);
-					btnDelete.setEnabled(true);
+					btnBorrar.setEnabled(true);
 				}
-				else //que diablo hace este else?
+				else if (btnBorrar.isEnabled() == false && tabladeJugadores.isEnabled() == true)
 				{
-					;
+					btnModify.setEnabled(true);
+					btnBorrar.setEnabled(true);
 				}
 			}
 		});
@@ -469,14 +478,14 @@ public class RegistrarJugador extends JDialog implements Serializable
 					new Object[][] {},
 					new String[] 
 						{
-						"Nombre", "Apellido", "País", "Fecha Nac.", "Edad", "Pies", "Pulgadas", "Peso", "No.", "Posición","Equipo","¿Lesión?"
+						"Nombre", "Apellido", "País", "Nacimiento", "Edad", "Altura", "Peso", "No.", "Posición","Equipo","¿Lesión?"
 						}
 				);
 			tabladeJugadores.setModel(new DefaultTableModel(
 				new Object[][] {
 				},
 				new String[] {
-						"Nombre", "Apellido", "País", "Fecha Nac.", "Edad", "Pies", "Pulgadas", "Peso", "No.", "Posición","Equipo","¿Lesión?"
+					"Nombre", "Apellido", "Pa\u00EDs", "Fecha Nac.", "Edad", "Altura", "Peso", "No.", "Posici\u00F3n", "Equipo", "¿Lesión?"
 				}
 			));
 			tabladeJugadores.getColumnModel().getColumn(0).setPreferredWidth(90);
@@ -502,7 +511,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 			               BufferedWriter bw = new BufferedWriter(fw);
 			               bw.write("\n														Listado de jugadores															\n");
 			               bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
-			               bw.write("Nombre \tApellido \tPaís \t\tFecha Nac. \t\tEdad \t\tPies \t\tPulgadas \t\tPeso \t\tNo. \t\tPosición \t\tEquipo \t\t\t¿Lesión?\n");
+			               bw.write("Nombre \tApellido \tPaís \t\tFecha Nac. \t\tEdad \t\tAltura \t\tPeso \t\tNo. \t\tPosición \t\tEquipo \t\t\t¿Lesión?\n");
 			               bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
 			               for(int i = 0; i < tabladeJugadores.getRowCount(); i++){
 			                   for(int j = 0; j < tabladeJugadores.getColumnCount(); j++){
@@ -526,11 +535,11 @@ public class RegistrarJugador extends JDialog implements Serializable
 	private void clean() {	
 		nombre.setText("");
 		apellido.setText("");
-		peso.setValue(100);
+		peso.setValue(0);
 		posicion.setSelectedIndex(0);
 		equipo.setSelectedIndex(0);
 		pulgadas.setValue(new Integer(0));
-		pies.setValue(new Integer(5));
+		pies.setValue(new Integer(0));
 		nocamiseta.setValue(new Integer(0));
 		lesionado.setSelectedIndex(0);
 	}
@@ -539,27 +548,30 @@ public class RegistrarJugador extends JDialog implements Serializable
 		Date date = null;
 		char Feets, Inches;
 		int feets, inches;
-		String Position = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 0);
-		int Number = (int) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 1);
-		String Name = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 2);
-		String LastName = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 3);
-		int Age = (int) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 4);
-		int Weight = (int) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 5);
-		String Height = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 6);
-		Feets = Height.charAt(0);
-		Inches = Height.charAt(2);
-		feets = Character.getNumericValue(Feets);
-		inches = Character.getNumericValue(Inches);
-		String Injuried = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 7);
+		String Name = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 0);
+		String LastName = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 1);
+		String Country = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 2);
 		try
 		{
-			date = formatter.parse((String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 8));
+			date = formatter.parse((String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 3));
 		}
 		catch (ParseException e) 
 		{
 			e.printStackTrace();
 		}
+		int Age = (int) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 4);
+		String Height = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 5);
+		Feets = Height.charAt(0);
+		Inches = Height.charAt(2);
+		feets = Character.getNumericValue(Feets);
+		inches = Character.getNumericValue(Inches);
+		int Weight = (int) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 6);
+		int Number = (int) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 7);
+		String Position = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 8);
 		String Team = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 9);
+		String Injuried = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 10);
+		
+		
 		borrarJugadores();
 		posicion.setSelectedItem(Position);
 		nombre.setText(Name);
@@ -581,54 +593,57 @@ public class RegistrarJugador extends JDialog implements Serializable
 		}
 	}
 	public void borrarJugadores() {
-		String Name = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 2);
-		for(Team aux : Nba.getInstances().getMisEquipos())
-		{
-			for(Player aux2 : aux.getMisJugadores())
-			{
-				if (Name.equalsIgnoreCase(aux.getMisJugadores().get(0).getNombre())) 
-				{
-					aux.getMisJugadores().remove(aux2);
+		int temp = 0;
+    	for (int i = 0; i < Nba.getInstances().getMisEquipos().size(); i++) {
+    		    for (int j = 0; j < listPlayers.size(); j++) {
+					if (listPlayers.get(j).getNombre().equalsIgnoreCase(Nba.getInstances().getMisEquipos().get(i).getNombreEquipo())) {
+						Nba.getInstances().getMisEquipos().remove(i);
+						temp = i;
+					}
 				}
-			}
-		}
-	}	
+    	}
+    	Nba.getInstances().getMisEquipos().remove(temp);
+    	tableModel.fireTableDataChanged();
+	}
+		
 	public void cargarJugadores() {
 		tableModel.setRowCount(0); 
 		row = new Object[tableModel.getColumnCount()];
 			      for(Team aux : Nba.getInstances().getMisEquipos()){
 						for (Player aux2 : aux.getMisJugadores()) {
-							row[0] = aux2.getPosicion();
-							row[1] = aux2.getNumero();
-							row[2] = aux2.getNombre();
-							row[3] = aux2.getApellido();
+							row[0] = aux2.getNombre();
+							row[1] = aux2.getApellido();
+							row[2] = aux2.getPais();
+							row[3] = aux2.getFechaNacimiento();
 							row[4] = aux2.getEdad();
-							row[5] = aux2.getPeso();
-							row[6] = aux2.getPies() + "'" + aux2.getPulgadas();
+							row[5] = aux2.getPies() + "'" + aux2.getPulgadas();
+							row[6] = aux2.getPeso();
+							row[7] = aux2.getNumero();
+							row[8] = aux2.getPosicion();
+							row[9] = aux2.getEquipo();
 							if (aux2.isLesionado() == false) {
-								row[7] = "No";
+								row[10] = "No";
 							}
 							else {
-								row[7] = "Si";
+								row[10] = "Si";
 							}
-							row[8] = aux2.getFechaNacimiento();
-							row[9] = aux2.getEquipo();
 							tableModel.addRow(row);
 						}
 					}
 		tabladeJugadores.setModel(tableModel);
-		tabladeJugadores.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		tabladeJugadores.getTableHeader().setReorderingAllowed(false);
+		tabladeJugadores.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		tabladeJugadores.getTableHeader().setReorderingAllowed(true);
 		TableColumnModel modeloColumna = tabladeJugadores.getColumnModel();
-		modeloColumna.getColumn(0).setPreferredWidth(50);
-		modeloColumna.getColumn(1).setPreferredWidth(25);
-		modeloColumna.getColumn(2).setPreferredWidth(80);
-		modeloColumna.getColumn(3).setPreferredWidth(80);
-		modeloColumna.getColumn(4).setPreferredWidth(30);
+		modeloColumna.getColumn(0).setPreferredWidth(80);
+		modeloColumna.getColumn(1).setPreferredWidth(80);
+		modeloColumna.getColumn(2).setPreferredWidth(90);
+		modeloColumna.getColumn(3).setPreferredWidth(90);
+		modeloColumna.getColumn(4).setPreferredWidth(50);
 		modeloColumna.getColumn(5).setPreferredWidth(50);
 		modeloColumna.getColumn(6).setPreferredWidth(50);
 		modeloColumna.getColumn(7).setPreferredWidth(50);
-		modeloColumna.getColumn(8).setPreferredWidth(87);
+		modeloColumna.getColumn(8).setPreferredWidth(65);
 		modeloColumna.getColumn(9).setPreferredWidth(155);
+		modeloColumna.getColumn(10).setPreferredWidth(100);
 		}
 }
