@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import com.toedter.calendar.JDateChooser;
+
 import logical.Injury;
 import logical.Nba;
 import logical.Player;
@@ -35,8 +37,8 @@ public class RegistrarLesion extends JDialog implements Serializable {
 	private Player jugador;
 	private Injury lesion;
 	private Nba liga;
-	private JTextField txtFecha;
-	private JTextField txtRecuperacion;
+	private JDateChooser txtFecha;
+	private JDateChooser txtRecuperacion;
 	private JTextField txtInfo;
 	private JComboBox comboEquipo;
 	private JComboBox comboJugador;
@@ -120,21 +122,17 @@ public class RegistrarLesion extends JDialog implements Serializable {
 		lblFecha.setBounds(420, 31, 46, 14);
 		panel.add(lblFecha);
 		
-		txtFecha = new JTextField();
-		txtFecha.setText("DD/MM/AAAA");
+		txtFecha = new JDateChooser();
 		txtFecha.setBounds(498, 28, 107, 20);
 		panel.add(txtFecha);
-		txtFecha.setColumns(10);
 		
 		JLabel lblRecuperacion = new JLabel("Recuperaci\u00F3n");
 		lblRecuperacion.setBounds(420, 71, 74, 14);
 		panel.add(lblRecuperacion);
 		
-		txtRecuperacion = new JTextField();
-		txtRecuperacion.setText("DD/MM/AAAA");
+		txtRecuperacion = new JDateChooser();
 		txtRecuperacion.setBounds(498, 68, 107, 20);
 		panel.add(txtRecuperacion);
-		txtRecuperacion.setColumns(10);
 		
 		txtInfo = new JTextField();
 		txtInfo.setBounds(98, 152, 507, 20);
@@ -154,12 +152,12 @@ public class RegistrarLesion extends JDialog implements Serializable {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						boolean listo = false;
-						if(comboEquipo.getSelectedIndex()!=0 && comboJugador.getSelectedIndex()!=0 && comboTipo.getSelectedIndex()!=0 && !txtFecha.getText().equalsIgnoreCase("") && !txtRecuperacion.getText().equalsIgnoreCase("")){
+						if(comboEquipo.getSelectedIndex()!=0 && comboJugador.getSelectedIndex()!=0 && comboTipo.getSelectedIndex()!=0 && !txtFecha.getDate().toString().isEmpty() && !txtRecuperacion.getDate().toString().isEmpty()){
 							String equipo = comboEquipo.getSelectedItem().toString();
 							String jugador = comboJugador.getSelectedItem().toString();
 							String tipo = comboTipo.getSelectedItem().toString();
-							String fecha = txtFecha.getText();
-							String recuperacion = txtRecuperacion.getText();
+							String fecha = txtFecha.getDate().toString();
+							String recuperacion = txtRecuperacion.getDate().toString();
 							String infoAdicional = txtInfo.getText();
 							listo = true;
 							Injury aux = new Injury(equipo, jugador, tipo, fecha, recuperacion, infoAdicional); 
@@ -202,8 +200,8 @@ public class RegistrarLesion extends JDialog implements Serializable {
 		comboEquipo.setSelectedIndex(0);
 		comboJugador.setSelectedIndex(0);
 		comboTipo.setSelectedIndex(0);
-		txtFecha.setText("");
-		txtRecuperacion.setText("");
+		txtFecha.setDate(null);;
+		txtRecuperacion.setDate(null);;
 		txtInfo.setText("");
 	}
 }
