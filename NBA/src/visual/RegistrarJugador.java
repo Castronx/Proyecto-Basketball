@@ -62,7 +62,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 	private JLabel lblEquipo, lblNombre, lblFechaN, lblEdad, lblNo, lblPosicion, lblApellido, lblAltura, lblPies, lblPulgadas, lblPeso, lblKgs, lblLesionado, lblAos ;
     private JDateChooser fechaNaci;
     private JButton btnModify,btnDelete, btnInsert, btnBorrar, btnImprimir, btnClose;
-    
+    //probando
     int year;
 	String aux;
 	RegistrarLesion injury;
