@@ -18,6 +18,7 @@ import javax.swing.JComboBox;
 
 import logical.Game;
 import logical.Nba;
+import logical.Team;
 
 import javax.swing.JSpinner;
 import java.awt.event.ActionListener;
@@ -36,12 +37,13 @@ public class RegistrarPartido extends JDialog {
 	private JSpinner spnTiempo;
 	private JComboBox equipolocal;
 	private JComboBox equipovisitante;
-	private JComboBox estadio;
 	private JTextField ciudad;
 	private JDateChooser fechapartido;
 	private Date fecha;
 	private JSpinner hora;
 	private SpinnerDateModel spinnerDateModel;
+	private Team equipoloc;
+	private JTextField estadio;
 
 	public RegistrarPartido() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarPartido.class.getResource("/images/5215-200.png")));
@@ -61,6 +63,15 @@ public class RegistrarPartido extends JDialog {
 		contentPanel.add(lblHomeTeam);
 		
 		equipolocal = new JComboBox<String>();
+		equipolocal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String nomequipo = equipolocal.getSelectedItem().toString();
+				equipoloc = Nba.getInstances().buscarEquipo(nomequipo);
+				ciudad.setText(equipoloc.getCiudad());
+				estadio.setText(equipoloc.getEstadio());
+	
+			}
+		});
 		equipolocal.setModel(new DefaultComboBoxModel(new String[] {"<Seleccionar>"}));
 		equipolocal.setBounds(85, 8, 135, 20);
 		for (int i = 0; i < Nba.getInstances().getMisEquipos().size(); i++)
@@ -82,12 +93,8 @@ public class RegistrarPartido extends JDialog {
 		lblEstadio.setBounds(10, 94, 46, 14);
 		contentPanel.add(lblEstadio);
 		
-		estadio = new JComboBox();
-		estadio.setBounds(85, 91, 442, 20);
-		contentPanel.add(estadio);
-		
 		JLabel lblFecha = new JLabel("Fecha:");
-		lblFecha.setBounds(10, 125, 46, 14);
+		lblFecha.setBounds(10, 130, 46, 14);
 		contentPanel.add(lblFecha);
 		
 		JLabel lblHora = new JLabel("Hora:");
@@ -95,7 +102,7 @@ public class RegistrarPartido extends JDialog {
 		contentPanel.add(lblHora);
 		
 		fechapartido = new JDateChooser();
-		fechapartido.setBounds(85, 122, 134, 20);
+		fechapartido.setBounds(85, 127, 134, 20);
 		contentPanel.add(fechapartido);
 		
 		hora = new JSpinner();
@@ -111,13 +118,16 @@ public class RegistrarPartido extends JDialog {
 		contentPanel.add(lblCiudad);
 		
 		ciudad = new JTextField();
+		ciudad.setEditable(false);
 		ciudad.setBounds(85, 51, 328, 20);
 		contentPanel.add(ciudad);
 		ciudad.setColumns(10);
 		
-		JLabel lblEjPuertoPlata = new JLabel("Ej: Puerto Plata");
-		lblEjPuertoPlata.setBounds(423, 54, 104, 14);
-		contentPanel.add(lblEjPuertoPlata);
+		estadio = new JTextField();
+		estadio.setEditable(false);
+		estadio.setBounds(85, 91, 328, 20);
+		contentPanel.add(estadio);
+		estadio.setColumns(10);
 		
 		{
 			JPanel buttonPane = new JPanel();
@@ -131,12 +141,12 @@ public class RegistrarPartido extends JDialog {
 						JSpinner.DateEditor fe = new JSpinner.DateEditor(hora, "hh:mm a");
 						String local = equipolocal.getSelectedItem().toString();
 						String visitante = equipovisitante.getSelectedItem().toString();
-						String campo = estadio.getSelectedItem().toString();
+						String campo = estadio.getText().toString();
 						String time = fe.getTextField().getText().toString();
 						String city = ciudad.getText().toString();
 						boolean jugados = false;
 						Game partido = new Game(local, visitante, city, campo, time, 0, 0, dat, jugados);
-						if (equipovisitante.getSelectedIndex() == 0 || equipolocal.getSelectedIndex() == 0 || estadio.getSelectedIndex() == 0 || fechapartido.getDate().toString().isEmpty()||ciudad.getText().toString()=="") {
+						if (equipovisitante.getSelectedIndex() == 0 || equipolocal.getSelectedIndex() == 0 || estadio.getText().toString() == "" || fechapartido.getDate().toString().isEmpty()||ciudad.getText().toString()=="") {
 							JOptionPane.showMessageDialog(null, "Completar todos los campos.", "Warning!", JOptionPane.WARNING_MESSAGE);
 						}
 						else {
@@ -166,7 +176,7 @@ public class RegistrarPartido extends JDialog {
 	public void clean() {
 		equipovisitante.setSelectedIndex(0);
 		equipovisitante.setSelectedIndex(0);
-		estadio.setSelectedIndex(0);
+		estadio.setText("");
 		fechapartido.setDate(fecha);
 	}
 }
