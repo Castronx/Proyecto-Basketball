@@ -104,17 +104,17 @@ public class Nba implements Serializable {
 	//fichero de cargar.
 	public void cargarNba(Nba nba) {
 		 try {
-			    FileInputStream f = new FileInputStream("Datoscargados.dat");
-				ObjectInputStream ob = new ObjectInputStream(f);
-				Nba nba1 = (Nba)ob.readObject();
-				Nba.setLiga(nba1);
-				ob.close();
-			 
-			} catch (Exception e) {	
+				 	FileInputStream f = new FileInputStream("Datoscargados.dat");
+					ObjectInputStream ob = new ObjectInputStream(f);
+					Nba nb = (Nba) ob.readObject();
+					Nba.setLiga(nb);
+					ob.close();
+		 
+			 } catch (Exception e) {	
 				e.printStackTrace();
 			}
 		
-	}
+}
 	//fichero de guardar.
 	public void guardarNba(Nba nba){
 	 	 File f = new File("Datoscargados.dat");
