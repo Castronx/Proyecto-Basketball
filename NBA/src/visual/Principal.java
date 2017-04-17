@@ -23,6 +23,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.Color;
 
 public class Principal extends JFrame {
 
@@ -54,6 +56,49 @@ public class Principal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JButton btnNewButton = new JButton("Team");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				RegistrarEquipo registrar = new RegistrarEquipo();
+				registrar.setVisible(true);
+			}
+		});
+		btnNewButton.setForeground(Color.BLACK);
+		btnNewButton.setBounds(147, 103, 163, 115);
+		contentPane.add(btnNewButton);
+		
+		JButton btnPlayer = new JButton("Player");
+		btnPlayer.setVisible(true);
+		btnPlayer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				RegistrarJugador registrar = new RegistrarJugador();
+				registrar.setVisible(true);
+			}
+		});
+		btnPlayer.setForeground(Color.BLACK);
+		btnPlayer.setBounds(147, 247, 163, 115);
+		contentPane.add(btnPlayer);
+		
+		JButton btnGame = new JButton("Game\r\n");
+		btnGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				OptionGame opc = new OptionGame();
+				opc.setVisible(true);
+			}
+		});
+		btnGame.setForeground(Color.BLACK);
+		btnGame.setBounds(147, 393, 163, 115);
+		contentPane.add(btnGame);
+		
+		JButton btnNewButton_1 = new JButton("Salir");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnNewButton_1.setBounds(1241, 593, 89, 23);
+		contentPane.add(btnNewButton_1);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Principal.class.getResource("/images/michael-jordan-chicago-bulls-basketball-nba.jpg")));

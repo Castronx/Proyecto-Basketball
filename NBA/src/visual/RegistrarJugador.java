@@ -71,7 +71,9 @@ public class RegistrarJugador extends JDialog implements Serializable
 	ArrayList<Player> listPlayers;
 	private JLabel lblPas;
 	private JTextField pais;
-	
+	private boolean modificacion = false;
+	private Team miEquipo;
+	private Player miJugador;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public RegistrarJugador() 
@@ -114,6 +116,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 		{
 			public void actionPerformed(ActionEvent arg0) {
 				modificarJugadores();
+				modificacion = true;
 				btnModify.setEnabled(false);
 				tabladeJugadores.setEnabled(false);
 				btnDelete.setEnabled(false); 
@@ -128,59 +131,112 @@ public class RegistrarJugador extends JDialog implements Serializable
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String Born = new SimpleDateFormat("MMM/dd/yyyy").format(fechaNaci.getDate());
-				aux = ""+Born.charAt(7)+Born.charAt(8)+Born.charAt(9)+Born.charAt(10);
-				year = Integer.parseInt(aux);
-				boolean inj = false;
-				if (lesionado.getSelectedIndex() == 0)
-				{
-					inj = false;
-				}
-				else
-				{
-					inj = true;
-				}
-				String name = nombre.getText().toString();
-				String lastname = apellido.getText().toString();
-				int weight = (int) peso.getValue();
-				int pi = (int) pies.getValue();
-				int pulg = (int) pulgadas.getValue();
-				int numCam = (int) nocamiseta.getValue();
-				String pos = posicion.getSelectedItem().toString();
-				String equi = equipo.getSelectedItem().toString();
-				String country = pais.getText().toString();
-				Player pla = new Player(name, lastname, country, Born, 2017-year, pi, pulg, weight, numCam, pos, equi, inj);
-				if (nombre.getText().isEmpty() || apellido.getText().isEmpty() || posicion.getSelectedIndex() == 0 || equipo.getSelectedIndex() == 0) 
-				{
-					JOptionPane.showMessageDialog(null, "Favor de llenar todos los campos.", "Warning!", JOptionPane.WARNING_MESSAGE);
-					return;
-				}
-				for (Team aux : Nba.getInstances().getMisEquipos()) {
-					for (Player aux2 : aux.getMisJugadores()) {
-						if ((nombre.getText().equalsIgnoreCase(aux2.getNombre()) && (apellido.getText().equalsIgnoreCase(aux2.getApellido())))) {
-							JOptionPane.showMessageDialog(null, "Este jugador ya existe.", "Warning!", JOptionPane.WARNING_MESSAGE);
-							clean();
-							return;
+				if(modificacion==false){
+					String Born = new SimpleDateFormat("MMM/dd/yyyy").format(fechaNaci.getDate());
+					aux = ""+Born.charAt(7)+Born.charAt(8)+Born.charAt(9)+Born.charAt(10);
+					year = Integer.parseInt(aux);
+					boolean inj = false;
+					if (lesionado.getSelectedIndex() == 0)
+					{
+						inj = false;
+					}
+					else
+					{
+						inj = true;
+					}
+					String name = nombre.getText().toString();
+					String lastname = apellido.getText().toString();
+					int weight = (int) peso.getValue();
+					int pi = (int) pies.getValue();
+					int pulg = (int) pulgadas.getValue();
+					int numCam = (int) nocamiseta.getValue();
+					String pos = posicion.getSelectedItem().toString();
+					String equi = equipo.getSelectedItem().toString();
+					String country = pais.getText().toString();
+					Player pla = new Player(name, lastname, country, Born, 2017-year, pi, pulg, weight, numCam, pos, equi, inj);
+					if (nombre.getText().isEmpty() || apellido.getText().isEmpty() || posicion.getSelectedIndex() == 0 || equipo.getSelectedIndex() == 0) 
+					{
+						JOptionPane.showMessageDialog(null, "Favor de llenar todos los campos.", "Warning!", JOptionPane.WARNING_MESSAGE);
+						return;
+					}
+					for (Team aux : Nba.getInstances().getMisEquipos()) {
+						for (Player aux2 : aux.getMisJugadores()) {
+							if ((nombre.getText().equalsIgnoreCase(aux2.getNombre()) && (apellido.getText().equalsIgnoreCase(aux2.getApellido())))) {
+								JOptionPane.showMessageDialog(null, "Este jugador ya existe.", "Warning!", JOptionPane.WARNING_MESSAGE);
+								clean();
+								return;
+							}
 						}
 					}
-				}
-				for (Team aux : Nba.getInstances().getMisEquipos()) {
-					if (equipo.getSelectedItem().toString().equalsIgnoreCase(aux.getNombreEquipo())) {
-						aux.InsertarJugador(pla);
-						JOptionPane.showMessageDialog(null, "El jugador ha sido registrado exitosamente.", null, JOptionPane.INFORMATION_MESSAGE);
-						btnModify.setEnabled(false);
-						tabladeJugadores.setEnabled(true);
-						btnDelete.setEnabled(false);
-						equipo.setEnabled(true);
-						if (inj) {
-							injury.getComboBox_Team().setSelectedItem(equipo.getSelectedItem().toString());
-							injury.getComboBox_Team().setEnabled(false);
-							injury.getComboBox_Player().setSelectedItem(nombre.getText()+" "+apellido.getText());
-							injury.getComboBox_Player().setEnabled(false);
-							injury.setVisible(true);
+					for (Team aux : Nba.getInstances().getMisEquipos()) {
+						if (equipo.getSelectedItem().toString().equalsIgnoreCase(aux.getNombreEquipo())) {
+							aux.InsertarJugador(pla);
+							JOptionPane.showMessageDialog(null, "El jugador ha sido registrado exitosamente.", null, JOptionPane.INFORMATION_MESSAGE);
+							btnModify.setEnabled(false);
+							tabladeJugadores.setEnabled(true);
+							btnDelete.setEnabled(false);
+							equipo.setEnabled(true);
+							if (inj) {
+								injury.getComboBox_Team().setSelectedItem(equipo.getSelectedItem().toString());
+								injury.getComboBox_Team().setEnabled(false);
+								injury.getComboBox_Player().setSelectedItem(nombre.getText()+" "+apellido.getText());
+								injury.getComboBox_Player().setEnabled(false);
+								injury.setVisible(true);
+							}
+							clean();
+							cargarJugadores();
 						}
-						clean();
-						cargarJugadores();
+					}
+				}else{
+					String Born = new SimpleDateFormat("MMM/dd/yyyy").format(fechaNaci.getDate());
+					aux = ""+Born.charAt(7)+Born.charAt(8)+Born.charAt(9)+Born.charAt(10);
+					year = Integer.parseInt(aux);
+					boolean inj = false;
+					if (lesionado.getSelectedIndex() == 0)
+					{
+						inj = false;
+					}
+					else
+					{
+						inj = true;
+					}
+					String name = nombre.getText().toString();
+					String lastname = apellido.getText().toString();
+					int weight = (int) peso.getValue();
+					int pi = (int) pies.getValue();
+					int pulg = (int) pulgadas.getValue();
+					int numCam = (int) nocamiseta.getValue();
+					String pos = posicion.getSelectedItem().toString();
+					String equi = equipo.getSelectedItem().toString();
+					String country = pais.getText().toString();
+					miJugador.setApellido(lastname);
+					miJugador.setNombre(name);
+					miJugador.setNumero(numCam);
+					miJugador.setPais(country);
+					miJugador.setEquipo(equi);
+					miJugador.setFechaNacimiento(Born);
+					miJugador.setPies(pi);
+					miJugador.setPulgadas(pulg);
+					miJugador.setPosicion(pos);
+					miJugador.setPeso(weight);
+					JOptionPane.showMessageDialog(null, "El jugador ha sido Modificado exitosamente.", null, JOptionPane.INFORMATION_MESSAGE);
+					btnModify.setEnabled(false);
+					tabladeJugadores.setEnabled(true);
+					btnDelete.setEnabled(false);
+					equipo.setEnabled(true);
+					cargarJugadores();
+					if (inj) {
+						injury.getComboBox_Team().setSelectedItem(equipo.getSelectedItem().toString());
+						injury.getComboBox_Team().setEnabled(false);
+						injury.getComboBox_Player().setSelectedItem(nombre.getText()+" "+apellido.getText());
+						injury.getComboBox_Player().setEnabled(false);
+						injury.setVisible(true);
+					}
+					clean();
+					cargarJugadores();
+ 					for (Team aux : Nba.getInstances().getMisEquipos()) {
+						if (equipo.getSelectedItem().toString().equalsIgnoreCase(aux.getNombreEquipo())) {
+						}
 					}
 				}
 			}
@@ -556,6 +612,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 		char Feets, Inches;
 		int feets, inches;
 		String Name = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 0);
+		//miJugador = Nba.getInstances().getMisEquipos().
 		String LastName = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 1);
 		String Country = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 2);
 		try
@@ -577,9 +634,9 @@ public class RegistrarJugador extends JDialog implements Serializable
 		String Position = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 8);
 		String Team = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 9);
 		String Injuried = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 10);
-		
-		
-		borrarJugadores();
+		miEquipo = Nba.getInstances().buscarEquipo(Team);
+		miJugador = miEquipo.buscarJugador(Name);
+		//borrarJugadores();
 		posicion.setSelectedItem(Position);
 		nombre.setText(Name);
 		apellido.setText(LastName);

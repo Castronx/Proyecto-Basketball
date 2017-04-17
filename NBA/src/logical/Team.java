@@ -107,4 +107,16 @@ public class Team implements Serializable {
 		}
 		return Roster;
 	}
+	public Player buscarJugador(String name) {
+		int i=0;
+		boolean find = false;
+		Player aux =null;
+		while(i<misJugadores.size() && find == false){
+			if(misJugadores.get(i).getNombre().equalsIgnoreCase(name)){
+				aux = misJugadores.get(i);
+				find = true;
+			}
+		}
+		return aux;
+	}
 }
