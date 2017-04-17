@@ -406,13 +406,13 @@ public class RegistrarJugador extends JDialog implements Serializable
 		JScrollPane scrollPane1 = new JScrollPane();
 		scrollPane1.setBounds(14, 277, 788, 283);
 		contentPanel.add(scrollPane1);
-		SimpleDateFormat format = new SimpleDateFormat("MMM-dd-yyyy");
+		SimpleDateFormat format = new SimpleDateFormat("MMM/dd/yyyy");
 		Date minDate = null, maxDate = null, selectDate = null;
 		try
 		{
-			minDate = format.parse("Ene-01-1977");
-			maxDate = format.parse("Dic-31-1997");
-			selectDate = format.parse("Ene-01-1997");
+			minDate = format.parse("Jan/01/1977");
+			maxDate = format.parse("Dec/31/1997");
+			selectDate = format.parse("Jan/01/1997");
 		}
 		catch (ParseException e) 
 		{
