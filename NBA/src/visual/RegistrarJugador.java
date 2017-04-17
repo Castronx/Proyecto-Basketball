@@ -578,17 +578,17 @@ public class RegistrarJugador extends JDialog implements Serializable
 			               }
 			               FileWriter fw = new FileWriter(file.getAbsoluteFile());
 			               BufferedWriter bw = new BufferedWriter(fw);
-			               bw.write("\n														Listado de jugadores															\n");
-			               bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
-			               bw.write("Nombre \tApellido \tPaís \t\tFecha Nac. \t\tEdad \t\tAltura \t\tPeso \t\tNo. \t\tPosición \t\tEquipo \t\t\t¿Lesión?\n");
-			               bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
+			               bw.write("\n														Listado de jugadores														                            	\n");
+			               bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+			               bw.write("Nombre \t\tApellido \t\tPaís \t\t\tFecha Nac. \t\t\tEdad \t\tAltura \t\t\tPeso \t\t\tNo. \t\t\tPosición \t\t\tEquipo \t\t\t¿Lesión?\n");
+			               bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 			               for(int i = 0; i < tabladeJugadores.getRowCount(); i++){
 			                   for(int j = 0; j < tabladeJugadores.getColumnCount(); j++){
 			                       bw.write(tabladeJugadores.getModel().getValueAt(i, j)+"			 ");
 			                   }
 			                   bw.write("\n");
 			               }
-			               bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
+			               bw.write("----------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 			               bw.close();
 			               fw.close();
 			               JOptionPane.showMessageDialog(null, "El listado de jugadores ha sido impreso.");

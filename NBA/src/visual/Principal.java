@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 
 import org.omg.PortableServer.ServantLocatorOperations;
 
+import logical.Nba;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -17,6 +19,9 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -30,6 +35,7 @@ public class Principal extends JFrame {
 
 	private JPanel contentPane;
 	private Dimension dim;
+	File f = new File("./Datos.dat");
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -196,5 +202,16 @@ public class Principal extends JFrame {
 			}
 		});
 		mnAdministrador.add(mntmSalir);
-	}
+	
+	
+	addWindowListener(new WindowAdapter()
+    {
+        @Override
+        public void windowClosing(WindowEvent e)
+        {	
+            Nba.getInstances().guardarNba(Nba.getInstances());;
+            e.getWindow().dispose();
+        }
+    });
+}
 }

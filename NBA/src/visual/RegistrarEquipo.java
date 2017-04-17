@@ -223,7 +223,7 @@ public class RegistrarEquipo extends JDialog implements Serializable {
    			               
    			               bw.write("\n														Listado de equipos													\n");
    			               bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
-   			               bw.write("\t\t\t\tNombre \t\t\tCoach \t\t\tLocacion\n");
+   			               bw.write("\t\t\t\tNombre \t\t\tCiudad \t\t\tEstadio \t\t\tCoach\n");
    			             bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
    			               for(int i = 0; i < tablaEquipos.getRowCount(); i++){
    			                   for(int j = 0; j < tablaEquipos.getColumnCount(); j++){
