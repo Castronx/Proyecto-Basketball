@@ -166,6 +166,13 @@ public class HistorialLesion extends JDialog {
 				panel.add(scrollPane);
 				
 				tableLesion = new JTable();
+				tableLesion.setModel(new DefaultTableModel(
+					new Object[][] {
+					},
+					new String[] {
+						"Equipo", "Nombre", "Apellido", "Tipo", "Fecha", "Retorno"
+					}
+				));
 				scrollPane.setViewportView(tableLesion);
 				
 				tableModel = new DefaultTableModel(

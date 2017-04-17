@@ -473,15 +473,11 @@ public class RegistrarJugador extends JDialog implements Serializable
 		Date minDate = null, maxDate = null, selectDate = null;
 		try
 		{
-<<<<<<< HEAD
-			minDate = format.parse("Ene/01/1977");
-			maxDate = format.parse("Dic/31/1997");
-			selectDate = format.parse("Ene/01/1997");
-=======
+
 			minDate = format.parse("Jan/01/1977");
 			maxDate = format.parse("Dec/31/1997");
 			selectDate = format.parse("Jan/01/1997");
->>>>>>> branch 'master' of https://github.com/Castronx/Proyecto-Basketball.git
+
 		}
 		catch (ParseException e) 
 		{
