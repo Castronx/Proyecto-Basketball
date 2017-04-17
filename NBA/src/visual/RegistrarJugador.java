@@ -209,22 +209,28 @@ public class RegistrarJugador extends JDialog implements Serializable
 					String pos = posicion.getSelectedItem().toString();
 					String equi = equipo.getSelectedItem().toString();
 					String country = pais.getText().toString();
-					miJugador.setApellido(lastname);
-					miJugador.setNombre(name);
-					miJugador.setNumero(numCam);
-					miJugador.setPais(country);
-					miJugador.setEquipo(equi);
-					miJugador.setFechaNacimiento(Born);
-					miJugador.setPies(pi);
-					miJugador.setPulgadas(pulg);
-					miJugador.setPosicion(pos);
-					miJugador.setPeso(weight);
-					JOptionPane.showMessageDialog(null, "El jugador ha sido Modificado exitosamente.", null, JOptionPane.INFORMATION_MESSAGE);
-					btnModify.setEnabled(false);
-					tabladeJugadores.setEnabled(true);
-					btnDelete.setEnabled(false);
-					equipo.setEnabled(true);
-					cargarJugadores();
+					if (nombre.getText().isEmpty() || apellido.getText().isEmpty() || posicion.getSelectedIndex() == 0 || equipo.getSelectedIndex() == 0) 
+					{
+						JOptionPane.showMessageDialog(null, "Favor de llenar todos los campos.", "Warning!", JOptionPane.WARNING_MESSAGE);
+						return;
+					}else{
+						miJugador.setApellido(lastname);
+						miJugador.setNombre(name);
+						miJugador.setNumero(numCam);
+						miJugador.setPais(country);
+						miJugador.setEquipo(equi);
+						miJugador.setFechaNacimiento(Born);
+						miJugador.setPies(pi);
+						miJugador.setPulgadas(pulg);
+						miJugador.setPosicion(pos);
+						miJugador.setPeso(weight);
+						JOptionPane.showMessageDialog(null, "El jugador ha sido Modificado exitosamente.", null, JOptionPane.INFORMATION_MESSAGE);
+						btnModify.setEnabled(false);
+						tabladeJugadores.setEnabled(true);
+						btnDelete.setEnabled(false);
+						equipo.setEnabled(true);
+						cargarJugadores();
+					}
 					if (inj) {
 						injury.getComboBox_Team().setSelectedItem(equipo.getSelectedItem().toString());
 						injury.getComboBox_Team().setEnabled(false);
@@ -612,7 +618,6 @@ public class RegistrarJugador extends JDialog implements Serializable
 		char Feets, Inches;
 		int feets, inches;
 		String Name = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 0);
-		//miJugador = Nba.getInstances().getMisEquipos().
 		String LastName = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 1);
 		String Country = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 2);
 		try
@@ -636,7 +641,6 @@ public class RegistrarJugador extends JDialog implements Serializable
 		String Injuried = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 10);
 		miEquipo = Nba.getInstances().buscarEquipo(Team);
 		miJugador = miEquipo.buscarJugador(Name);
-		//borrarJugadores();
 		posicion.setSelectedItem(Position);
 		nombre.setText(Name);
 		apellido.setText(LastName);
