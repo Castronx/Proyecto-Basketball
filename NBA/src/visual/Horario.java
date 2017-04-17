@@ -29,7 +29,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class Horario extends JDialog {
-	
+	//cc
 	private Nba liga;
 	Object[] fila;
 	private final JPanel contentPanel = new JPanel();
