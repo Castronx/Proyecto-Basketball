@@ -1016,7 +1016,7 @@ public class JugarPartido extends JDialog implements Serializable{
 		btnNewButton.setForeground(Color.BLUE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Resultados result = new Resultados();
+				Resultados result = new Resultados(null, null);
 				result.setVisible(true);
 				result.setLocationRelativeTo(null);
 			}
