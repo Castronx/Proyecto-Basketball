@@ -28,6 +28,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class RegistrarLesion extends JDialog implements Serializable {
 
@@ -46,6 +47,7 @@ public class RegistrarLesion extends JDialog implements Serializable {
 	
 
 	public RegistrarLesion() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarLesion.class.getResource("/images/adhesive_bandage-512.png")));
 		setTitle("Insertar Lesi\u00F3n");
 		setBounds(100, 100, 659, 290);
 		getContentPane().setLayout(new BorderLayout());
@@ -60,7 +62,7 @@ public class RegistrarLesion extends JDialog implements Serializable {
 		panel.setLayout(null);
 		
 		JLabel lblEquipo = new JLabel("Equipo");
-		lblEquipo.setBounds(10, 34, 46, 14);
+		lblEquipo.setBounds(10, 34, 61, 14);
 		panel.add(lblEquipo);
 		
 		comboEquipo = new JComboBox();
@@ -87,7 +89,7 @@ public class RegistrarLesion extends JDialog implements Serializable {
 		panel.add(comboEquipo);
 		
 		JLabel lblJugador = new JLabel("Jugador");
-		lblJugador.setBounds(10, 74, 46, 14);
+		lblJugador.setBounds(10, 74, 72, 14);
 		panel.add(lblJugador);
 		
 		comboJugador = new JComboBox();
@@ -106,7 +108,7 @@ public class RegistrarLesion extends JDialog implements Serializable {
 		panel.add(comboJugador);
 		
 		JLabel lblTipo = new JLabel("Tipo de Lesi\u00F3n");
-		lblTipo.setBounds(10, 114, 90, 14);
+		lblTipo.setBounds(10, 114, 99, 14);
 		panel.add(lblTipo);
 		
 		comboTipo = new JComboBox();
@@ -115,23 +117,23 @@ public class RegistrarLesion extends JDialog implements Serializable {
 		panel.add(comboTipo);
 		
 		JLabel lblInfo = new JLabel("Info Adicional");
-		lblInfo.setBounds(10, 155, 72, 14);
+		lblInfo.setBounds(10, 155, 78, 14);
 		panel.add(lblInfo);
 		
 		JLabel lblFecha = new JLabel("Fecha");
-		lblFecha.setBounds(420, 31, 46, 14);
+		lblFecha.setBounds(412, 34, 54, 14);
 		panel.add(lblFecha);
 		
 		txtFecha = new JDateChooser();
-		txtFecha.setBounds(498, 28, 107, 20);
+		txtFecha.setBounds(498, 31, 107, 20);
 		panel.add(txtFecha);
 		
 		JLabel lblRecuperacion = new JLabel("Recuperaci\u00F3n");
-		lblRecuperacion.setBounds(420, 71, 74, 14);
+		lblRecuperacion.setBounds(399, 74, 82, 14);
 		panel.add(lblRecuperacion);
 		
 		txtRecuperacion = new JDateChooser();
-		txtRecuperacion.setBounds(498, 68, 107, 20);
+		txtRecuperacion.setBounds(498, 71, 107, 20);
 		panel.add(txtRecuperacion);
 		
 		txtInfo = new JTextField();
@@ -148,7 +150,7 @@ public class RegistrarLesion extends JDialog implements Serializable {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Insertar Lesi\u00F3n");
+				JButton okButton = new JButton("Registrar lesi\u00F3n");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						boolean listo = false;
@@ -162,14 +164,13 @@ public class RegistrarLesion extends JDialog implements Serializable {
 							listo = true;
 							Injury aux = new Injury(equipo, jugador, tipo, fecha, recuperacion, infoAdicional); 
 			
-		 JOptionPane.showMessageDialog(null, "Lesión Registrada " + comboJugador.getSelectedItem().toString(), null, JOptionPane.INFORMATION_MESSAGE);
+		 JOptionPane.showMessageDialog(null, "Lesión Registrada. " + comboJugador.getSelectedItem().toString(), null, JOptionPane.INFORMATION_MESSAGE);
 							Nba.getInstances().getMisEquipos().get(comboEquipo.getSelectedIndex()).getMisJugadores().get(comboJugador.getSelectedIndex()).InsertarLesion(aux);
 							clean();
 						}
-						
 						else{
 							listo=false;
-							JOptionPane.showMessageDialog(null, "Verifique que todos los campos estén llenos", null, JOptionPane.ERROR_MESSAGE, null);
+							JOptionPane.showMessageDialog(null, "Verifique que todos los campos estén llenos.", null, JOptionPane.ERROR_MESSAGE, null);
 						}
 					}
 				});

@@ -127,7 +127,7 @@ public class RegistrarPartido extends JDialog {
 				JButton okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						String dat = new SimpleDateFormat("MMM/dd/yyyy").format(fechapartido.getDate());
+						String dat = new SimpleDateFormat("MMM-dd-yyyy").format(fechapartido.getDate());
 						JSpinner.DateEditor fe = new JSpinner.DateEditor(hora, "hh:mm a");
 						String local = equipolocal.getSelectedItem().toString();
 						String visitante = equipovisitante.getSelectedItem().toString();

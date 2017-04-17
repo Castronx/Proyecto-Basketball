@@ -26,6 +26,8 @@ import javax.swing.UIManager;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 public class JugarPartido extends JDialog implements Serializable{
 	
@@ -104,7 +106,6 @@ public class JugarPartido extends JDialog implements Serializable{
 	private JTextField tresj11;
 	private JTextField tresj12;
 
-	
 	private JTextField dosjl1;
 	private JTextField dosjl2;
 	private JTextField dosjl3;
@@ -227,15 +228,16 @@ public class JugarPartido extends JDialog implements Serializable{
 	int treslocal11;
 	int treslocal12;
 	
-
-	RegistrarPartido insert_game;
-	int HomeTeamFouls, AwayTeamFouls;
+	RegistrarPartido insertarJuego;
+	int faltasLocales, faltasVisitante;
 	Horario schedule;
+	private JLabel lblNewLabel_1;
 	
 	public JugarPartido() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Jesus\\Pictures\\Nueva carpeta\\play_game_video-512.png"));
 		schedule = new Horario();
 		setModal(true);
-		insert_game = new RegistrarPartido();
+		insertarJuego = new RegistrarPartido();
 		
 		setTitle("Live");
 		setBounds(50, 10, 1212, 640);
@@ -695,7 +697,6 @@ public class JugarPartido extends JDialog implements Serializable{
 			tresj12.setBounds(10, 372, 47, 20);
 			tresjv.add(tresj12);
 		}
-
 		{
 			dospuntoslocal = new JPanel();
 			dospuntoslocal.setBorder(new TitledBorder(null, "T-2Pts", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -933,8 +934,6 @@ public class JugarPartido extends JDialog implements Serializable{
 			treslj12.setBounds(10, 372, 47, 20);
 			treslocal.add(treslj12);
 		}
-
-		
 		JPanel panel_GameInfo = new JPanel();
 		panel_GameInfo.setBorder(new TitledBorder(null, "Resumen de juego", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_GameInfo.setBounds(10, 465, 1219, 95);
@@ -984,8 +983,14 @@ public class JugarPartido extends JDialog implements Serializable{
 		panel_GameInfo.add(puntosequipolocal);
 		
 		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(JugarPartido.class.getResource("/images/tumblr_static_filename_640_v2.png")));
 		lblNewLabel.setBounds(252, 17, 210, 67);
 		panel_GameInfo.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(JugarPartido.class.getResource("/images/1ycs60oaqdmk431jcp6v_400x400.jpeg")));
+		lblNewLabel_1.setBounds(882, 17, 210, 67);
+		panel_GameInfo.add(lblNewLabel_1);
 		
 		JButton actualizar = new JButton("Actualizar");
 		actualizar.setBounds(887, 571, 89, 23);
@@ -1007,6 +1012,8 @@ public class JugarPartido extends JDialog implements Serializable{
 		btnClose.setActionCommand("Cancelar");
 		
 		JButton btnNewButton = new JButton("Resultados");
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton.setForeground(Color.BLUE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Resultados result = new Resultados();
@@ -1014,13 +1021,24 @@ public class JugarPartido extends JDialog implements Serializable{
 				result.setLocationRelativeTo(null);
 			}
 		});
-		btnNewButton.setBounds(780, 571, 89, 23);
+		btnNewButton.setBounds(680, 571, 101, 23);
 		contentPanel.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Reiniciar");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton_1.setForeground(Color.RED);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Datos reiniciados.", "", JOptionPane.INFORMATION_MESSAGE);
+				reiniciar();
+			}
+		});
+		btnNewButton_1.setBounds(788, 571, 89, 23);
+		contentPanel.add(btnNewButton_1);
 		guardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Juego guardado satisfactoriamente!", "", JOptionPane.INFORMATION_MESSAGE);
-				Save();
-				
+				JOptionPane.showMessageDialog(null, "Juego guardado satisfactoriamente.", "", JOptionPane.INFORMATION_MESSAGE);
+				guardar();
 				dispose();
 			}
 		});
@@ -1031,7 +1049,6 @@ public class JugarPartido extends JDialog implements Serializable{
 			}
 		});
 	}
-	
 	public void Fill_Fields() {
 		for (int i = 0; i < Nba.getInstances().getMisEquipos().size(); i++) {
 			for (int j = 0; j < Nba.getInstances().getMisEquipos().get(i).getMisJugadores().size(); j++) {
@@ -1068,7 +1085,7 @@ public class JugarPartido extends JDialog implements Serializable{
 			}
 		}
 	}
-	public void Reset() {
+	public void reiniciar() {
 		puntosV.setText(""+0);
 		
 		dosj1.setText(""+0);
@@ -1255,7 +1272,6 @@ public class JugarPartido extends JDialog implements Serializable{
 			
 			puntosequipolocal.setText(""+puntoslocal);
 
-			
 			//Estos son los tiros de tres de la casa
 			treslocal1 = Integer.parseInt(""+treslj1.getText());
 			treslocal2 = Integer.parseInt(""+treslj2.getText());
@@ -1270,7 +1286,6 @@ public class JugarPartido extends JDialog implements Serializable{
 			treslocal11 = Integer.parseInt(""+treslj11.getText());
 			treslocal12 = Integer.parseInt(""+treslj12.getText());
 			
-
 			puntoslocal += (treslocal1*3) + (treslocal2*3)+ (treslocal3*3)+ (treslocal4*3)+ (treslocal5*3)+ (treslocal6*3)+
 					(treslocal7*3)+ (treslocal8*3)+ (treslocal9*3)+ (treslocal10*3)+ (treslocal11*3)+ (treslocal12*3);
 
@@ -1281,8 +1296,7 @@ public class JugarPartido extends JDialog implements Serializable{
 		}
 		
 	}
-	public void Save() {
-		
+	public void guardar() {
 		for (int i = 0; i < Nba.getInstances().getMisEquipos().size(); i++) {
 			if (equipovisitante.getText().equalsIgnoreCase(Nba.getInstances().getMisEquipos().get(i).getNombreEquipo())) {
 				Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(0).InsertarEstadisticasJugador(new Performance(tirolv1, tresvis1, dosvis1));

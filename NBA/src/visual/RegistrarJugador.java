@@ -43,6 +43,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 
 public class RegistrarJugador extends JDialog implements Serializable
@@ -62,7 +64,6 @@ public class RegistrarJugador extends JDialog implements Serializable
 	private JLabel lblEquipo, lblNombre, lblFechaN, lblEdad, lblNo, lblPosicion, lblApellido, lblAltura, lblPies, lblPulgadas, lblPeso, lblKgs, lblLesionado, lblAos ;
     private JDateChooser fechaNaci;
     private JButton btnModify,btnDelete, btnInsert, btnBorrar, btnImprimir, btnClose;
-    //probando
     int year;
 	String aux;
 	RegistrarLesion injury;
@@ -75,6 +76,8 @@ public class RegistrarJugador extends JDialog implements Serializable
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public RegistrarJugador() 
 	    {
+		setTitle("Registrar Jugador");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarJugador.class.getResource("/images/mini-jugador-de-basquet.jpg")));
         setResizable(false);
 		setModal(true);
 		injury = new RegistrarLesion();
@@ -99,11 +102,10 @@ public class RegistrarJugador extends JDialog implements Serializable
 				{
 					borrarJugadores();
 					cargarJugadores();
-					
 				}
 			}
 		});
-		btnBorrar.setBounds(420, 571, 75, 23);
+		btnBorrar.setBounds(413, 571, 75, 23);
 		contentPanel.add(btnBorrar);
 		
 		btnModify = new JButton("Modificar");
@@ -117,10 +119,10 @@ public class RegistrarJugador extends JDialog implements Serializable
 				btnDelete.setEnabled(false); 
 			}
 		});
-		btnModify.setBounds(517, 571, 82, 23);
+		btnModify.setBounds(498, 571, 101, 23);
 		contentPanel.add(btnModify);
 		
-		btnInsert = new JButton("Insertar");
+		btnInsert = new JButton("Registrar");
 		btnInsert.setEnabled(false);
 		btnInsert.addActionListener(new ActionListener()
 		{
@@ -150,13 +152,13 @@ public class RegistrarJugador extends JDialog implements Serializable
 				Player pla = new Player(name, lastname, country, Born, 2017-year, pi, pulg, weight, numCam, pos, equi, inj);
 				if (nombre.getText().isEmpty() || apellido.getText().isEmpty() || posicion.getSelectedIndex() == 0 || equipo.getSelectedIndex() == 0) 
 				{
-					JOptionPane.showMessageDialog(null, "Campos vacios!", "Warning!", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Favor de llenar todos los campos.", "Warning!", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				for (Team aux : Nba.getInstances().getMisEquipos()) {
 					for (Player aux2 : aux.getMisJugadores()) {
 						if ((nombre.getText().equalsIgnoreCase(aux2.getNombre()) && (apellido.getText().equalsIgnoreCase(aux2.getApellido())))) {
-							JOptionPane.showMessageDialog(null, "El jugador ya existe!", "Warning!", JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Este jugador ya existe.", "Warning!", JOptionPane.WARNING_MESSAGE);
 							clean();
 							return;
 						}
@@ -165,7 +167,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 				for (Team aux : Nba.getInstances().getMisEquipos()) {
 					if (equipo.getSelectedItem().toString().equalsIgnoreCase(aux.getNombreEquipo())) {
 						aux.InsertarJugador(pla);
-						JOptionPane.showMessageDialog(null, "Jugador insertado!", null, JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "El jugador ha sido registrado exitosamente.", null, JOptionPane.INFORMATION_MESSAGE);
 						btnModify.setEnabled(false);
 						tabladeJugadores.setEnabled(true);
 						btnDelete.setEnabled(false);
@@ -362,7 +364,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 			
 			lblPeso = new JLabel("Peso:");
 			lblPeso.setEnabled(false);
-			lblPeso.setBounds(315, 110, 46, 14);
+			lblPeso.setBounds(315, 107, 46, 14);
 			panel.add(lblPeso);
 			
 			peso = new JSpinner();
@@ -372,7 +374,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 			
 			lblKgs = new JLabel("Kgs");
 			lblKgs.setEnabled(false);
-			lblKgs.setBounds(453, 110, 36, 14);
+			lblKgs.setBounds(453, 107, 36, 14);
 			panel.add(lblKgs);
 			
 			lblLesionado = new JLabel("Lesionado:");
@@ -404,13 +406,13 @@ public class RegistrarJugador extends JDialog implements Serializable
 		JScrollPane scrollPane1 = new JScrollPane();
 		scrollPane1.setBounds(14, 277, 788, 283);
 		contentPanel.add(scrollPane1);
-		SimpleDateFormat format = new SimpleDateFormat("MMM/dd/yyyy");
+		SimpleDateFormat format = new SimpleDateFormat("MMM-dd-yyyy");
 		Date minDate = null, maxDate = null, selectDate = null;
 		try
 		{
-			minDate = format.parse("Jan/01/1977");
-			maxDate = format.parse("Dec/31/1997");
-			selectDate = format.parse("Jan/01/1997");
+			minDate = format.parse("Ene-01-1977");
+			maxDate = format.parse("Dic-31-1997");
+			selectDate = format.parse("Ene-01-1997");
 		}
 		catch (ParseException e) 
 		{
@@ -418,7 +420,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 		}
 		fechaNaci = new JDateChooser();
 		fechaNaci.setEnabled(false);
-		fechaNaci.setBounds(97, 145, 160, 20);
+		fechaNaci.setBounds(97, 142, 160, 20);
 		panel.add(fechaNaci);
 		fechaNaci.setSelectableDateRange(minDate, maxDate);
 		fechaNaci.setDate(selectDate);
@@ -437,6 +439,11 @@ public class RegistrarJugador extends JDialog implements Serializable
 		pais.setBounds(97, 104, 160, 20);
 		panel.add(pais);
 		pais.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(RegistrarJugador.class.getResource("/images/feeb7e52-61ff-4909-839c-045e03b53c37.png")));
+		lblNewLabel.setBounds(585, 11, 207, 188);
+		panel.add(lblNewLabel);
 		String Born = new SimpleDateFormat("MMM/dd/yyyy").format(fechaNaci.getDate());
 		aux = ""+Born.charAt(7)+Born.charAt(8)+Born.charAt(9)+Born.charAt(10);
 		year = Integer.parseInt(aux);
@@ -528,7 +535,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 			               }
 				}
 			});
-			btnImprimir.setBounds(10, 571, 89, 23);
+			btnImprimir.setBounds(314, 571, 89, 23);
 			contentPanel.add(btnImprimir);
            }   
                }
@@ -605,7 +612,6 @@ public class RegistrarJugador extends JDialog implements Serializable
     	Nba.getInstances().getMisEquipos().remove(temp);
     	tableModel.fireTableDataChanged();
 	}
-		
 	public void cargarJugadores() {
 		tableModel.setRowCount(0); 
 		row = new Object[tableModel.getColumnCount()];

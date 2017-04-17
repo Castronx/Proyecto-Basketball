@@ -24,6 +24,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
+import java.awt.Color;
+import java.awt.Font;
 
 public class Horario extends JDialog {
 	
@@ -37,6 +40,7 @@ public class Horario extends JDialog {
 	public DefaultTableModel tableModel;
 	
 	public Horario() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Horario.class.getResource("/images/schedule-icon-2.png")));
 		setTitle("Horario");
 		setBounds(100, 100, 599, 395);
 		getContentPane().setLayout(new BorderLayout());
@@ -50,6 +54,8 @@ public class Horario extends JDialog {
 			buttonPane.setLayout(null);
 			{
 				JButton imprimir = new JButton("Imprimir");
+				imprimir.setFont(new Font("Tahoma", Font.BOLD, 11));
+				imprimir.setForeground(Color.BLUE);
 				imprimir.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						try{
@@ -98,6 +104,8 @@ public class Horario extends JDialog {
 				buttonPane.add(cerrar);
 			}
 			jugar = new JButton("Jugar");
+			jugar.setFont(new Font("Tahoma", Font.BOLD, 11));
+			jugar.setForeground(Color.RED);
 			jugar.setEnabled(false);
 			jugar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {

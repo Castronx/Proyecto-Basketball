@@ -56,6 +56,7 @@ public class Principal extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Principal.class.getResource("/images/michael-jordan-chicago-bulls-basketball-nba.jpg")));
 		lblNewLabel.setBounds(10, 11, 1340, 616);
 		contentPane.add(lblNewLabel);
 		
@@ -86,7 +87,7 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				RegistrarJugador regist = new RegistrarJugador();
 				regist.setVisible(true);
-				setLocationRelativeTo(null);
+				regist.setLocationRelativeTo(null);
 			}
 		});
 		mnJugadores.add(mntmRegistrar_1);
@@ -142,5 +143,13 @@ public class Principal extends JFrame {
 			}
 		});
 		mnLesiones.add(mntmHistorial);
+		
+		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		mnAdministrador.add(mntmSalir);
 	}
 }

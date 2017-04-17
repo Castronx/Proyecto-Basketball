@@ -86,14 +86,14 @@ public class HistorialLesion extends JDialog {
 						if(comboEquipo.getSelectedIndex()==0)
 						{
 							comboJugador.setEnabled(false);
-							loadPlayer();
+							cargarJugador();
 						}
 						if(comboEquipo.getSelectedIndex()!=0)
 						{
-							loadPlayerFromTeam();
+							cargarJugadorporEquipo();
 							if(comboJugador.getSelectedIndex()!=0)
 							{
-								loadPlayer();
+								cargarJugador();
 							}
 						}
 					}
@@ -132,14 +132,14 @@ public class HistorialLesion extends JDialog {
 						if(comboEquipo.getSelectedIndex()==0)
 						{
 							comboJugador.setEnabled(false);
-							loadInjury();
+							cargarLesion();
 						}
 						if(comboEquipo.getSelectedIndex()!=0)
 						{
-							loadPlayerFromTeam();
+							cargarJugadorporEquipo();
 							if(comboJugador.getSelectedIndex()!=0)
 							{
-								loadPlayer();
+								cargarJugador();
 							}
 						}
 					}
@@ -182,20 +182,19 @@ public class HistorialLesion extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Aceptar");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Aceptar");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
 	}
 	//metodo para cargar jugador a partir de equipo
-	public void loadPlayerFromTeam()
+	public void cargarJugadorporEquipo()
 	{
 		tableModel.setRowCount(0);
 		row = new Object[tableModel.getColumnCount()];
@@ -230,9 +229,8 @@ public class HistorialLesion extends JDialog {
 		modeloColumna.getColumn(5).setPreferredWidth(120);
 		}
 	}
-	
     //metodo para cargar jugador
-	public void loadPlayer()
+	public void cargarJugador()
 	{
 		tableModel.setRowCount(0);
 		row = new Object[tableModel.getColumnCount()];
@@ -269,7 +267,7 @@ public class HistorialLesion extends JDialog {
 		modelColumn.getColumn(5).setPreferredWidth(120);
 	}
 	
-	public void loadInjury() 
+	public void cargarLesion() 
 	{
 		tableModel.setRowCount(0); 
 		row = new Object[tableModel.getColumnCount()];
