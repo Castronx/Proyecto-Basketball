@@ -109,9 +109,15 @@ public class Horario extends JDialog {
 			jugar.setEnabled(false);
 			jugar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					JugarPartido juga = new JugarPartido();
-					juga.setVisible(true);
-					setLocationRelativeTo(null);
+					JugarPartido juego = new JugarPartido();
+					String Visit = (String) tableModel.getValueAt(tableHorario.getSelectedRow(), 2);
+					String Local = (String) tableModel.getValueAt(tableHorario.getSelectedRow(), 3);
+					juego.equipovisitante.setText(""+Visit);
+					juego.equipolocal.setText(""+Local);
+					juego.llenarCampos();
+					juego.reiniciar();
+					juego.setVisible(true);
+					dispose();
 				}
 			});
 			jugar.setBounds(267, 5, 89, 23);

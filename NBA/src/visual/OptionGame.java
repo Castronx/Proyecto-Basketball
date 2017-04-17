@@ -11,14 +11,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class OptionGame extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		try {
 			OptionGame dialog = new OptionGame();
@@ -29,10 +26,9 @@ public class OptionGame extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
-	 */
 	public OptionGame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(OptionGame.class.getResource("/images/descarga (2).png")));
+		setTitle("Juego");
 		setBounds(100, 100, 352, 226);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -44,7 +40,7 @@ public class OptionGame extends JDialog {
 		lblNewLabel.setBounds(0, 0, 330, 142);
 		contentPanel.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Create Game");
+		JButton btnNewButton = new JButton("Registrar partido");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegistrarPartido reg = new RegistrarPartido();
@@ -54,10 +50,10 @@ public class OptionGame extends JDialog {
 		btnNewButton.setBounds(0, 149, 164, 34);
 		contentPanel.add(btnNewButton);
 		
-		JButton btnPlayGame = new JButton("Play Game");
+		JButton btnPlayGame = new JButton("Jugar partido");
 		btnPlayGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JugarPartido jug = new JugarPartido();
+				Horario jug = new Horario();
 				jug.setVisible(true);
 			}
 		});

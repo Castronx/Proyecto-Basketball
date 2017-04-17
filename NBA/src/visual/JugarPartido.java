@@ -1049,9 +1049,8 @@ public class JugarPartido extends JDialog implements Serializable{
 			}
 		});
 	}
-	public void Fill_Fields() {
+	public void llenarCampos() {
 		for (int i = 0; i < Nba.getInstances().getMisEquipos().size(); i++) {
-			for (int j = 0; j < Nba.getInstances().getMisEquipos().get(i).getMisJugadores().size(); j++) {
 				//Visitante
 				if (Nba.getInstances().getMisEquipos().get(i).getNombreEquipo().equalsIgnoreCase(equipovisitante.getText())) {
 					jugador1.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(0).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(0).getApellido());
@@ -1084,7 +1083,7 @@ public class JugarPartido extends JDialog implements Serializable{
 				}
 			}
 		}
-	}
+	
 	public void reiniciar() {
 		puntosV.setText(""+0);
 		
@@ -1331,11 +1330,11 @@ public class JugarPartido extends JDialog implements Serializable{
 		int i = schedule.tableHorario.getSelectedRow();
 		String local = schedule.tableModel.getValueAt(schedule.tableHorario.getSelectedRow(), 3).toString();
 		String visitante = schedule.tableModel.getValueAt(schedule.tableHorario.getSelectedRow(), 2).toString();
-		//String ciudad = 
-		//String fechapar = schedule.tableModel.getValueAt(schedule.tableHorario.getSelectedRow(), 0).toString();
-		//(index, new Partido(date, home, away, locacion, puntosHome, puntosAway, tiempo, jugados)
-		//Nba.getInstances().setPartido(i, local, visitante, localizacion, estadio, hora, marcadorLocal, marcadorVisitante, fechapar, true);
-		//Nba.getInstances().setPartido(schedule.tableHorario.getSelectedRow(), equipoLocal, equipoVisitante, localizacion, estadio, hora, marcadorLocal, marcadorVisitante, fecha, jugado);
-		//Nba.getInstances().setPartido(schedule.tableHorario.getSelectedRow(), schedule.tableModel.getValueAt(schedule.tableHorario.getSelectedRow(), 0).toString(), schedule.tableModel.getValueAt(schedule.tableHorario.getSelectedRow(), 3).toString(), schedule.tableModel.getValueAt(schedule.tableHorario.getSelectedRow(), 2).toString(),Nba.getInstances().getMisEquipos().get(schedule.tableHorario.getSelectedRow()).toString(), puntoslocal, puntosvis, schedule.tableModel.getValueAt(schedule.tableHorario.getSelectedRow(), 1).toString(), true);
+		String ciudad = Nba.getInstances().getMisEquipos().get(schedule.tableHorario.getSelectedRow()).toString();
+		String fechapar = schedule.tableModel.getValueAt(schedule.tableHorario.getSelectedRow(), 0).toString();
+		int marcadorL = puntoslocal;
+		int marcadorV = puntosvis;
+		String tiempos = schedule.tableModel.getValueAt(schedule.tableHorario.getSelectedRow(), 1).toString();
+		Nba.getInstances().setPartido(i, local, visitante, ciudad, "estadio", tiempos, marcadorL, marcadorV, fechapar, true);
 	}
 }

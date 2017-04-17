@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Font;
 
 public class Principal extends JFrame {
 
@@ -57,7 +58,8 @@ public class Principal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Team");
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(Principal.class.getResource("/images/maxresdefault (1).jpg")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				RegistrarEquipo registrar = new RegistrarEquipo();
@@ -69,6 +71,7 @@ public class Principal extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnPlayer = new JButton("Player");
+		btnPlayer.setIcon(new ImageIcon(Principal.class.getResource("/images/MTLML8KBc.jpg")));
 		btnPlayer.setVisible(true);
 		btnPlayer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -77,18 +80,20 @@ public class Principal extends JFrame {
 			}
 		});
 		btnPlayer.setForeground(Color.BLACK);
-		btnPlayer.setBounds(147, 247, 163, 115);
+		btnPlayer.setBounds(147, 270, 163, 115);
 		contentPane.add(btnPlayer);
 		
-		JButton btnGame = new JButton("Game\r\n");
+		JButton btnGame = new JButton("");
+		btnGame.setIcon(new ImageIcon(Principal.class.getResource("/images/images (1).png")));
 		btnGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				OptionGame opc = new OptionGame();
 				opc.setVisible(true);
+				opc.setLocationRelativeTo(null);
 			}
 		});
 		btnGame.setForeground(Color.BLACK);
-		btnGame.setBounds(147, 393, 163, 115);
+		btnGame.setBounds(147, 432, 163, 115);
 		contentPane.add(btnGame);
 		
 		JButton btnNewButton_1 = new JButton("Salir");
@@ -99,6 +104,24 @@ public class Principal extends JFrame {
 		});
 		btnNewButton_1.setBounds(1241, 593, 89, 23);
 		contentPane.add(btnNewButton_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("Juego");
+		lblNewLabel_1.setForeground(Color.RED);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_1.setBounds(147, 568, 46, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Jugador");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_2.setForeground(Color.RED);
+		lblNewLabel_2.setBounds(147, 396, 46, 14);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblEquipo = new JLabel("Equipo");
+		lblEquipo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblEquipo.setForeground(Color.RED);
+		lblEquipo.setBounds(147, 234, 46, 14);
+		contentPane.add(lblEquipo);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Principal.class.getResource("/images/michael-jordan-chicago-bulls-basketball-nba.jpg")));

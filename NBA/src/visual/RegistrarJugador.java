@@ -462,13 +462,13 @@ public class RegistrarJugador extends JDialog implements Serializable
 		JScrollPane scrollPane1 = new JScrollPane();
 		scrollPane1.setBounds(14, 277, 788, 283);
 		contentPanel.add(scrollPane1);
-		SimpleDateFormat format = new SimpleDateFormat("MMM/dd/yyyy");
+		SimpleDateFormat format = new SimpleDateFormat("MMM-dd-yyyy");
 		Date minDate = null, maxDate = null, selectDate = null;
 		try
 		{
-			minDate = format.parse("Jan/01/1977");
-			maxDate = format.parse("Dec/31/1997");
-			selectDate = format.parse("Jan/01/1997");
+			minDate = format.parse("Ene-01-1977");
+			maxDate = format.parse("Dic-31-1997");
+			selectDate = format.parse("Ene-01-1997");
 		}
 		catch (ParseException e) 
 		{
@@ -500,7 +500,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 		lblNewLabel.setIcon(new ImageIcon(RegistrarJugador.class.getResource("/images/feeb7e52-61ff-4909-839c-045e03b53c37.png")));
 		lblNewLabel.setBounds(585, 11, 207, 188);
 		panel.add(lblNewLabel);
-		String Born = new SimpleDateFormat("MMM/dd/yyyy").format(fechaNaci.getDate());
+		String Born = new SimpleDateFormat("MMM-dd-yyyy").format(fechaNaci.getDate());
 		aux = ""+Born.charAt(7)+Born.charAt(8)+Born.charAt(9)+Born.charAt(10);
 		year = Integer.parseInt(aux);
 		
@@ -509,7 +509,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 		    @Override
 		    public void propertyChange(PropertyChangeEvent e) 
 		    {
-		    	String Born = new SimpleDateFormat("MMM/dd/yyyy").format(fechaNaci.getDate());
+		    	String Born = new SimpleDateFormat("MMM-dd-yyyy").format(fechaNaci.getDate());
 				aux = ""+Born.charAt(7)+Born.charAt(8)+Born.charAt(9)+Born.charAt(10);
 				year = Integer.parseInt(aux);	
 		        edad.setText(""+(2017-year));
@@ -605,6 +605,8 @@ public class RegistrarJugador extends JDialog implements Serializable
 		pies.setValue(new Integer(0));
 		nocamiseta.setValue(new Integer(0));
 		lesionado.setSelectedIndex(0);
+		pais.setText("");
+		//fechaNaci.setDate();
 	}
 	public void modificarJugadores(){
 		SimpleDateFormat formatter = new SimpleDateFormat("MMM/dd/yyyy");
@@ -612,7 +614,6 @@ public class RegistrarJugador extends JDialog implements Serializable
 		char Feets, Inches;
 		int feets, inches;
 		String Name = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 0);
-		//miJugador = Nba.getInstances().getMisEquipos().
 		String LastName = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 1);
 		String Country = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 2);
 		try
@@ -636,7 +637,6 @@ public class RegistrarJugador extends JDialog implements Serializable
 		String Injuried = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 10);
 		miEquipo = Nba.getInstances().buscarEquipo(Team);
 		miJugador = miEquipo.buscarJugador(Name);
-		//borrarJugadores();
 		posicion.setSelectedItem(Position);
 		nombre.setText(Name);
 		apellido.setText(LastName);
