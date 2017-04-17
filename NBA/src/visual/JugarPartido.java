@@ -252,7 +252,7 @@ public class JugarPartido extends JDialog implements Serializable{
 		contentPanel.add(separator);
 		{
 			JLabel lblAwayTeam = new JLabel("Equipo visitante:");
-			lblAwayTeam.setBounds(10, 9, 117, 27);
+			lblAwayTeam.setBounds(589, 9, 117, 27);
 			contentPanel.add(lblAwayTeam);
 		}
 		equipovisitante = new JTextField();
@@ -273,7 +273,7 @@ public class JugarPartido extends JDialog implements Serializable{
 		}
 		{
 			JLabel lblHomeTeam = new JLabel("Equipo local:");
-			lblHomeTeam.setBounds(649, 9, 75, 27);
+			lblHomeTeam.setBounds(33, 9, 75, 27);
 			contentPanel.add(lblHomeTeam);
 		}
 		{
@@ -984,16 +984,16 @@ public class JugarPartido extends JDialog implements Serializable{
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(JugarPartido.class.getResource("/images/tumblr_static_filename_640_v2.png")));
-		lblNewLabel.setBounds(252, 17, 210, 67);
+		lblNewLabel.setBounds(847, 17, 210, 67);
 		panel_GameInfo.add(lblNewLabel);
 		
 		lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(JugarPartido.class.getResource("/images/1ycs60oaqdmk431jcp6v_400x400.jpeg")));
-		lblNewLabel_1.setBounds(882, 17, 210, 67);
+		lblNewLabel_1.setBounds(215, 17, 210, 67);
 		panel_GameInfo.add(lblNewLabel_1);
+		lblNewLabel_1.setIcon(new ImageIcon(JugarPartido.class.getResource("/images/1ycs60oaqdmk431jcp6v_400x400.jpeg")));
 		
 		JButton actualizar = new JButton("Actualizar");
-		actualizar.setBounds(887, 571, 89, 23);
+		actualizar.setBounds(870, 571, 106, 23);
 		contentPanel.add(actualizar);
 		
 		
@@ -1021,7 +1021,7 @@ public class JugarPartido extends JDialog implements Serializable{
 				result.setLocationRelativeTo(null);
 			}
 		});
-		btnNewButton.setBounds(680, 571, 101, 23);
+		btnNewButton.setBounds(663, 571, 101, 23);
 		contentPanel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Reiniciar");
@@ -1033,7 +1033,7 @@ public class JugarPartido extends JDialog implements Serializable{
 				reiniciar();
 			}
 		});
-		btnNewButton_1.setBounds(788, 571, 89, 23);
+		btnNewButton_1.setBounds(771, 571, 89, 23);
 		contentPanel.add(btnNewButton_1);
 		guardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1053,33 +1053,35 @@ public class JugarPartido extends JDialog implements Serializable{
 		for (int i = 0; i < Nba.getInstances().getMisEquipos().size(); i++) {
 				//Visitante
 				if (Nba.getInstances().getMisEquipos().get(i).getNombreEquipo().equalsIgnoreCase(equipovisitante.getText())) {
-					jugador1.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(0).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(0).getApellido());
-					jugador2.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(1).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(1).getApellido());
+					jugador1.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(0).getNombre()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(0).getApellido());
+					jugador2.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(1).getNombre()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(1).getApellido());
 					jugador4.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(2).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(2).getApellido());
 					jugador3.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(3).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(3).getApellido());
 					jugador6.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(4).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(4).getApellido());
-					jugador5.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(5).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(5).getApellido());
+					/*jugador5.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(5).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(5).getApellido());
 					jugador8.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(6).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(6).getApellido());
 					jugador7.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(7).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(7).getApellido());
 					jugador10.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(8).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(8).getApellido());
 					jugador9.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(9).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(9).getApellido());
 					jugador12.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(10).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(10).getApellido());
 					jugador11.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(11).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(11).getApellido());
+					*/
 				}
 				//Local
 				if (Nba.getInstances().getMisEquipos().get(i).getNombreEquipo().equalsIgnoreCase(equipolocal.getText())) {
-					j1l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(0).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(0).getApellido());
-					j2l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(1).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(1).getApellido());
+					j1l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(0).getNombre()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(0).getApellido());
+					j2l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(1).getNombre()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(1).getApellido());
 					j4l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(2).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(2).getApellido());
 					j3l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(3).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(3).getApellido());
 					j6l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(4).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(4).getApellido());
-					j5l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(5).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(5).getApellido());
+					/*j5l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(5).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(5).getApellido());
 					j8l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(6).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(6).getApellido());
 					j7l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(7).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(7).getApellido());
 					j10l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(8).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(8).getApellido());
 					j9l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(9).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(9).getApellido());
 					j12l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(10).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(10).getApellido());
 					j11l.setText(""+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(11).getEquipo()+" "+Nba.getInstances().getMisEquipos().get(i).getMisJugadores().get(11).getApellido());
+					*/
 				}
 			}
 		}

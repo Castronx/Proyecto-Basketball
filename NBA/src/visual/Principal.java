@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.omg.PortableServer.ServantLocatorOperations;
 
+
 import logical.Nba;
 
 import javax.swing.JMenuBar;
@@ -36,13 +37,14 @@ public class Principal extends JFrame {
 
 	private JPanel contentPane;
 	private Dimension dim;
+	private static Nba nb;
 	File f = new File("./Datos.dat");
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Principal frame = new Principal();
+					Principal frame = new Principal(nb);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,12 +52,14 @@ public class Principal extends JFrame {
 			}
 		});
 	}
-	public Principal() {
+	public Principal(final Nba nb) {
 		setResizable(false);
 		setTitle("National Basketball Asociation");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Jesus\\Pictures\\Nueva carpeta\\descarga.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		
+		Nba.getInstances().cargarNba(nb);
 		dim = super.getToolkit().getScreenSize();
 		super.setSize(dim.width, (dim.height-80));
 		setLocationRelativeTo(null);

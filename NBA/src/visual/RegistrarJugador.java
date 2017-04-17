@@ -35,6 +35,7 @@ import javax.swing.DefaultComboBoxModel;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
+
 import logical.Nba;
 import logical.Player;
 import logical.Team;
@@ -468,13 +469,19 @@ public class RegistrarJugador extends JDialog implements Serializable
 		JScrollPane scrollPane1 = new JScrollPane();
 		scrollPane1.setBounds(14, 277, 788, 283);
 		contentPanel.add(scrollPane1);
-		SimpleDateFormat format = new SimpleDateFormat("MMM-dd-yyyy");
+		SimpleDateFormat format = new SimpleDateFormat("MMM/dd/yyyy");
 		Date minDate = null, maxDate = null, selectDate = null;
 		try
 		{
+<<<<<<< HEAD
 			minDate = format.parse("Ene/01/1977");
 			maxDate = format.parse("Dic/31/1997");
 			selectDate = format.parse("Ene/01/1997");
+=======
+			minDate = format.parse("Jan/01/1977");
+			maxDate = format.parse("Dec/31/1997");
+			selectDate = format.parse("Jan/01/1997");
+>>>>>>> branch 'master' of https://github.com/Castronx/Proyecto-Basketball.git
 		}
 		catch (ParseException e) 
 		{
@@ -506,7 +513,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 		lblNewLabel.setIcon(new ImageIcon(RegistrarJugador.class.getResource("/images/feeb7e52-61ff-4909-839c-045e03b53c37.png")));
 		lblNewLabel.setBounds(585, 11, 207, 188);
 		panel.add(lblNewLabel);
-		String Born = new SimpleDateFormat("MMM-dd-yyyy").format(fechaNaci.getDate());
+		String Born = new SimpleDateFormat("MMM/dd/yyyy").format(fechaNaci.getDate());
 		aux = ""+Born.charAt(7)+Born.charAt(8)+Born.charAt(9)+Born.charAt(10);
 		year = Integer.parseInt(aux);
 		
@@ -515,7 +522,7 @@ public class RegistrarJugador extends JDialog implements Serializable
 		    @Override
 		    public void propertyChange(PropertyChangeEvent e) 
 		    {
-		    	String Born = new SimpleDateFormat("MMM-dd-yyyy").format(fechaNaci.getDate());
+		    	String Born = new SimpleDateFormat("MMM/dd/yyyy").format(fechaNaci.getDate());
 				aux = ""+Born.charAt(7)+Born.charAt(8)+Born.charAt(9)+Born.charAt(10);
 				year = Integer.parseInt(aux);	
 		        edad.setText(""+(2017-year));
@@ -662,19 +669,36 @@ public class RegistrarJugador extends JDialog implements Serializable
 			lesionado.setSelectedIndex(1);
 		}
 	}
-	public void borrarJugadores() {
+	/*public void borrarJugadores() {
 		int temp = 0;
-    	for (int i = 0; i < Nba.getInstances().getMisEquipos().size(); i++) {
-    		    for (int j = 0; j < listPlayers.size(); j++) {
-					if (listPlayers.get(j).getNombre().equalsIgnoreCase(Nba.getInstances().getMisEquipos().get(i).getNombreEquipo())) {
-						Nba.getInstances().getMisEquipos().remove(i);
+    	for (int i = 0; i < Team.getInstances().getMisJugadores().size(); i++) {
+    		   // for (int j = 0; j < Nba.getInstances().getMisEquipos().g.size(); j++) {
+					if (Team.getInstances().getMisJugadores().get(i).getNombre().equalsIgnoreCase(Team.getInstances().getMisJugadores().get(i).getNombre())) {
+						Team.getInstances().getMisJugadores().remove(i);
 						temp = i;
 					}
 				}
-    	}
-    	Nba.getInstances().getMisEquipos().remove(temp);
+    	
+    	//Team.getInstances().getMisJugadores().remove(temp);
     	tableModel.fireTableDataChanged();
-	}
+	}*/
+	
+	public void borrarJugadores()
+	{
+		String Name = (String) tableModel.getValueAt(tabladeJugadores.getSelectedRow(), 0);
+		for(Team aux : Nba.getInstances().getMisEquipos())
+		{
+			for(Player aux2 : aux.getMisJugadores())
+			{
+				if (Name.equalsIgnoreCase(aux.getMisJugadores().get(0).getNombre())) 
+				{
+					aux.getMisJugadores().remove(aux2);
+				}
+			}
+		}
+	}	
+	
+   
 	public void cargarJugadores() {
 		tableModel.setRowCount(0); 
 		row = new Object[tableModel.getColumnCount()];
